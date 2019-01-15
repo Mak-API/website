@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+ db:
+    image: postgres:9.6-alpine
+    #labels:
+    #  - "traefik.frontend.rule=Host:db.localhost"
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      # - db-data:/var/lib/postgresql/data:rw
+      - ./docker/db/data:/var/lib/postgresql/data:rw
+    ports:
+      - "${DATABASE_PORT}:5432"

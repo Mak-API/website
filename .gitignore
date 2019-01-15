@@ -1,3 +1,7 @@
+### For Docker
+/docker/db
+### For Docker
+
 ###>JetBrains
 .idea
 .idea/*
