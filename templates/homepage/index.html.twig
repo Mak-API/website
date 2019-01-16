@@ -3,228 +3,27 @@
 {% block title %}Mak'API - Home{% endblock %}
 
 {% block body %}
-<style>
-    * {
-        padding: 0;
-        margin: 0;
-    }
-    body {
-        font-size: 14px;
-        font-family: 'Comfortaa', cursive;
-    }
-    header {
-        position: absolute;
-        width: 100%;
-        z-index: 100000;
-    }
-    a {
-        text-decoration: none;
-    }
-    a.btn-orange {
-        background: #FF6F61;
-        border-radius: 20px;
-        padding: 9px 21px;
-        color: white;
-    }
-    .header-navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 80px;
-        padding: 0 15px;
-    }
-    .logo {
-        display: flex;
-        align-items: center;
-        font-size: 24px;
-        text-decoration: none;
-    }
-    .logo .font-major {
-        font-family: 'Major Mono Display', monospace;
-        color: white;
-        margin-right: 5px;
-    }
-    .logo .font-kodchasan {
-        font-family: 'Kodchasan', sans-serif;
-        color: white;
-        margin-left: 5px;
-    }
-    .header-navbar .navbar ul {
-        display: flex;
-        list-style: none;
-    }
-    .header-navbar .navbar a {
-        margin-right: 30px;
-        margin-left: 30px;
-        border-bottom: 3px solid transparent;
-        padding-bottom: 20px;
-        padding-top: 20px;
-        transition: .2s;
-        color: white;
-    }
-        .header-navbar .navbar a:hover{
-            border-bottom: 3px solid #FF6F61;
-        }
-        .header-navbar .navbar a.active{
-            border-bottom: 3px solid #FF6F61;
-        }
-        .header-navbar .navbar a:first-child{
-            margin-left: 0px;
-        }
-        .header-navbar .navbar a:last-child{
-            margin-right: 0px;
-        }
-
-    .user {
-        display: flex;
-        align-items: center;
-    }
-        .user a {
-            color: white;
-            display: block;
-        }
-        .user a:first-child {
-            margin-right: 30px;
-            border-bottom: 3px solid transparent;
-            padding-bottom: 20px;
-            padding-top: 20px;
-            transition: .2s;
-            color: white;
-        }
-            .user a:first-child:hover {
-                border-bottom: 3px solid #FF6F61;
-            }
-    .corps {
-        width: 100vw;
-        height: 100vh;
-        background: linear-gradient(180deg, #263056 0%, #5E3D72 33.61%, #9C467E 50.87%, #D55377 64.95%, #FF6F61 82.2%, #FF6F61 82.21%);
-    }
-    .corps-content {
-        padding-top: 50%;
-        transform: translateY(-50%);
-    }
-    .corps-header_title {
-        display: flex;
-        justify-content: center;
-        color: white;
-        font-size: 3em;
-    }
-    .slider-bloc {
-        color: #FF6F61;
-    }
-    .slider-list {
-        list-style: none;
-        text-align: right;
-        margin-right: 5px;
-        height: 1.2em;
-        overflow: hidden;
-        vertical-align: middle;
-    }
-    .slider-word {
-        display: block;
-        height: 1.2em;
-        animation-name: wordSlider;
-        animation-iteration-count: infinite;
-        animation-duration: 10s;
-
-    }
-
-    @keyframes wordSlider {
-        0%,
-        19% {
-            -webkit-transform: translateY(0%);
-            transform: translateY(0%);
-        }
-        25%,
-        44% {
-            -webkit-transform: translateY(-100%);
-            transform: translateY(-100%);
-        }
-        50%,
-        69% {
-            -webkit-transform: translateY(-200%);
-            transform: translateY(-200%);
-        }
-        75%,
-        94% {
-            -webkit-transform: translateY(-300%);
-            transform: translateY(-300%);
-        }
-        100% {
-            -webkit-transform: translateY(-400%);
-            transform: translateY(-400%);
-        }
-    }
-    .description {
-        text-align: center;
-        font-size: 18px;
-        color:white;
-        width: 630px;
-        margin: auto;
-        margin-top: 20px;
-    }
-    .button-get_started {
-        margin-top: 50px;
-        text-align: center;
-    }
-</style>
-
-<header>
-    <div class="header-navbar">
-        <a href="#" class="logo">
-            <div class="font-major">
-                Mak
+    {% include 'components/header/homepage_header.html.twig' %}
+    <div class="corps">
+        <div class="corps-content">
+            <h1 class="corps-header_title">
+                <div class="slider-bloc">
+                    <ul class="slider-list">
+                        <li class="slider-word">Create.</li>
+                        <li class="slider-word">Build.</li>
+                        <li class="slider-word">Test.</li>
+                        <li class="slider-word">Host.</li>
+                        <li class="slider-word">Create.</li>
+                    </ul>
+                </div>
+                Your API easily.
+            </h1>
+            <div class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a nunc eu ligula blandit scelerisque. Praesent placerat.
             </div>
-            <img src="{{ asset('images/favicons/favicon.png') }}">
-            <div class="font-kodchasan">
-                API
+            <div class="button-get_started">
+                <a href="#" class="btn-orange">Get started</a>
             </div>
-        </a>
-        <div class="navbar">
-            <ul>
-                <a href="#" {% if app.request.get('_route') == 'app_default_index' %} class="active"{% endif %}>
-                    <li>Home</li>
-                </a>
-                <a href="#">
-                    <li>Make your API</li>
-                </a>
-                <a href="#">
-                    <li>Documentation</li>
-                </a>
-                <a href="#">
-                    <li>News</li>
-                </a>
-                <a href="#">
-                    <li>About us</li>
-                </a>
-            </ul>
-        </div>
-        <div class="user">
-            <a href="#">Sign in</a>
-            <a class="btn-orange" href="#">Sign up</a>
         </div>
     </div>
-</header>
-<div class="corps">
-    <div class="corps-content">
-        <h1 class="corps-header_title">
-            <div class="slider-bloc">
-                <ul class="slider-list">
-                    <li class="slider-word">Create.</li>
-                    <li class="slider-word">Build.</li>
-                    <li class="slider-word">Test.</li>
-                    <li class="slider-word">Host.</li>
-                    <li class="slider-word">Create.</li>
-                </ul>
-            </div>
-            Your API easily.
-        </h1>
-        <div class="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a nunc eu ligula blandit scelerisque. Praesent placerat.
-        </div>
-        <div class="button-get_started">
-            <a href="#" class="btn-orange">Get started</a>
-        </div>
-    </div>
-</div>
 {% endblock %}

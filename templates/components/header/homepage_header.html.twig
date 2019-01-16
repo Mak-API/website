@@ -1,0 +1,36 @@
+<header>
+    <div class="header-navbar">
+        <a href="#" class="logo">
+            <div class="font-major">
+                Mak
+            </div>
+            <img src="{{ asset('images/favicons/favicon.png') }}">
+            <div class="font-kodchasan">
+                API
+            </div>
+        </a>
+        <div class="navbar">
+            <ul>
+                <a href="#" {% if app.request.get('_route') == 'app_default_index' %} class="active"{% endif %}>
+                    <li>Home</li>
+                </a>
+                <a href="#">
+                    <li>Make your API</li>
+                </a>
+                <a href="#">
+                    <li>Documentation</li>
+                </a>
+                <a href="#">
+                    <li>News</li>
+                </a>
+                <a href="#">
+                    <li>About us</li>
+                </a>
+            </ul>
+        </div>
+        <div class="user">
+            <a href="#">Sign in</a>
+            <a class="btn-orange" href="#">Sign up</a>
+        </div>
+    </div>
+</header>
