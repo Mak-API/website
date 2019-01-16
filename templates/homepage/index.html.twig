@@ -1,0 +1,245 @@
+{% extends 'pagelayout.html.twig' %}
+
+{% block title %}Mak'API - Home{% endblock %}
+
+{% block body %}
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    body {
+        font-size: 14px;
+        font-family: 'Comfortaa', cursive;
+    }
+    header {
+        position: absolute;
+        width: 100%;
+    }
+    a {
+        text-decoration: none;
+    }
+    .header-navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+        padding: 0 15px;
+    }
+    .logo {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        text-decoration: none;
+    }
+    .logo .font-major {
+        font-family: 'Major Mono Display', monospace;
+        color: white;
+        margin-right: 5px;
+    }
+    .logo .font-kodchasan {
+        font-family: 'Kodchasan', sans-serif;
+        color: white;
+        margin-left: 5px;
+    }
+    .header-navbar .navbar ul {
+        display: flex;
+        list-style: none;
+    }
+    .header-navbar .navbar a {
+        margin-right: 30px;
+        margin-left: 30px;
+        border-bottom: 3px solid transparent;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        transition: .2s;
+        color: white;
+    }
+        .header-navbar .navbar a:hover{
+            border-bottom: 3px solid #FF6F61;
+        }
+        .header-navbar .navbar a.active{
+            border-bottom: 3px solid #FF6F61;
+        }
+        .header-navbar .navbar a:first-child{
+            margin-left: 0px;
+        }
+        .header-navbar .navbar a:last-child{
+            margin-right: 0px;
+        }
+
+    .user {
+        display: flex;
+        align-items: center;
+    }
+        .user a {
+            color: white;
+            display: block;
+        }
+        .user a:first-child {
+            margin-right: 30px;
+            border-bottom: 3px solid transparent;
+            padding-bottom: 20px;
+            padding-top: 20px;
+            transition: .2s;
+            color: white;
+        }
+            .user a:first-child:hover {
+                border-bottom: 3px solid #FF6F61;
+            }
+        .user a:last-child {
+            background: #FF6F61;
+            border-radius: 20px;
+            padding: 9px 21px;
+        }
+    .corps {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(180deg, #263056 0%, #5E3D72 33.61%, #9C467E 50.87%, #D55377 64.95%, #FF6F61 82.2%, #FF6F61 82.21%);
+    }
+    .corps-header_title {
+        flex: 1 1 100%;
+        width: 100%;
+        text-align: center;
+        font-size: 38px;
+        color: #fff;
+        text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .ms-slider {
+        display: inline-block;
+        height: 1.2em;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+    .ms-slider__words {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        -webkit-animation-name: wordSlider;
+        animation-name: wordSlider;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-duration: 14s;
+        animation-duration: 14s;
+        color: #FF6F61;
+    }
+    .ms-slider__word {
+        display: block;
+        height: 1.2em;
+        text-align: right;
+    }
+
+    @-webkit-keyframes wordSlider {
+        0%,
+        20% {
+            -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+        }
+        21%,
+        40% {
+            -webkit-transform: translateY(-20%);
+            transform: translateY(-20%);
+        }
+        41%,
+        60% {
+            -webkit-transform: translateY(-40%);
+            transform: translateY(-40%);
+        }
+        61%,
+        80%{
+            -webkit-transform: translateY(-60%);
+            transform: translateY(-60%);
+        }
+        100%{
+            -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+        }
+    }
+
+    @keyframes wordSlider {
+        0%,
+        20% {
+            -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+        }
+        21%,
+        40% {
+            -webkit-transform: translateY(-20%);
+            transform: translateY(-20%);
+        }
+        41%,
+        60% {
+            -webkit-transform: translateY(-40%);
+            transform: translateY(-40%);
+        }
+        61%,
+        80%{
+            -webkit-transform: translateY(-60%);
+            transform: translateY(-60%);
+        }
+        100%{
+            -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+        }
+    }
+</style>
+
+<header>
+    <div class="header-navbar">
+        <a href="#" class="logo">
+            <div class="font-major">
+                Mak
+            </div>
+            <img src="{{ asset('images/favicons/favicon.png') }}">
+            <div class="font-kodchasan">
+                API
+            </div>
+        </a>
+        <nav class="navbar">
+            <ul>
+                <a href="#" {% if app.request.get('_route') == 'app_default_index' %} class="active"{% endif %}>
+                    <li>Home</li>
+                </a>
+                <a href="#">
+                    <li>Make your API</li>
+                </a>
+                <a href="#">
+                    <li>Documentation</li>
+                </a>
+                <a href="#">
+                    <li>News</li>
+                </a>
+                <a href="#">
+                    <li>About us</li>
+                </a>
+            </ul>
+        </nav>
+        <div class="user">
+            <a href="#">Sign in</a>
+            <a class="btn-" href="#">Sign up</a>
+        </div>
+    </div>
+</header>
+<div class="corps">
+        <h1 class="corps-header_title">
+            <div class="ms-slider">
+                <ul class="ms-slider__words">
+                    <li class="ms-slider__word">Create.</li>
+                    <li class="ms-slider__word">Build.</li>
+                    <li class="ms-slider__word">Test.</li>
+                    <!-- This last word needs to duplicate the first one to ensure a smooth infinite animation -->
+                    <li class="ms-slider__word">Host.</li>
+                    <li class="ms-slider__word">Create.</li>
+                </ul>
+            </div>
+            Your API easily.
+        </h1>
+</div>
+{% endblock %}
