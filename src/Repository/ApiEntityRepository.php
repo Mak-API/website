@@ -4,47 +4,57 @@ namespace App\Repository;
 
 use App\Entity\ApiEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method ApiEntity|null find($id, $lockMode = null, $lockVersion = null)
  * @method ApiEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method ApiEntity[]    findAll()
  * @method ApiEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ApiEntityRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+    /**
+     * @var ObjectRepository
+     */
+    private $objectRepository;
+    /**
+     * ApiEntityRepository constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        parent::__construct($registry, ApiEntity::class);
+        $this->entityManager = $entityManager;
+        $this->objectRepository = $this->entityManager->getRepository(ApiEntity::class);
     }
 
-    // /**
-    //  * @return ApiEntity[] Returns an array of ApiEntity objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return array
+     */
+    public function findAll(): array
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->objectRepository->findAll();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?ApiEntity
+    /**
+     * @param ApiEntity $apiEntity
+     */
+    public function save(ApiEntity $apiEntity): void
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $this->entityManager->persist($apiEntity);
+        $this->entityManager->flush();
     }
-    */
+
+    /**
+     * @param ApiEntity $apiEntity
+     */
+    public function delete(ApiEntity $apiEntity): void
+    {
+        $this->entityManager->remove($apiEntity);
+        $this->entityManager->flush();
+    }
 }
