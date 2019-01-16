@@ -19,6 +19,12 @@
     a {
         text-decoration: none;
     }
+    a.btn-orange {
+        background: #FF6F61;
+        border-radius: 20px;
+        padding: 9px 21px;
+        color: white;
+    }
     .header-navbar {
         display: flex;
         align-items: center;
@@ -87,107 +93,78 @@
             .user a:first-child:hover {
                 border-bottom: 3px solid #FF6F61;
             }
-        .user a:last-child {
-            background: #FF6F61;
-            border-radius: 20px;
-            padding: 9px 21px;
-        }
     .corps {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         width: 100vw;
         height: 100vh;
         background: linear-gradient(180deg, #263056 0%, #5E3D72 33.61%, #9C467E 50.87%, #D55377 64.95%, #FF6F61 82.2%, #FF6F61 82.21%);
     }
-    .corps-header_title {
-        flex: 1 1 100%;
-        width: 100%;
-        text-align: center;
-        font-size: 38px;
-        color: #fff;
-        text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+    .corps-content {
+        padding-top: 50%;
+        transform: translateY(-50%);
     }
-
-    .ms-slider {
-        display: inline-block;
+    .corps-header_title {
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-size: 3em;
+    }
+    .slider-bloc {
+        color: #FF6F61;
+    }
+    .slider-list {
+        list-style: none;
+        text-align: right;
+        margin-right: 5px;
         height: 1.2em;
         overflow: hidden;
         vertical-align: middle;
     }
-    .ms-slider__words {
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        -webkit-animation-name: wordSlider;
-        animation-name: wordSlider;
-        -webkit-animation-timing-function: ease-out;
-        animation-timing-function: ease-out;
-        -webkit-animation-iteration-count: infinite;
-        animation-iteration-count: infinite;
-        -webkit-animation-duration: 14s;
-        animation-duration: 14s;
-        color: #FF6F61;
-    }
-    .ms-slider__word {
+    .slider-word {
         display: block;
         height: 1.2em;
-        text-align: right;
-    }
+        animation-name: wordSlider;
+        animation-iteration-count: infinite;
+        animation-duration: 10s;
 
-    @-webkit-keyframes wordSlider {
-        0%,
-        20% {
-            -webkit-transform: translateY(0%);
-            transform: translateY(0%);
-        }
-        21%,
-        40% {
-            -webkit-transform: translateY(-20%);
-            transform: translateY(-20%);
-        }
-        41%,
-        60% {
-            -webkit-transform: translateY(-40%);
-            transform: translateY(-40%);
-        }
-        61%,
-        80%{
-            -webkit-transform: translateY(-60%);
-            transform: translateY(-60%);
-        }
-        100%{
-            -webkit-transform: translateY(-100%);
-            transform: translateY(-100%);
-        }
     }
 
     @keyframes wordSlider {
         0%,
-        20% {
+        19% {
             -webkit-transform: translateY(0%);
             transform: translateY(0%);
         }
-        21%,
-        40% {
-            -webkit-transform: translateY(-20%);
-            transform: translateY(-20%);
-        }
-        41%,
-        60% {
-            -webkit-transform: translateY(-40%);
-            transform: translateY(-40%);
-        }
-        61%,
-        80%{
-            -webkit-transform: translateY(-60%);
-            transform: translateY(-60%);
-        }
-        100%{
+        25%,
+        44% {
             -webkit-transform: translateY(-100%);
             transform: translateY(-100%);
         }
+        50%,
+        69% {
+            -webkit-transform: translateY(-200%);
+            transform: translateY(-200%);
+        }
+        75%,
+        94% {
+            -webkit-transform: translateY(-300%);
+            transform: translateY(-300%);
+        }
+        100% {
+            -webkit-transform: translateY(-400%);
+            transform: translateY(-400%);
+        }
+    }
+    .description {
+        text-align: center;
+        font-size: 18px;
+        color:white;
+        width: 630px;
+        margin: auto;
+        margin-top: 20px;
+    }
+    .button-get_started {
+        margin-top: 50px;
+        text-align: center;
     }
 </style>
 
@@ -223,23 +200,30 @@
         </nav>
         <div class="user">
             <a href="#">Sign in</a>
-            <a class="btn-" href="#">Sign up</a>
+            <a class="btn-orange" href="#">Sign up</a>
         </div>
     </div>
 </header>
 <div class="corps">
+    <div class="corps-content">
         <h1 class="corps-header_title">
-            <div class="ms-slider">
-                <ul class="ms-slider__words">
-                    <li class="ms-slider__word">Create.</li>
-                    <li class="ms-slider__word">Build.</li>
-                    <li class="ms-slider__word">Test.</li>
-                    <!-- This last word needs to duplicate the first one to ensure a smooth infinite animation -->
-                    <li class="ms-slider__word">Host.</li>
-                    <li class="ms-slider__word">Create.</li>
+            <div class="slider-bloc">
+                <ul class="slider-list">
+                    <li class="slider-word">Create.</li>
+                    <li class="slider-word">Build.</li>
+                    <li class="slider-word">Test.</li>
+                    <li class="slider-word">Host.</li>
+                    <li class="slider-word">Create.</li>
                 </ul>
             </div>
             Your API easily.
         </h1>
+        <div class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a nunc eu ligula blandit scelerisque. Praesent placerat.
+        </div>
+        <div class="button-get_started">
+            <a href="#" class="btn-orange">Get started</a>
+        </div>
+    </div>
 </div>
 {% endblock %}
