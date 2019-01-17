@@ -1,185 +1,24 @@
+// Imports fonts, variable, Makapi Class and animations
+    @import "components/fonts";
+    @import "variable/global";
+    @import "components/animation";
+    @import "components/class";
+
 * {
     padding: 0;
     margin: 0;
 }
 body {
     font-size: 14px;
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Raleway', sans-serif;
 }
 header {
     position: absolute;
     width: 100%;
     z-index: 100000;
 }
-a {
-    text-decoration: none;
-}
-a.btn-orange {
-    background: #FF6F61;
-    border-radius: 20px;
-    padding: 9px 21px;
-    color: white;
-}
-.header-navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px;
-    padding: 0 15px;
-}
-.header-navbar .navbar ul {
-    display: flex;
-    list-style: none;
-}
-.header-navbar .navbar a {
-    margin-right: 30px;
-    margin-left: 30px;
-    border-bottom: 3px solid transparent;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    transition: .2s;
-    color: white;
-}
-.header-navbar .navbar a:hover{
-    border-bottom: 3px solid #FF6F61;
-}
-.header-navbar .navbar a.active{
-    border-bottom: 3px solid #FF6F61;
-}
-.header-navbar .navbar a:first-child{
-    margin-left: 0px;
-}
-.header-navbar .navbar a:last-child{
-    margin-right: 0px;
-}
 
-.user {
-    display: flex;
-    align-items: center;
-}
-.user a {
-    color: white;
-    display: block;
-}
-.user a:first-child {
-    margin-right: 30px;
-    border-bottom: 3px solid transparent;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    transition: .2s;
-    color: white;
-}
-.user a:first-child:hover {
-    border-bottom: 3px solid #FF6F61;
-}
-.corps {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(180deg, #263056 0%, #5E3D72 33.61%, #9C467E 50.87%, #D55377 64.95%, #FF6F61 82.2%, #FF6F61 82.21%);
-}
-.corps-content {
-    padding-top: 50%;
-    transform: translateY(-50%);
-}
-.corps-header_title {
-    display: flex;
-    justify-content: center;
-    color: white;
-    font-size: 3em;
-}
-.slider-bloc {
-    color: #FF6F61;
-}
-.slider-list {
-    list-style: none;
-    text-align: right;
-    margin-right: 5px;
-    height: 1.2em;
-    overflow: hidden;
-    vertical-align: middle;
-}
-.slider-word {
-    display: block;
-    height: 1.2em;
-    animation-name: wordSlider;
-    animation-iteration-count: infinite;
-    animation-duration: 10s;
+// Imports SCSS file
+    @import "components/header";
+    @import "components/homepage";
 
-}
-
-@keyframes wordSlider {
-    0%,
-    19% {
-        -webkit-transform: translateY(0%);
-        transform: translateY(0%);
-    }
-    25%,
-    44% {
-        -webkit-transform: translateY(-100%);
-        transform: translateY(-100%);
-    }
-    50%,
-    69% {
-        -webkit-transform: translateY(-200%);
-        transform: translateY(-200%);
-    }
-    75%,
-    94% {
-        -webkit-transform: translateY(-300%);
-        transform: translateY(-300%);
-    }
-    100% {
-        -webkit-transform: translateY(-400%);
-        transform: translateY(-400%);
-    }
-}
-.description {
-    text-align: center;
-    font-size: 18px;
-    color:white;
-    width: 630px;
-    margin: auto;
-    margin-top: 20px;
-}
-.button-get_started {
-    margin-top: 50px;
-    text-align: center;
-}
-
-
-/* New dev */
-header nav {
-    background: none;
-    box-shadow: none;
-}
-.navbar-logo_makapi {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    text-decoration: none;
-}
-.navbar-logo_makapi .font-mak {
-    font-family: 'Major Mono Display', monospace;
-    margin-right: 5px;
-}
-.navbar-logo_makapi .font-api {
-    font-family: 'Kodchasan', sans-serif;
-    margin-left: 5px;
-}
-header nav .navbar-list a {
-    border-bottom: 3px solid transparent;
-    transition: .2s;
-}
-header nav .navbar-list a:hover {
-    border-bottom: 3px solid #FF6F61;
-}
-
-header nav .navbar-list .navbar-list_signup a{
-    height: 0px;
-    border-bottom: none;
-    background: #FF6F61;
-    border-radius: 20px;
-    padding: 9px 21px;
-    color: white;
-}
-/* New dev */
