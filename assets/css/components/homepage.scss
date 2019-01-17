@@ -51,9 +51,11 @@ main {
     height: 100vh;
     background: $color-greyClaire;
     > .makapi-content {
-      width: 1280px;
+      width: $size-maxWithWebsite;
       margin: auto;
+      height: 100%;
       > .makapi-image {
+        height: 100%;
         > .makapi-svg_builder {
           height: 480px;
         }
