@@ -19,7 +19,7 @@ class UserFixtures extends Fixture
                 ->setPassword($faker->password())
                 ->setFirstname($faker->firstName)
                 ->setLastname($faker->Lastname)
-                ->setStatus($i)
+                ->setStatus('1')
             ;
             $manager->persist($user);
         }
