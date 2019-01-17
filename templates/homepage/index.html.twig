@@ -4,28 +4,37 @@
 
 {% block body %}
     {% include 'components/header/homepage_header.html.twig' %}
-    <section class="part-home">
-        <div class="home-content">
-            <h1 class="home-header_title">
-                <div class="home-slider_bloc">
-                    <ul class="slider-list">
-                        <li class="slider-word">Create.</li>
-                        <li class="slider-word">Build.</li>
-                        <li class="slider-word">Test.</li>
-                        <li class="slider-word">Host.</li>
-                        <li class="slider-word">Create.</li>
-                    </ul>
+    <main>
+        <section class="part-home">
+            <div class="home-content">
+                <h1 class="home-header_title">
+                    <div class="home-slider_bloc">
+                        <ul class="slider-list">
+                            <li class="slider-word">Create.</li>
+                            <li class="slider-word">Build.</li>
+                            <li class="slider-word">Test.</li>
+                            <li class="slider-word">Host.</li>
+                            <li class="slider-word">Create.</li>
+                        </ul>
+                    </div>
+                    Your API easily.
+                </h1>
+                <div class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a nunc eu ligula blandit scelerisque. Praesent placerat.
                 </div>
-                Your API easily.
-            </h1>
-            <div class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a nunc eu ligula blandit scelerisque. Praesent placerat.
+                <div class="button-get_started">
+                    <a href="#" class="btn-makapi-orange">Get started</a>
+                </div>
             </div>
-            <div class="button-get_started">
-                <a href="#" class="btn-makapi-orange">Get started</a>
+        </section>
+        <section class="part-makapi">
+            <div class="makapi-content">
+                <div class="makapi-image">
+                    <img src="{{ asset('/images/svg/builder.svg') }}" alt="Builder">
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 {% endblock %}
 
 {% block javascripts %}
