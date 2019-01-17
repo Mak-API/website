@@ -174,12 +174,17 @@ header nav .navbar-list a:hover {
     border-bottom: 3px solid #FF6F61;
 }
 
+header nav .navbar-list .navbar-list_signup {
+    padding-top: 20px;
+    line-height: 0px;
+}
+
 header nav .navbar-list .navbar-list_signup a{
-    height: 0px;
     border-bottom: none;
     background: #FF6F61;
     border-radius: 20px;
-    padding: 9px 21px;
+    padding: 15px 30px;
     color: white;
 }
 /* New dev */
+
