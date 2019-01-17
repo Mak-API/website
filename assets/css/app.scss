@@ -1,16 +1,23 @@
+// Imports fonts and variable
+    @import "components/fonts";
+
 * {
     padding: 0;
     margin: 0;
 }
 body {
     font-size: 14px;
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Raleway', cursive;
 }
 header {
     position: absolute;
     width: 100%;
     z-index: 100000;
 }
+
+// Imports SCSS file
+    @import "components/header";
+
 a {
     text-decoration: none;
 }
@@ -115,18 +122,18 @@ a.btn-orange {
     }
     25%,
     44% {
-        -webkit-transform: translateY(-100%);
-        transform: translateY(-100%);
+        -webkit-transform: translateY(-99%);
+        transform: translateY(-99%);
     }
     50%,
     69% {
-        -webkit-transform: translateY(-200%);
-        transform: translateY(-200%);
+        -webkit-transform: translateY(-201%);
+        transform: translateY(-201%);
     }
     75%,
     94% {
-        -webkit-transform: translateY(-300%);
-        transform: translateY(-300%);
+        -webkit-transform: translateY(-298%);
+        transform: translateY(-298%);
     }
     100% {
         -webkit-transform: translateY(-400%);
@@ -147,39 +154,3 @@ a.btn-orange {
 }
 
 
-/* New dev */
-header nav {
-    background: none;
-    box-shadow: none;
-}
-.navbar-logo_makapi {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    text-decoration: none;
-}
-.navbar-logo_makapi .font-mak {
-    font-family: 'Major Mono Display', monospace;
-    margin-right: 5px;
-}
-.navbar-logo_makapi .font-api {
-    font-family: 'Kodchasan', sans-serif;
-    margin-left: 5px;
-}
-header nav .navbar-list a {
-    border-bottom: 3px solid transparent;
-    transition: .2s;
-}
-header nav .navbar-list a:hover {
-    border-bottom: 3px solid #FF6F61;
-}
-
-header nav .navbar-list .navbar-list_signup a{
-    height: 0px;
-    border-bottom: none;
-    background: #FF6F61;
-    border-radius: 20px;
-    padding: 9px 21px;
-    color: white;
-}
-/* New dev */
