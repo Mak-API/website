@@ -1,8 +1,8 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.22.0",
-        "webpack-notifier": "^1.6.0",
-        "materialize-css": "^1.0.0"
+        "materialize-css": "^1.0.0",
+        "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -11,5 +11,9 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "node-sass": "^4.11.0",
+        "sass-loader": "^7.1.0"
     }
 }

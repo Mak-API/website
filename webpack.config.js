@@ -39,7 +39,7 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -50,7 +50,6 @@ Encore
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
-
     .createSharedEntry('vendor', './shared_entry.js')
 ;
 
