@@ -1,0 +1,60 @@
+<header>
+    <nav>
+        <div class="nav-wrapper homepage-navbar">
+            <a href="#" class="brand-logo">
+                <div class="navbar-logo_makapi">
+                    <div class="font-mak">
+                        Mak
+                    </div>
+                    <img src="{{ asset('images/favicons/favicon.png') }}">
+                    <div class="font-api">
+                        API
+                    </div>
+                </div>
+            </a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down navbar-list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Make your API</a></li>
+                <li><a href="#">Documentation</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">About us</a></li>
+                <li class="navbar-list_signin"><a href="#">Sign in</a></li>
+                <li class="navbar-list_signup"><a href="#">Sign up</a></li>
+            </ul>
+        </div>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Make your API</a></li>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">About us</a></li>
+    </ul>
+    <div class="header-navbar">
+
+        <div class="navbar">
+            <ul>
+                <a href="#" {% if app.request.get('_route') == 'app_default_index' %} class="active"{% endif %}>
+                    <li>Home</li>
+                </a>
+                <a href="#">
+                    <li>Make your API</li>
+                </a>
+                <a href="#">
+                    <li>Documentation</li>
+                </a>
+                <a href="#">
+                    <li>News</li>
+                </a>
+                <a href="#">
+                    <li>About us</li>
+                </a>
+            </ul>
+        </div>
+        <div class="user">
+            <a href="#">Sign in</a>
+            <a class="btn-orange" href="#">Sign up</a>
+        </div>
+    </div>
+</header>
