@@ -4,28 +4,69 @@
 
 {% block body %}
     {% include 'components/header/homepage_header.html.twig' %}
-    <section class="part-home">
-        <div class="home-content">
-            <h1 class="home-header_title">
-                <div class="home-slider_bloc">
-                    <ul class="slider-list">
-                        <li class="slider-word">Create.</li>
-                        <li class="slider-word">Build.</li>
-                        <li class="slider-word">Test.</li>
-                        <li class="slider-word">Host.</li>
-                        <li class="slider-word">Create.</li>
-                    </ul>
+    <main>
+        <section class="part-home">
+            <div class="home-content valign-wrapper">
+                <div class="home-content_center_div center-block">
+                    <h1 class="home-header_title">
+                        <div class="home-slider_bloc">
+                            <ul class="slider-list">
+                                <li class="slider-word">Create.</li>
+                                <li class="slider-word">Build.</li>
+                                <li class="slider-word">Test.</li>
+                                <li class="slider-word">Host.</li>
+                                <li class="slider-word">Create.</li>
+                            </ul>
+                        </div>
+                        Your API easily.
+                    </h1>
+                    <div class="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a nunc eu ligula blandit scelerisque. Praesent placerat.
+                    </div>
+                    <div class="button-get_started">
+                        <a href="#" class="btn-makapi-orange">Get started</a>
+                    </div>
                 </div>
-                Your API easily.
-            </h1>
-            <div class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a nunc eu ligula blandit scelerisque. Praesent placerat.
             </div>
-            <div class="button-get_started">
-                <a href="#" class="btn-makapi-orange">Get started</a>
+        </section>
+        <section class="part-makapi">
+            <div class="makapi-content row">
+                <div class="makapi-image col s6 valign-wrapper">
+                    <object class="makapi-svg_builder" type="image/svg+xml" data="{{ asset('images/svg/builder.svg') }}">
+                        <img src="{{ asset('images/svg/builder.png') }}" alt="Makapi builder"/>
+                    </object>
+                </div>
+                <div class="makapi-text col s6 valign-wrapper">
+                    <div class="makapi-text_center_div">
+                        <h2 class="homepage-bloc_title">
+                            Who are we and what are our solutions ?
+                        </h2>
+                        <div class="makapi-text_content">
+                            <p>
+                                Mak’API is group of people who wants to simplify the use of APIs to all.
+                            </p>
+                            <p>
+                                It is simple, we have created an API generator that will allow you to create its fully online API step by step with a hosting and testing service.
+                            </p>
+                            <p>
+                                Our API Generator is totally free to use, you can try now.
+                            </p>
+                        </div>
+                        <div class="makapi-button_go">
+                            <div class="makapi-button_go_center_div valign-wrapper">
+                                <div class="makapi-button_separateur"></div>
+                                <a href="#" class="makapi-button_go_action center-align">
+                                    GO
+                                </a>
+                                <div class="makapi-button_separateur"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 {% endblock %}
 
 {% block javascripts %}
