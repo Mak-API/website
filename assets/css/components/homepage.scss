@@ -60,6 +60,50 @@ main {
           height: 480px;
         }
       }
+      > .makapi-text {
+        height: 100%;
+        > .makapi-text_center_div {
+          > .homepage-bloc_title {
+            text-align: center;
+          }
+          > .makapi-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
+          }
+          > .makapi-button_go {
+            margin-top: 50px;
+            > .makapi-button_go_center_div {
+              justify-content: center;
+              > .makapi-button_separateur {
+                width: 100px;
+                border: 2px solid $color-blueDial;
+              }
+              > .makapi-button_go_action {
+                height: 100px;
+                width: 100px;
+                display: block;
+                line-height: 100px;
+                border-radius: 50px;
+                text-decoration: none;
+                background: $color-livingCoral;
+                color: $color-greyClaire;
+                margin: 0 15px;
+              }
+            }
+
+          }
+        }
+      }
     }
   }
 }
