@@ -14,15 +14,12 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}
-
-        {% endblock %}
-
+        {% block javascripts %}{% endblock %}
         {{ encore_entry_script_tags('app') }}
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                var elems = document.querySelectorAll('.sidenav');
-                var instances = M.Sidenav.init(elems);
+                let elems = document.querySelectorAll('.sidenav');
+                let instances = M.Sidenav.init(elems);
             });
         </script>
     </body>

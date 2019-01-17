@@ -1,0 +1,46 @@
+.part-home {
+  width: 100vw;
+  height: 100vh;
+  background: $background-makapiLinearOne;
+  .home-content {
+    padding-top: 50%;
+    transform: translateY(-50%);
+    .home-header_title {
+      display: flex;
+      justify-content: center;
+      color: white;
+      font-size: 3em;
+      .home-slider_bloc {
+        color: $color-livingCoral;
+        .slider-list {
+          list-style: none;
+          text-align: right;
+          margin-right: 5px;
+          height: 1.2em;
+          overflow: hidden;
+          vertical-align: middle;
+          .slider-word {
+            display: block;
+            height: 1.2em;
+            animation-name: homepageWordSlider;
+            animation-iteration-count: infinite;
+            animation-duration: 10s;
+
+          }
+        }
+      }
+    }
+    > .description {
+      text-align: center;
+      font-size: 18px;
+      color:white;
+      width: 630px;
+      margin: auto;
+      margin-top: 20px;
+    }
+    > .button-get_started {
+      margin-top: 50px;
+      text-align: center;
+    }
+  }
+}

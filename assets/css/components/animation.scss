@@ -1,0 +1,16 @@
+@keyframes homepageWordSlider {
+  $steps: -0%, -99%, -201%, -298%, -400%;
+
+  @for $index from 0 to length($steps)-1 {
+    $next: $index+1;
+    $step: floor(100/(length($steps)-1));
+    $animation_step: floor($step*.2);
+
+    #{$step*$index}%, #{($step*$next) - $animation_step}% {
+      transform: translateY(nth($steps, $index+1));
+    }
+  }
+  100% {
+    transform: translateY(nth($steps, length($steps)));
+  }
+}
