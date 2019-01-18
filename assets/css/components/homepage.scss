@@ -163,4 +163,51 @@ main {
       max-width: none;
     }
   }
+  .part-build {
+    width: 100vw;
+    min-height: 100vh;
+    background: $color-greyClaire;
+    > .build-content {
+      max-width: $size-maxWithWebsite;
+      margin: auto;
+      height: 100%;
+      color: $color-blueDial;
+      > .build-image {
+        height: 100%;
+        > .build-svg_builder {
+          margin:auto;
+          height: 480px;
+          justify-content: center;
+          > img {
+            height: 480px;
+          }
+        }
+      }
+      > .build-text {
+        height: 100%;
+        > .build-text_center_div {
+          > .homepage-bloc_title {
+            text-align: left;
+          }
+          > .build-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.container {
+      max-width: none;
+    }
+  }
 }
