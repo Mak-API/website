@@ -2,7 +2,7 @@ header {
   > nav {
     box-shadow: none;
     padding: 0 15px;
-    width: $size-maxWithWebsite;
+    max-width: $size-maxWithWebsite;
     margin: auto;
     > .nav-wrapper {
       .navbar-logo_makapi {

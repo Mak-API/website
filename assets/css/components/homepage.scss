@@ -51,7 +51,7 @@ main {
     height: 100vh;
     background: $color-greyClaire;
     > .makapi-content {
-      width: $size-maxWithWebsite;
+      max-width: $size-maxWithWebsite;
       margin: auto;
       height: 100%;
       > .makapi-image {
