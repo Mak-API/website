@@ -60,6 +60,9 @@ main {
           margin:auto;
           height: 480px;
           justify-content: center;
+          > img {
+            height: 480px;
+          }
         }
       }
       > .makapi-text {
@@ -67,6 +70,8 @@ main {
         > .makapi-text_center_div {
           > .homepage-bloc_title {
             text-align: center;
+            max-width: 480px;
+            margin: auto;
           }
           > .makapi-text_content {
             font-weight: 500;
@@ -103,6 +108,53 @@ main {
               }
             }
 
+          }
+        }
+      }
+    }
+    &.container {
+      max-width: none;
+    }
+  }
+  .part-create {
+    width: 100vw;
+    min-height: 100vh;
+    background: $color-livingCoral;
+    > .create-content {
+      max-width: $size-maxWithWebsite;
+      margin: auto;
+      height: 100%;
+      color: white;
+      > .create-image {
+        height: 100%;
+        > .create-svg_builder {
+          margin:auto;
+          height: 400px;
+          justify-content: center;
+          > img {
+            height: 400px;
+          }
+        }
+      }
+      > .create-text {
+        height: 100%;
+        > .create-text_center_div {
+          > .homepage-bloc_title {
+            text-align: left;
+          }
+          > .create-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
           }
         }
       }
