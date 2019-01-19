@@ -1,6 +1,6 @@
 main {
   .part-home {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background: $background-makapiLinearOne;
     .home-content {
@@ -47,7 +47,7 @@ main {
     }
   }
   .part-makapi {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     background: $color-greyClaire;
     > .makapi-content {
@@ -117,7 +117,7 @@ main {
     }
   }
   .part-create {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     background: $color-livingCoral;
     > .create-content {
@@ -164,7 +164,7 @@ main {
     }
   }
   .part-build {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     background: $color-greyClaire;
     > .build-content {
