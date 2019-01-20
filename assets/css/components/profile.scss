@@ -1,18 +1,17 @@
 main {
   .part-profile{
     width: 100vw;
-    height: 100vh;
+    height: 65vh;
     background: $background-makapiLinearOne;
     .profile-content {
       height: 100%;
       > .profile-content_center_div {
-          > img{
-            > .profile-picture{
-              background-size: cover;
-              width: 300px;
+          > div.row img.profile-picture{
+              width: 200px;
               height: 200px;
+              border-radius: 50%;
+              border: 2px solid white;
           }
-        }
       }
     }
   }

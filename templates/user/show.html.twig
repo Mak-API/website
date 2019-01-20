@@ -1,54 +1,65 @@
 {% extends 'pagelayout.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Mak'API - Profile{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    {% include 'components/header/homepage_header.html.twig' %}
+    <main>
+        <section class="part-profile white-text">
+            <div class="profile-content valign-wrapper">
+                <div class="profile-content_center_div center-block">
+                    <div class="row">
+                        <img class="profile-picture" src="{{ asset('images/png/Moi2_190118.png') }}" alt="Profile_picture">
+                    </div>
+                    <div class="row center">
+                        <h4>{{ user.firstname }}</h4>
+                        <p> {{ user.email }}</p>
+                    </div>
+                    <div class="row info-API">
+                        <span>API created : </span>
+                        <span class="offset-l1 offset-s1 offset-m1">Request traited : </span>
+                    </div>
+                    <div class="profile-setting center">
+                        <a class="btn-flat white-text">
+                            <i class="material-icons medium left">settings</i>
+                            Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="part-control-action col-l12">
+            <div class="col-l"></div>
+        </section>
+        <section class="table-action-API col-l10 offset-l1 offset-m1 offset-s1">
+                <table class="striped centered responsive-table">
+                    <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Created at </th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Action</th>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+        </section>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ user.status }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s T') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s T') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+        <!--<a href="{{ path('app_user_index') }}">back to list</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+        <a class="btn" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
 
-    {{ include('user/_delete_form.html.twig') }}
+        {{ include('user/_delete_form.html.twig') }}-->
+    </main>
+
 {% endblock %}
