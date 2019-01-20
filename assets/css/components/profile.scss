@@ -15,6 +15,18 @@ main {
       }
     }
   }
+  .part-control-action{
+    margin-top: 2%;
+    .btn-control-action {
+      > a {
+        padding: 9px 21px;
+        background-color: $color-livingCoral;
+        display: inline;
+        border-radius: 20px;
+        text-transform: none;
+      }
+    }
+  }
 
 
 
