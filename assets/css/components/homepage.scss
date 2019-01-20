@@ -127,7 +127,7 @@ main {
       color: white;
       > .create-image {
         height: 100%;
-        > .create-svg_builder {
+        > .create-svg_create {
           margin:auto;
           height: 400px;
           justify-content: center;
@@ -174,7 +174,7 @@ main {
       color: $color-blueDial;
       > .build-image {
         height: 100%;
-        > .build-svg_builder {
+        > .build-svg_build {
           margin:auto;
           height: 480px;
           justify-content: center;
@@ -190,6 +190,100 @@ main {
             text-align: left;
           }
           > .build-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.container {
+      max-width: none;
+    }
+  }
+  .part-test {
+    width: 100%;
+    min-height: 100vh;
+    background: $color-blueDial;
+    > .test-content {
+      max-width: $size-maxWithWebsite;
+      margin: auto;
+      height: 100%;
+      color: white;
+      > .test-image {
+        height: 100%;
+        > .test-svg_test {
+          margin:auto;
+          height: 400px;
+          justify-content: center;
+          > img {
+            height: 400px;
+          }
+        }
+      }
+      > .test-text {
+        height: 100%;
+        > .test-text_center_div {
+          > .homepage-bloc_title {
+            text-align: left;
+          }
+          > .test-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.container {
+      max-width: none;
+    }
+  }
+  .part-host {
+    width: 100%;
+    min-height: 100vh;
+    background: $color-greyClaire;
+    > .host-content {
+      max-width: $size-maxWithWebsite;
+      margin: auto;
+      height: 100%;
+      color: $color-blueDial;
+      > .host-image {
+        height: 100%;
+        > .host-svg_host {
+          margin:auto;
+          height: 480px;
+          justify-content: center;
+          > img {
+            height: 480px;
+          }
+        }
+      }
+      > .host-text {
+        height: 100%;
+        > .host-text_center_div {
+          > .homepage-bloc_title {
+            text-align: left;
+          }
+          > .host-text_content {
             font-weight: 500;
             font-size: 22px;
             text-align: justify;

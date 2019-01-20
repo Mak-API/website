@@ -12,57 +12,16 @@
             {% include 'homepage/part_makapi.html.twig' %}
         </section>
         <section class="part-create container valign-wrapper">
-            <div class="create-content row">
-                <div class="create-text col l6 valign-wrapper">
-                    <div class="create-text_center_div">
-                        <h2 class="homepage-bloc_title">
-                            Create your API here
-                        </h2>
-                        <div class="create-text_content">
-                            <p>
-                                You can easily create your own APIs with our step-by-step form.
-                            </p>
-                            <p>
-                                It's simple no longer need to take the lead in looking for information anywhere or with
-                                different sources. Everything is planned to help you and you facilitate the work directly
-                                on our site.
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="create-image col l6 valign-wrapper">
-                    <object class="create-svg_builder" type="image/svg+xml" data="{{ asset('images/svg/sketch.svg') }}">
-                        <img src="{{ asset('images/png/sketch.png') }}" alt="Makapi builder"/>
-                    </object>
-                </div>
-            </div>
+            {% include 'homepage/part_create.html.twig' %}
         </section>
         <section class="part-build container valign-wrapper">
-            <div class="build-content row">
-                <div class="build-image col l6 valign-wrapper">
-                    <object class="build-svg_builder" type="image/svg+xml" data="{{ asset('images/svg/crane.svg') }}">
-                        <img src="{{ asset('images/png/crane.png') }}" alt="Makapi builder"/>
-                    </object>
-                </div>
-                <div class="build-text col l6 valign-wrapper">
-                    <div class="build-text_center_div">
-                        <h2 class="homepage-bloc_title">
-                            Build instantly
-                        </h2>
-                        <div class="build-text_content">
-                            <p>
-                                Your API is directly created online, after filling out all the information you needed
-                                through the form.
-                            </p>
-                            <p>
-                                If no errors are detected from our platform, you will be redirected to a page that will
-                                allow you to directly test your application.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% include 'homepage/part_build.html.twig' %}
+        </section>
+        <section class="part-test container valign-wrapper">
+            {% include 'homepage/part_test.html.twig' %}
+        </section>
+        <section class="part-host container valign-wrapper">
+            {% include 'homepage/part_host.html.twig' %}
         </section>
     </main>
 {% endblock %}
