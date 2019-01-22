@@ -7,10 +7,14 @@ main {
       height: 100%;
       > .profile-content_center_div {
           > div.row img.profile-picture{
-              width: 200px;
-              height: 200px;
-              border-radius: 50%;
-              border: 2px solid white;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px;
+
+            object-fit: cover;
+            object-position: center right;
+            border: 2px solid white;
           }
       }
     }
@@ -24,6 +28,25 @@ main {
         display: inline;
         border-radius: 20px;
         text-transform: none;
+      }
+    }
+  }
+  .part-table-action-API{
+    .makapi-table {
+      table, th, td {
+        border-color: $color-livingCoral;
+        border-style: inherit;
+        border-bottom-width: 1.1px;
+      }
+      thead {
+        color : $color-livingCoral;
+      }
+      tbody {
+        a {
+          i {
+            color: $color-blueDial;
+          }
+        }
       }
     }
   }
