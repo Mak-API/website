@@ -304,4 +304,12 @@ main {
       max-width: none;
     }
   }
+  .part-ahead {
+    width: 100%;
+    height: 800px;
+    background: $background-makapiLinearTwo;
+    &.container {
+      max-width: none;
+    }
+  }
 }
