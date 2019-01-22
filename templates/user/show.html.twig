@@ -37,35 +37,50 @@
             </div>
             <div class="btn-control-action">
                 <a class="btn">
-                    <i class="material-icons medium">bar_chart</i>
+                    <i class="material-icons large">bar_chart</i>
                     See statistics
                 </a>
             </div>
         </section>
-        <section class="table-action-API row">
-            <div class="col l10 m10 s10 offset-l1 offset-m1 offset-s1">
-                <table class="striped centered responsive-table">
-                    <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Created at </th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Action</th>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
+        <section class="part-table-action-API row">
+            <div class="col l12 m12 s12 ">
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header">
+                            My API
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="makapi-table">
+                                <table class="centered responsive-table">
+                                    <thead class="">
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Created at</th>
+                                    <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>API 1</td>
+                                        <td>Lorem ipsum dolor sit amet</td>
+                                        <td>12-12-12</td>
+                                        <td class="table-btn-action">
+                                            <a href="#"><i class="material-icons small ">cloud_download</i></a>
+                                            <a href="#"><i class="material-icons small">bar_chart</i></a>
+                                            <a href="#"><i class="material-icons small">create</i></a>
+                                            <a href="#"><i class="material-icons small">delete_forever</i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
             </div>
         </section>
+
+
 
 
         <!--<a href="{{ path('app_user_index') }}">back to list</a>
@@ -75,4 +90,12 @@
         {{ include('user/_delete_form.html.twig') }}-->
     </main>
 
+{% endblock %}
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems);
+        });
+    </script>
 {% endblock %}
