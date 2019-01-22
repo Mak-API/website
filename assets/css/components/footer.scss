@@ -1,0 +1,14 @@
+footer {
+  /**
+    Ovveride materialize
+   */
+  &.page-footer {
+    background: none;
+  }
+  /**
+    Makapi footer homepage
+   */
+  &.homepage-footer {
+    background: $background-makapiLinearTwo;
+  }
+}
