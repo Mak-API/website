@@ -20,7 +20,7 @@
                         <span class="offset-l1 offset-s1 offset-m1">Request traited : </span>
                     </div>
                     <div class="profile-setting center">
-                        <a class="btn-flat white-text">
+                        <a class="btn-flat white-text" href="{{ path('app_user_edit', {'id': user.id}) }}">
                             <i class="material-icons medium left">settings</i>
                             Settings
                         </a>
@@ -79,15 +79,6 @@
 
             </div>
         </section>
-
-
-
-
-        <!--<a href="{{ path('app_user_index') }}">back to list</a>
-
-        <a class="btn" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-
-        {{ include('user/_delete_form.html.twig') }}-->
     </main>
 
 {% endblock %}
