@@ -10,7 +10,30 @@ h2 {
   font-weight: 800 !important;
 }
 
+h3 {
+  font-size: 28px !important;
+  font-weight: 500 !important;
+}
+
 a.makapi-corail {
   color: $color-livingCoral;
   text-decoration: none;
+}
+
+.makapi-button {
+  background-color: $color-livingCoral !important;
+  padding: 0 22px !important;
+  height: 50px !important;
+  line-height: 50px !important;
+  border-radius: 20px !important;
+  &.large {
+    padding: 0 16px !important;
+    height: 60px !important;
+    line-height: 60px !important;
+  }
+  &.small {
+    padding: 0 27px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+  }
 }
