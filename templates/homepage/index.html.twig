@@ -3,7 +3,9 @@
 {% block title %}Mak'API - Home{% endblock %}
 
 {% block body %}
-    {% include 'components/header/homepage_header.html.twig' %}
+    <header class="homepage-header">
+        {% include 'components/header/homepage_header.html.twig' %}
+    </header>
     <main>
         <section class="part-home">
             {% include 'homepage/part_home.html.twig' %}
