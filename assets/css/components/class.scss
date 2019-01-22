@@ -20,12 +20,16 @@ a.makapi-corail {
   text-decoration: none;
 }
 
+/**
+  Ovveride Materialize with makapi class
+ */
 .makapi-button {
   background-color: $color-livingCoral !important;
   padding: 0 22px !important;
   height: 50px !important;
   line-height: 50px !important;
   border-radius: 20px !important;
+  text-transform: none !important;
   &.large {
     padding: 0 16px !important;
     height: 60px !important;
