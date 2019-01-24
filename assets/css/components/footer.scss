@@ -1,0 +1,39 @@
+footer {
+  /**
+    Ovveride materialize
+   */
+  &.page-footer {
+    background: none;
+  }
+  /**
+    Makapi footer homepage
+   */
+  &.homepage-footer {
+    background: $color-blueDial;
+  }
+  .footer-logo_makapi {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    text-decoration: none;
+    justify-content: center;
+    > .font-mak {
+      font-family: 'Major Mono Display', monospace;
+      margin-right: 5px;
+    }
+    > .font-api {
+      font-family: 'Kodchasan', sans-serif;
+      margin-left: 5px;
+    }
+  }
+  h4 {
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
+  ul {
+    > li {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  }
+}
