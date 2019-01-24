@@ -13,8 +13,8 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
         {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}{% endblock %}
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 let elems = document.querySelectorAll('.sidenav');
