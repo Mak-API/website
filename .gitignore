@@ -1,5 +1,5 @@
 ### For Docker
-/docker/db
+.docker/data/*
 ### For Docker
 
 ###>JetBrains
