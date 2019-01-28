@@ -16,23 +16,13 @@ class EmailService {
                     ),
                     'text/html'
                 );
-            /*
-            * If you also want to include a plaintext version of the message
-            ->addPart(
-            $this->renderView(
-            'emails/registration.txt.twig',
-            ['name' => $name]
-            ),
-            'text/plain'
-            )
-            */
 
 
 
         $mailer->send($message);
     }
 
-    public function resetPassword($name, $email, $url,  \Swift_Mailer $mailer)
+    public function resetPassword($email, $url,  \Swift_Mailer $mailer)
     {
         $message = (new \Swift_Message('Mot de passe oublié ?'))
             ->setFrom('send@example.com')
@@ -41,8 +31,7 @@ class EmailService {
                 $this->renderView(
                 // templates/emails/registration.html.twig
                     'emails/forgotPassword.html.twig',
-                    ['name' => $name,
-                        'url' => $url]
+                    ['url' => $url]
                 ),
                 'text/html'
             );
