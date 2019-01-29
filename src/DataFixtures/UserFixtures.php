@@ -17,9 +17,12 @@ class UserFixtures extends Fixture
             $user = (new User())
                 ->setEmail($faker->email())
                 ->setPassword($faker->password())
+                ->setLogin($faker->firstName)
                 ->setFirstname($faker->firstName)
                 ->setLastname($faker->Lastname)
                 ->setStatus('1')
+                ->setCreatedAt($faker->dateTime)
+                ->setUpdatedAt($faker->dateTime)
             ;
             $manager->persist($user);
         }
