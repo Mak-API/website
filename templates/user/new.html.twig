@@ -12,13 +12,16 @@
             <div class="form-content valign-wrapper offset-l3 col l6">
                 <div class="center-block">
                     <div class="row col l12">
+                        <h2>Sign up to MAK'API</h2>
                         {{ include('user/_form.html.twig') }}
+                        <div class="center">
+                            <h4>Already an account ?
+                                <a href="{{ path('app_user_index') }}">Sign in.</a>
+                            </h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-
-
-    <!--<a href="{{ path('app_user_index') }}">back to list</a>-->
 {% endblock %}
