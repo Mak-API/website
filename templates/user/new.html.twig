@@ -3,9 +3,22 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+    <header class="linear-header">
+        {% include 'components/header/header.html.twig' %}
+    </header>
 
-    {{ include('user/_form.html.twig') }}
+    <main>
+        <section class="form-signin part-profile row col l12">
+            <div class="form-content valign-wrapper offset-l3 col l6">
+                <div class="center-block">
+                    <div class="row col l12">
+                        {{ include('user/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+
+    <!--<a href="{{ path('app_user_index') }}">back to list</a>-->
 {% endblock %}
