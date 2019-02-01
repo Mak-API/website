@@ -9,6 +9,16 @@ body{
         height: 100%;
         margin-top: 20vh;
         background: #FFFFFF;
+        >.center-block{
+          .form-makapi{
+            >form label{
+                color: $color-blueDial;
+            }
+            >form input {
+              border-bottom: 1px solid $color-livingCoralg;
+            }
+          }
+        }
       }
     }
   }
