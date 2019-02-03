@@ -5,7 +5,8 @@ namespace App\Service;
 
 use App\Entity\PaymentPlan;
 use App\Repository\PaymentPlanRepository;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class PaymentPlanService
 {
@@ -15,11 +16,11 @@ class PaymentPlanService
     private $paymentServiceRepository;
 
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
-    public function __construct(PaymentPlanRepository $paymentPlanRepository, EntityManager $entityManager)
+    public function __construct(PaymentPlanRepository $paymentPlanRepository, EntityManagerInterface $entityManager)
     {
         $this->paymentServiceRepository = $paymentPlanRepository;
         $this->entityManager = $entityManager;
@@ -46,16 +47,17 @@ class PaymentPlanService
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createPaymentPlan(string $name, string $description, int $requests, int $periodicity)
+    public function createPaymentPlan(string $name, string $description, int $requests, int $periodicity, UserInterface $creator)
     {
         $paymentPlan = new PaymentPlan();
         $paymentPlan->setName($name)
             ->setDescription($description)
             ->setRequests($requests)
-            ->setPeriodicity($periodicity);
+            ->setPeriodicity($periodicity)
+            ->setCreatedBy($creator);
 
         $this->entityManager->persist($paymentPlan);
-        $this->entityManager->flush($paymentPlan);
+        $this->entityManager->flush();
 
         return $paymentPlan;
     }
