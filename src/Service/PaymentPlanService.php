@@ -7,7 +7,7 @@ use App\Entity\PaymentPlan;
 use App\Repository\PaymentPlanRepository;
 use Doctrine\ORM\EntityManager;
 
-class PaymentService
+class PaymentPlanService
 {
     /**
      * @var PaymentPlanRepository
