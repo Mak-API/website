@@ -17,6 +17,14 @@ class Api
     use DeletedTrait;
 
     /**
+     * Status constants
+     */
+    const STATUS_DELETED = 0;
+    const STATUS_INIT = 1;
+    const STATUS_CREATED = 2;
+    const STATUS_HOSTED = 3;
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
