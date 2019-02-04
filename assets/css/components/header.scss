@@ -50,4 +50,10 @@ header {
       background: none;
     }
   }
+  &.linear-header {
+    nav {
+      max-width:100%;
+      background : $color-blueDial;
+    }
+  }
 }

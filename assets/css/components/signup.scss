@@ -1,0 +1,26 @@
+body{
+  background: $color-greyClaire;
+  main {
+    .form-signin {
+      width: 100vw;
+      height: 65vh;
+      background:none;
+      .form-content {
+        height: 100%;
+        margin-top: 20vh;
+        background: #FFFFFF;
+        box-shadow: 4px 3px 4px;
+        >.center-block{
+          .form-makapi{
+            >form label{
+                color: $color-blueDial;
+            }
+            >form input {
+              border-bottom: 1px solid $color-livingCoral;
+            }
+          }
+        }
+      }
+    }
+  }
+}
