@@ -9,6 +9,7 @@
         <tr>
             <th>Id</th>
             <th>Email</th>
+            <th>Login</th>
             <th>Roles</th>
             <th>Password</th>
             <th>Firstname</th>
@@ -24,6 +25,7 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
+                <td>{{ user.login }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.password }}</td>
                 <td>{{ user.firstname }}</td>
