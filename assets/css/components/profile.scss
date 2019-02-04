@@ -1,0 +1,57 @@
+main {
+  .part-profile{
+    width: 100vw;
+    height: 65vh;
+    background: $background-makapiLinearOne;
+    .profile-content {
+      height: 100%;
+      > .profile-content_center_div {
+          > div.row img.profile-picture{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px;
+
+            object-fit: cover;
+            object-position: center right;
+            border: 2px solid white;
+          }
+      }
+    }
+  }
+  .part-control-action{
+    margin-top: 2%;
+    .btn-control-action {
+      > a {
+        padding: 9px 21px;
+        background-color: $color-livingCoral;
+        display: inline;
+        border-radius: 20px;
+        text-transform: none;
+      }
+    }
+  }
+  .part-table-action-API{
+    .makapi-table {
+      table, th, td {
+        border-color: $color-livingCoral;
+        border-style: inherit;
+        border-bottom-width: 1.1px;
+      }
+      thead {
+        color : $color-livingCoral;
+      }
+      tbody {
+        a {
+          i {
+            color: $color-blueDial;
+          }
+        }
+      }
+    }
+  }
+
+
+
+
+}

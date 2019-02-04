@@ -1,0 +1,27 @@
+{% extends 'pagelayout.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <header class="linear-header">
+        {% include 'components/header/header.html.twig' %}
+    </header>
+
+    <main>
+        <section class="form-signin part-profile row col l12">
+            <div class="form-content valign-wrapper offset-l3 col l6">
+                <div class="center-block">
+                    <div class="form-makapi row col l12 blueDial-text">
+                        <h2>Sign up to MAK'API</h2>
+                        {{ include('user/_form.html.twig') }}
+                        <div class="center">
+                            <h4>Already an account ?
+                                <a href="{{ path('app_user_index') }}">Sign in.</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

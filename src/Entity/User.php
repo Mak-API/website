@@ -10,6 +10,7 @@ use App\Entity\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="user_account")
  */
 class User implements UserInterface
 {
@@ -41,10 +42,15 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $login;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, options={"default":null})
+     */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true, options={"default":null})
      */
     private $lastname;
 
@@ -139,6 +145,18 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(string $login): self
+    {
+        $this->login = $login;
+
+        return $this;
     }
 
     public function getFirstname(): ?string
