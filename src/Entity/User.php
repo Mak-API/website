@@ -99,6 +99,11 @@ class User implements UserInterface
      */
     private $apis;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email_token;
+
     public function __construct()
     {
         $this->apis = new ArrayCollection();
@@ -269,5 +274,17 @@ class User implements UserInterface
     public static function getExistingRoles(): array
     {
         return [self::ROLE_USER, self::ROLE_ADMIN];
+    }
+
+    public function getEmailToken(): ?string
+    {
+        return $this->email_token;
+    }
+
+    public function setEmailToken(?string $email_token): self
+    {
+        $this->email_token = $email_token;
+
+        return $this;
     }
 }
