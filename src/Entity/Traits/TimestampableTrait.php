@@ -5,7 +5,6 @@ namespace App\Entity\Traits;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 trait TimestampableTrait
 {
@@ -64,17 +63,17 @@ trait TimestampableTrait
     /**
      * @return User|null
      */
-    public function getCreatedBy(): ?UserInterface
+    public function getCreatedBy(): ?User
     {
         return $this->createdBy;
     }
 
     /**
-     * @param UserInterface|null $createdBy
+     * @param User|null $createdBy
      *
      * @return TimestampableTrait
      */
-    public function setCreatedBy(?UserInterface $createdBy): self
+    public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
         return $this;
@@ -102,17 +101,17 @@ trait TimestampableTrait
     /**
      * @return User|null
      */
-    public function getUpdatedBy(): ?UserInterface
+    public function getUpdatedBy(): ?User
     {
         return $this->updatedBy;
     }
 
     /**
-     * @param UserInterface|null $updatedBy
+     * @param User|null $updatedBy
      *
      * @return TimestampableTrait
      */
-    public function setUpdatedBy(?UserInterface $updatedBy): self
+    public function setUpdatedBy(?User $updatedBy): self
     {
         $this->updatedBy = $updatedBy;
         return $this;
