@@ -59,6 +59,7 @@ trait TimestampableTrait
         return $this;
     }
 
+
     /**
      * @return User|null
      */
