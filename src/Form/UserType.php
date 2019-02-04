@@ -34,6 +34,11 @@ class UserType extends AbstractType
         ;
         if ($options['group'] === 'edit') {
             $builder
+                ->add('password', RepeatedType::class, array(
+                    'type' => PasswordType::class,
+                    'first_options' => array('label' => 'Change password'),
+                    'second_options' => array('label' => 'Repeat Password'),
+                ))
                 ->add('firstname', TextType::class)
                 ->add('lastname', TextType::class)
             ;
