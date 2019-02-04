@@ -14,6 +14,12 @@ class PaymentPlan
 {
     use TimestampableTrait;
 
+    const PERIODICITY_DAILY = 1;
+    const PERIODICITY_WEEKLY = 2;
+    const PERIODICITY_MONTHLY = 3;
+    const PERIODICITY_BIYEARLY = 4;
+    const PERIODICITY_YEARLY = 5;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
