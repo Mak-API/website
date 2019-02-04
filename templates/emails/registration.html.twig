@@ -1,11 +1,11 @@
 {# templates/emails/registration.html.twig #}
 <h3>Une dernière étape pour votre inscription ! </h3>
 
-Bonjour {{ name }}! Il ne vous reste plus qu'une étape pour confirmer votre inscription.
+<p>Bonjour {{ name }}!</p>
 
-Cliquez sur ce lien pour <a href="{{ url('ConfirmRegistration') }}">finaliser votre inscription</a>.
+<p>Il ne vous reste plus qu'une étape pour confirmer votre inscription.</p>
 
-Sinon, vous pouvez y accéder via ce lien : {{ url('confirmRegistration') }}
+<p>Cliquez sur ce lien pour <a href="{{ url('ConfirmRegistration', {'token': token}) }}">finaliser votre inscription</a>.</p>
+<p>Sinon, vous pouvez y accéder via ce lien : {{ url('ConfirmRegistration', {'token': token}) }}</p>
 
-
-L'équipe Mak'API.
+<p>L'équipe Mak'API.</p>
