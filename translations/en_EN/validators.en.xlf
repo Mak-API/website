@@ -6,6 +6,10 @@
                 <source>user.email.already.exist</source>
                 <target>Your E-Mail adress has already been registered.</target>
             </trans-unit>
+            <trans-unit id="user.email.format">
+                <source>user.email.format</source>
+                <target>The email '{{ value }}' is not a valid email.</target>
+            </trans-unit>
             <trans-unit id="user.login.already.exist">
                 <source>user.login.already.exist</source>
                 <target>Your login adress has already been registered.</target>
