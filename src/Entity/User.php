@@ -61,14 +61,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank(
+     *     message = "user.login.empty"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[^<>%\$\/\\\s]*$/",
+     *     match=true,
+     *     message="user.login.special.char"
+     * )
      */
     private $login;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, options={"default":null})
-     * @Assert\NotBlank(
-     *     message = "user.login.empty"
-     * )
      */
     private $firstname;
 
