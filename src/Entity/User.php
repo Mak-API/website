@@ -10,11 +10,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\Traits\TimestampableTrait;
 
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user_account")
- * @UniqueEntity("email", message="Your E-Mail adress has already been registered")
- * @UniqueEntity("login", message="Your login has already been registered")
+ * @UniqueEntity("email", message="user.email.already.exist")
+ * @UniqueEntity("login", message="user.login.already.exist")
  */
 class User implements UserInterface
 {
