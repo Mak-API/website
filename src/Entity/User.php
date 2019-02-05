@@ -66,6 +66,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, options={"default":null})
+     * @Assert\NotBlank(
+     *     message = "user.login.empty"
+     * )
      */
     private $firstname;
 

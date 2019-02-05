@@ -12,7 +12,11 @@
             </trans-unit>
             <trans-unit id="user.login.already.exist">
                 <source>user.login.already.exist</source>
-                <target>Your login adress has already been registered.</target>
+                <target>Your login has already been registered.</target>
+            </trans-unit>
+            <trans-unit id="user.login.empty">
+                <source>user.login.empty</source>
+                <target>Your login must not be null.</target>
             </trans-unit>
             <trans-unit id="user.password.must.match">
                 <source>user.password.must.match</source>
