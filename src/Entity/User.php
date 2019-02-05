@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\Traits\TimestampableTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -41,6 +42,17 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(
+     *     min = 8,
+     *     max = 100,
+     *     minMessage = "user.password.min.message",
+     *     maxMessage = "user.password.max.message"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^(?=.{3,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/",
+     *     match=true,
+     *     message="user.password.format.message"
+     * )
      */
     private $password;
 

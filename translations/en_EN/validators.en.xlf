@@ -14,6 +14,18 @@
                 <source>user.password.must.match</source>
                 <target>The password fields must match.</target>
             </trans-unit>
+            <trans-unit id="user.password.min.message">
+                <source>user.password.min.message</source>
+                <target>Your password must be at least {{ limit }} characters long</target>
+            </trans-unit>
+            <trans-unit id="user.password.max.message">
+                <source>user.password.max.message</source>
+                <target>Your password must be at least {{ limit }} characters long</target>
+            </trans-unit>
+            <trans-unit id="user.password.format.message">
+                <source>user.password.format.message</source>
+                <target>Your password must contain a number and uppercase and lowercase</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
