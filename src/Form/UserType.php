@@ -19,20 +19,40 @@ class UserType extends AbstractType
         $builder
             ->add('login', TextType::class)
             ->add('email', EmailType::class)
-            ->add('password', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
+        ;
+        if ($options['group'] === 'new') {
+            $builder
+                ->add('password', RepeatedType::class, array(
+                    'type' => PasswordType::class,
+                    'invalid_message' => 'user.password.must.match',
+                    'first_options' => array('label' => 'Password'),
+                    'second_options' => array('label' => 'Repeat Password'),
+                ))
+            ;
+        }
+        $builder
             ->add('status', HiddenType::class)
         ;
+        if ($options['group'] === 'edit') {
+            $builder
+                ->add('password', RepeatedType::class, array(
+                    'type' => PasswordType::class,
+                    'first_options' => array('label' => 'Change password'),
+                    'second_options' => array('label' => 'Repeat Password'),
+                ))
+                ->add('firstname', TextType::class)
+                ->add('lastname', TextType::class)
+            ;
+
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'group' => "new",
+            'group' => "edit"
         ]);
     }
 }

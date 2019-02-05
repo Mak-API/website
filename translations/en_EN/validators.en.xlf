@@ -10,6 +10,10 @@
                 <source>user.login.already.exist</source>
                 <target>Your login adress has already been registered.</target>
             </trans-unit>
+            <trans-unit id="user.password.must.match">
+                <source>user.password.must.match</source>
+                <target>The password fields must match.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
