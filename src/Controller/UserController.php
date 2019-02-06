@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\UserService;
+use App\Service\EmailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,7 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, EmailService $emailService): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user, ['group' => 'new']);
@@ -45,10 +46,14 @@ class UserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+            $token = $emailService->gen_uuid();
+            $user->setEmailToken($token);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $emailService->confirmRegistration($user->getUsername(), $user->getEmail(), $user->getEmailToken());
 
             return $this->redirectToRoute('app_user_index');
         }
