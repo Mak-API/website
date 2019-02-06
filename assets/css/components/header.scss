@@ -26,6 +26,7 @@ header {
             border-bottom: 3px solid transparent;
             transition: 0.2s;
             &:hover {
+              background: none;
               border-bottom: 3px solid $color-livingCoral;
             }
           }
@@ -51,9 +52,9 @@ header {
     }
   }
   &.linear-header {
+    background : $color-blueDial;
     nav {
-      max-width:100%;
-      background : $color-blueDial;
+      background: none;
     }
   }
 }

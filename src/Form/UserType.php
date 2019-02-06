@@ -24,6 +24,7 @@ class UserType extends AbstractType
             $builder
                 ->add('password', RepeatedType::class, array(
                     'type' => PasswordType::class,
+                    'invalid_message' => 'user.password.must.match',
                     'first_options' => array('label' => 'Password'),
                     'second_options' => array('label' => 'Repeat Password'),
                 ))

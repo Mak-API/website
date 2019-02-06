@@ -5,12 +5,18 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\Traits\TimestampableTrait;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user_account")
+ * @UniqueEntity("email", message="user.email.already.exist")
+ * @UniqueEntity("login", message="user.login.already.exist")
  */
 class User implements UserInterface
 {
@@ -25,6 +31,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "user.email.format"
+     * )
      */
     private $email;
 
@@ -36,11 +45,30 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(
+     *     min = 8,
+     *     max = 100,
+     *     minMessage = "user.password.min.message",
+     *     maxMessage = "user.password.max.message"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^(?=.{3,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/",
+     *     match=true,
+     *     message="user.password.format.message"
+     * )
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank(
+     *     message = "user.login.empty"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[^<>%\$\/\\\s]*$/",
+     *     match=true,
+     *     message="user.login.special.char"
+     * )
      */
     private $login;
 
