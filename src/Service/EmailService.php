@@ -19,6 +19,7 @@ class EmailService {
         $this->templating = $templating;
     }
 
+    //Email function for sending the confirmation email
     public function confirmRegistration($username, $email, $token)
     {
         $message = (new \Swift_Message('Confirmez votre adresse email'))
@@ -35,6 +36,7 @@ class EmailService {
         $this->mailer->send($message);
     }
 
+    //[NOTE] Keep for later
     //public function resetPassword($email, $url,  \Swift_Mailer $mailer)
     //{
     //    $message = (new \Swift_Message('Mot de passe oublié ?'))
@@ -50,6 +52,7 @@ class EmailService {
     //    $this->mailer->send($message);
     //}
 
+    //Generate a token for the email_token (use in UserController
     function gen_uuid() {
         return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"
