@@ -53,7 +53,7 @@ class ApiService
      *
      * @param string $name
      * @param string $description
-     * @param User $creator
+     * @param UserInterface $creator
      * @return Api
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -71,6 +71,20 @@ class ApiService
         $this->entityManager->flush();
 
         return $api;
+    }
+
+    /**
+     * Updates an Api.
+     *
+     * @param Api $api
+     * @param string $name
+     * @param string $description
+     * @return Api
+     */
+    public function updateApi(Api $api, string $name, string $description)
+    {
+        return $api->setName($name)
+            ->setDescription($description);
     }
 
     /**
