@@ -36,12 +36,13 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
 
-    App\DataCollector\ImpersonateCollector:
+    App\DataCollector\RequestCollector:
         tags:
             -
-                name:     impersonate_collector
-                template: 'data_collector/impersonate.html.twig'
+                name:     data_collector
+                template: 'data_collector/template.html.twig'
                 # must match the value returned by the getName() method
-                id:       'app.impersonate_collector'
+                id:       'app.request_collector'
                 # optional priority
                 # priority: 300
+        public: false
