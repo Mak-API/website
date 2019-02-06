@@ -2,17 +2,23 @@
 
 {% block toolbar %}
     {% set icon %}
-        {# this is the content displayed as a panel in the toolbar #}
-        <svg xmlns="http://www.w3.org/2000/svg"> ... </svg>
-        <span class="sf-toolbar-value">Request</span>
+        <i class="material-icons" style="float:left; margin-top: 4px;">people_outline</i>
+        <span class="sf-toolbar-value">
+            Switch user
+        </span>
     {% endset %}
 
     {% set text %}
         {# this is the content displayed when hovering the mouse over
            the toolbar panel #}
         <div class="sf-toolbar-info-piece">
-            <b>Method</b>
-            <span>{{ collector.testssss }}</span>
+            <b>User list</b>
+            <ul>
+                {% for user in collector.users %}
+                    <li>{{ user.login }}</li>
+                {% endfor %}
+            </ul>
+            <span>{{ collector.test }}</span>
         </div>
     {% endset %}
 
