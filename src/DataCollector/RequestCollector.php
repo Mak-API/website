@@ -2,10 +2,12 @@
 
 namespace App\DataCollector;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Repository\UserRepository;
 
 class RequestCollector extends DataCollector
 {
@@ -35,6 +37,6 @@ class RequestCollector extends DataCollector
 
     public function getUsers()
     {
-        return $this->user->findAll();
+        return 'test';
     }
 }
