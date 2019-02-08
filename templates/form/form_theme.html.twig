@@ -1,0 +1,5 @@
+{% block text_widget %}
+    {% set type = type|default('text') %}
+    {{ block('text_widget') }}
+{% endblock text_widget %}
+
