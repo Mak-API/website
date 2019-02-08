@@ -59,6 +59,7 @@ class CreateUserCommand extends Command
 
         $user = new User();
         $user->setEmail($email)
+            ->setLogin($email)
             ->setPassword($password)
             ->setRoles($roles);
         $this->objectManager->persist($user);
