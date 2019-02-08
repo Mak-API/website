@@ -11,17 +11,21 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RequestCollector extends DataCollector
 {
-    private $user;
+    /**
+     * @var User
+     */
+    private $arrayUsers;
 
     public function __construct(UserRepository $userRepository)
     {
-        $this->user = $userRepository;
+        $this->arrayUsers = $userRepository->findAll();
     }
 
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->data = [
-            'users' => $this->getUsers()
+            'impersonateArrayUser' => $this->getImpersonateArrayUser(),
+            'impersonateUser' => $this->getImpersonateUser(),
         ];
     }
 
@@ -35,8 +39,13 @@ class RequestCollector extends DataCollector
         return 'app.request_collector';
     }
 
-    public function getUsers()
+    public function getImpersonateArrayUser()
     {
-        return 'test';
+        return $this->arrayUsers;
+    }
+
+    public function getImpersonateUser()
+    {
+        return 'Switch User';
     }
 }

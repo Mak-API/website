@@ -4,7 +4,7 @@
     {% set icon %}
         <i class="material-icons" style="float:left; margin-top: 4px;">people_outline</i>
         <span class="sf-toolbar-value">
-            Switch user
+            {{ collector.impersonateUser }}
         </span>
     {% endset %}
 
@@ -12,16 +12,28 @@
         {# this is the content displayed when hovering the mouse over
            the toolbar panel #}
         <div class="sf-toolbar-info-piece">
-            <b>User list</b>
-            <ul>
-                {% for user in collector.users %}
-                    <li>p</li>
-                {% endfor %}
-            </ul>
+            <p>collector</p>
+            {{  dump(collector) }}
+            <p>collector.impersonateArrayUser</p>
+            {{  dump(collector.impersonateArrayUser) }}
+            <p>collector.impersonateUser</p>
+            {{  dump(collector.impersonateUser) }}
+            {% if collector %}
+                <form method="POST" action="#">
+                    <label for="impersonate-select-user">User list</label>
+                    <select name="impersonate-select-user" id="impersonate-select-user">
+                        {% for user in collector.impersonateArrayUser %}
+                            <option value="{{ user.id }}">{{ user.login }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            {% else %}
+                <span>No user found</span>
+            {% endif %}
         </div>
     {% endset %}
 
     {# the 'link' value set to 'false' means that this panel doesn't
        show a section in the web profiler #}
-    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: false }) }}
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': false }) }}
 {% endblock %}
