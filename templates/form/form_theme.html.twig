@@ -1,5 +1,32 @@
-{% block text_widget %}
-    {% set type = type|default('text') %}
-    {{ block('text_widget') }}
-{% endblock text_widget %}
+{% extends "form_div_layout.html.twig" %}
 
+{%- block form_row -%}
+    <div>
+        {{- form_widget(form) -}}
+        {{- form_label(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="red-text">
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block text_row -%}
+    <div class="row">
+        <div class="input-field col s12">
+            {{- form_widget(form) -}}
+            {{- form_label(form) -}}
+        </div>
+    </div>
+{%- endblock text_row %}
+
+{% block text_widget %}
+    {%- set type = type|default('text') -%}
+    <input type="{{ type }}" {% if not valid %} class="invalid"{% endif %} {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endblock text_widget %}
