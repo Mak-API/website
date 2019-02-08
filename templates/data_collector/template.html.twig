@@ -4,7 +4,7 @@
     {% set icon %}
         <i class="material-icons" style="float:left; margin-top: 4px;">people_outline</i>
         <span class="sf-toolbar-value">
-            {{ collector.impersonateUser }}
+            {{ collector.labelToolbarUsers }}
         </span>
     {% endset %}
 
@@ -12,21 +12,47 @@
         {# this is the content displayed when hovering the mouse over
            the toolbar panel #}
         <div class="sf-toolbar-info-piece">
-            <p>collector</p>
-            {{  dump(collector) }}
-            <p>collector.impersonateArrayUser</p>
-            {{  dump(collector.impersonateArrayUser) }}
-            <p>collector.impersonateUser</p>
-            {{  dump(collector.impersonateUser) }}
             {% if collector %}
                 <form method="POST" action="#">
-                    <label for="impersonate-select-user">User list</label>
-                    <select name="impersonate-select-user" id="impersonate-select-user">
-                        {% for user in collector.impersonateArrayUser %}
-                            <option value="{{ user.id }}">{{ user.login }}</option>
-                        {% endfor %}
+                    <label for="impersonate-select-user">{{ collector.labelSelectUsers }}</label>
+                    <select name="impersonate-select-user"
+                            id="impersonate-select-user"
+                            style="
+                                display: inline;
+                                height: 25px;
+                            "
+                    >
+                        <option selected>Select user</option>
+                        <optgroup label="Options">
+                            <option value="_exit">Exit impersonate</option>
+                        </optgroup>
+                        <optgroup label="User list">
+                            {% for user in collector.users %}
+                                <option value="{{ user.id }}">{{ user.login }}</option>
+                            {% else %}
+                                <option>No user found</option>
+                            {% endfor %}
+                        </optgroup>
                     </select>
+                    <input type="button"
+                           value="Switch"
+                           id="impersonate-button"
+                           style="
+                                display: block;
+                                padding: 2.5px;
+                                margin-top: 5px;
+                            "
+                    >
                 </form>
+                <script>
+                    let user = document.getElementById('impersonate-select-user');
+                    let button = document.getElementById('impersonate-button');
+                    let parsedHref = location.href.split('?')[0];
+
+                    button.onclick = function () {
+                        location.href = parsedHref + '?_switch_user=' + user.value;
+                    };
+                </script>
             {% else %}
                 <span>No user found</span>
             {% endif %}
