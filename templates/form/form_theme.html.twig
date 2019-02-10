@@ -33,7 +33,7 @@
         {% endfor %}
         {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' invalid')|trim, 'data-error': stringErrors|join(' ')}) %}
         {% for error in errors %}
-            <span class="red-text">{{ error.message }}</span>
+            <div><span class="red-text">{{ error.message }}</span></div>
         {% endfor %}
     {% endif %}
     {% if value is not empty -%}
