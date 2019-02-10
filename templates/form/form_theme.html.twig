@@ -32,7 +32,8 @@
             {% set stringErrors = stringErrors|merge([error.message]) %}
         {% endfor %}
         {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' invalid')|trim, 'data-error': stringErrors|join(' ')}) %}
-        <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+        {{ dump(stringErrors[0]) }}
+        <span class="helper-text" data-error="{{ stringErrors[0] }}" ></span>
     {% endif %}
     {% if value is not empty -%}
         {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' active')|trim}) %}
