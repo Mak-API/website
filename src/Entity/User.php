@@ -22,6 +22,13 @@ class User implements UserInterface
 {
     use TimestampableTrait;
 
+    /*
+     * User roles
+     */
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -252,5 +259,15 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * Returns the existing roles.
+     *
+     * @return array
+     */
+    public static function getExistingRoles(): array
+    {
+        return [self::ROLE_USER, self::ROLE_ADMIN];
     }
 }
