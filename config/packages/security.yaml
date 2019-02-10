@@ -14,9 +14,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-            switch_user: true
         main:
             anonymous: true
+            switch_user: { role: ROLE_ADMIN }
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator

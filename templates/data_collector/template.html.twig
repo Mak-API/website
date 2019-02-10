@@ -11,38 +11,39 @@
     {% set text %}
         {# this is the content displayed when hovering the mouse over
            the toolbar panel #}
-        <div class="sf-toolbar-info-piece">
+        <div class="sf-toolbar-info-group">
             {% if collector %}
                 <form method="POST" action="#">
-                    <label for="impersonate-select-user">{{ collector.labelSelectUsers }}</label>
-                    <select name="impersonate-select-user"
-                            id="impersonate-select-user"
-                            style="
-                                display: inline;
-                                height: 25px;
-                            "
-                    >
-                        <option selected>Select user</option>
-                        <optgroup label="Options">
-                            <option value="_exit">Exit impersonate</option>
-                        </optgroup>
-                        <optgroup label="User list">
-                            {% for user in collector.users %}
-                                <option value="{{ user.id }}">{{ user.login }}</option>
-                            {% else %}
-                                <option>No user found</option>
-                            {% endfor %}
-                        </optgroup>
-                    </select>
-                    <input type="button"
-                           value="Switch"
-                           id="impersonate-button"
-                           style="
-                                display: block;
-                                padding: 2.5px;
-                                margin-top: 5px;
-                            "
-                    >
+                    <div class="sf-toolbar-info-piece">
+                        <label for="impersonate-select-user">{{ collector.labelSelectUsers }}</label>
+                        <select name="impersonate-select-user"
+                                id="impersonate-select-user"
+                                style="
+                                    display: inline;
+                                    height: 25px;
+                                    margin-left: 5px;
+                                "
+                        >
+                            <option selected>Select user</option>
+                            <optgroup label="User list">
+                                {% for user in collector.users %}
+                                    <option value="{{ user.email }}">{{ user.login }}</option>
+                                {% else %}
+                                    <option>No user found</option>
+                                {% endfor %}
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="sf-toolbar-info-piece">
+                        <input type="button"
+                               value="switch"
+                               id="impersonate-button"
+                               style="
+                                    padding: 2.5px;
+                                    margin-top: 5px;
+                                "
+                        >
+                    </div>
                 </form>
                 <script>
                     let user = document.getElementById('impersonate-select-user');
@@ -54,8 +55,15 @@
                     };
                 </script>
             {% else %}
-                <span>No user found</span>
+                <b>User</b>
+                <span>0 users founded</span>
             {% endif %}
+        </div>
+        <div class="sf-toolbar-info-group">
+            <div class="sf-toolbar-info-piece">
+                <b>Action</b>
+                <a href="{{ path('app_default_index', {'_switch_user': '_exit'}) }}">Exit impersonation</a>
+            </div>
         </div>
     {% endset %}
 
