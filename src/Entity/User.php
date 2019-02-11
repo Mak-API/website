@@ -104,6 +104,11 @@ class User implements UserInterface
      */
     private $email_token;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $verified = false;
+
     public function __construct()
     {
         $this->apis = new ArrayCollection();
@@ -143,7 +148,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_UNVERIFIED';
 
         return array_unique($roles);
     }
@@ -284,6 +289,18 @@ class User implements UserInterface
     public function setEmailToken(?string $email_token): self
     {
         $this->email_token = $email_token;
+
+        return $this;
+    }
+
+    public function getVerified(): ?bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): self
+    {
+        $this->verified = $verified;
 
         return $this;
     }
