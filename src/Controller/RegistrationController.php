@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\UserService;
 
 /**
  * Class DefaultController
@@ -15,16 +16,15 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/confirm/{token}", name="ConfirmRegistration", methods={"GET"})
      */
-    public function confirmRegistration($token)
+    public function confirmRegistration($token, UserService $userService)
     {
 
-        //if token == token envoyé à l'inscription
+        $result = $userService->verifyToken($token);
 
-        return $this->render('authentication/successRegistration.html.twig', [
-            'token' => $token
+        return $this->render('authentication/registration.html.twig', [
+            'isVerified' => $result["isVerified"],
+            'username' => $result["user"]
         ]);
-
-        //sinon return error
     }
 
     /**
@@ -39,5 +39,14 @@ class RegistrationController extends AbstractController
         ]);
 
         //sinon return error
+    }
+
+    /**
+     * @Route("/send_confirmation_email", name="send_confirmation_email", methods={"GET"})
+     */
+    public function sendConfirmationEmail($token)
+    {
+        return $this->render('authentication/send_confirmation_email.html.twig', []);
+
     }
 }
