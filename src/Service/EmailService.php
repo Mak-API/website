@@ -2,7 +2,6 @@
 namespace App\Service;
 use Aws\Ses\SesClient;
 use Aws\Exception\AwsException;
-use Swift_Mailer;
 
 class EmailService {
 
@@ -28,7 +27,7 @@ class EmailService {
             ->setBody(
                 $this->templating->render(
                     'emails/registration.html.twig',
-                    ['name' => $username,
+                    ['username' => $username,
                         'token' => $token]
                 ),
                 'text/html'
