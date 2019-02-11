@@ -1,0 +1,188 @@
+{% extends "form_div_layout.html.twig" %}
+
+{%- block form_row -%}
+    <div{% if not compound %} class="input-field"{% endif %}>
+        {{- form_widget(form) -}}
+        {{- form_label(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="red-text">
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{%- block textarea_row -%}
+    <div>
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock textarea_row -%}
+
+{% block form_label -%}
+    {% if errors|length > 0 -%}
+        {% set stringErrors = [] %}
+        {% for error in errors %}
+            {% set stringErrors = stringErrors|merge([error.message]) %}
+        {% endfor %}
+        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' invalid')|trim, 'data-error': stringErrors|join(' ')}) %}
+        {% for error in errors %}
+            <div><span class="red-text">{{ error.message }}</span></div>
+        {% endfor %}
+    {% endif %}
+    {% if value is not empty -%}
+        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' active')|trim}) %}
+    {% endif %}
+    {{- parent() -}}
+{%- endblock form_label %}
+
+{% block datetime_widget -%}
+    {% if widget == 'single_text' %}
+        {{- block('form_widget_simple') -}}
+    {% else -%}
+        {% set attr = attr|merge({class: (attr.class|default(''))|trim}) -%}
+        <div {{ block('widget_container_attributes') }} class="col s12">
+            {{- form_errors(form.date) -}}
+            {{- form_errors(form.time) -}}
+            <div class="input-field col s6 form_datetime">
+                {{ form_widget(form.date, { datetime: true, 'attr': {'readonly': 'true', 'class': 'validate', 'data-value': form.date.vars.value}} ) }}
+                <label for="icon_prefix">{{ 'label.date.the'|trans }}</label>
+            </div>
+            <div class="input-field col s6">
+                {{ form_widget(form.time, { datetime: true, 'attr': {'class': 'validate timepicker5'}} ) }}
+                <label for="icon_prefix">{{ 'label.at'|trans }}</label>
+            </div>
+        </div>
+    {%- endif %}
+{%- endblock datetime_widget %}
+
+{% block time_widget -%}
+    {% if widget == 'single_text' %}
+        {{- block('form_widget_simple') -}}
+    {% else -%}
+        {% set attr = attr|merge({class: (attr.class|default(''))|trim}) -%}
+        <div {{ block('widget_container_attributes') }} class="col s12">
+            {{- form_errors(form.time) -}}
+            <div class="input-field col s6">
+                {{ form_widget(form.time, { datetime: true, 'attr': {'class': 'validate timepicker5'}} ) }}
+                <label for="icon_prefix">{{ 'label.at'|trans }}</label>
+            </div>
+        </div>
+    {%- endif %}
+{%- endblock time_widget %}
+
+{% block checkbox_row -%}
+    <p {% if form.vars.attr['data-label-class'] is defined %}class="{{ form.vars.attr['data-label-class'] }}"{% endif %}>
+        <label>
+            {{- form_widget(form) -}}
+            {{- form_label(form) -}}
+        </label>
+    </p>
+{%- endblock checkbox_row %}
+
+{% block checkbox_widget -%}
+    <input type="checkbox"
+           class="filled-in"{{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+{%- endblock checkbox_widget %}
+
+{%- block checkbox_label -%}
+    {% if label is not same as(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif -%}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif -%}
+        {% if errors|length > 0 -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' invalid')|trim}) %}
+        {% endif %}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+        <span{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        {{ translation_domain is same as(false) ? label|raw : label|trans({}, translation_domain)|raw }}
+        </span>
+    {%- endif -%}
+{%- endblock -%}
+
+{% block radio_row -%}
+    {{- block('checkbox_row') -}}
+{%- endblock radio_row %}
+
+{% block radio_widget -%}
+    <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+{%- endblock radio_widget %}
+
+{% block text_row -%}
+    <div class="row">
+        <div class="input-field col s12">
+            {{- form_widget(form) -}}
+            {{- form_label(form) -}}
+        </div>
+    </div>
+{%- endblock text_row %}
+
+{% block text_widget %}
+    {%- set type = type|default('text') -%}
+    <input type="{{ type }}" {% if not valid %} class="invalid"{% endif %} {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endblock text_widget %}
+
+{% block app_bundle_switch_row -%}
+    <div class="row">
+        <div class="col s12">
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+        </div>
+    </div>
+{%- endblock app_bundle_switch_row %}
+
+{% block app_bundle_switch_widget -%}
+    <div class="switch">
+        <label>
+            {{ form.vars.label_off|trans }}
+            <input type="checkbox"
+                   name="{{ form.vars.full_name }}"
+                   value="{{ form.vars.value }}"
+                    {% if form.vars.data %} checked="checked"{% endif %}>
+            <span class="lever"></span>
+            {{ form.vars.label_on|trans }}
+        </label>
+    </div>
+{%- endblock app_bundle_switch_widget %}
+
+{% block choice_row -%}
+    <div class="row">
+        <div class="input-field col s12">
+            {{- form_widget(form) -}}
+            {{- form_label(form) -}}
+        </div>
+    </div>
+{%- endblock choice_row %}
+
+{%- block choice_widget_collapsed -%}
+    <select {{ block('widget_attributes') }}{% if multiple %} multiple{% endif %}>
+        <option value="" disabled {% if value is empty %} selected{% endif %}>Choisir une option</option>
+        {%- if preferred_choices|length > 0 -%}
+            {% set options = preferred_choices %}
+            {{- block('choice_widget_options') -}}
+            {%- if choices|length > 0 and separator is not none -%}
+                <option disabled="disabled">{{ separator }}</option>
+            {%- endif -%}
+        {%- endif -%}
+        {%- set options = choices -%}
+        {{- block('choice_widget_options') -}}
+    </select>
+{%- endblock choice_widget_collapsed -%}
