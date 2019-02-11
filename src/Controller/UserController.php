@@ -37,7 +37,6 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user, ['group' => 'new']);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $user->setPassword(
@@ -53,14 +52,14 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $emailService->confirmRegistration($user->getUsername(), $user->getEmail(), $user->getEmailToken());
+            $emailService->confirmRegistration($user->getLogin(), $user->getEmail(), $user->getEmailToken());
 
             return $this->redirectToRoute('app_user_index');
         }
 
         return $this->render('user/new.html.twig', [
             'user' => $user,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
