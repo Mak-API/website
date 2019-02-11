@@ -35,3 +35,14 @@ services:
     App\EventListener\UserListener:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
+
+    App\DataCollector\RequestCollector:
+        tags:
+            -
+                name:     data_collector
+                template: 'data_collector/template.html.twig'
+                # must match the value returned by the getName() method
+                id:       'app.request_collector'
+                # optional priority
+                # priority: 300
+        public: false

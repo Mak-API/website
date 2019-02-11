@@ -16,6 +16,7 @@ security:
             security: false
         main:
             anonymous: true
+            switch_user: { role: ROLE_ADMIN }
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
