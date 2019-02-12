@@ -27,7 +27,7 @@
                         <div class="validate-registration">
                             <h2>Check your email box to activate your account !</h2>
                             <button  class=" send-email btn waves-effect waves-light" type="submit" name="action">
-                                <a href="{{ path('send_confirmation_email', {'email': username }) }}">No mail received ? Click here</a>
+                                <a href="{{ path('send_confirmation_email', {'email': login }) }}">No mail received ? Click here</a>
                             </button>
                         </div>
                     {% endif %}
