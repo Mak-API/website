@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use App\Service\EmailService;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\UserService;
 
 /**
  * Class DefaultController
@@ -13,13 +14,22 @@ use App\Service\UserService;
  */
 class RegistrationController extends AbstractController
 {
+    private $emailService;
+    private $userService;
+
+    public function __construct(EmailService $emailService, UserService $userService)
+    {
+        $this->emailService = $emailService;
+        $this->userService = $userService;
+    }
+
     /**
      * @Route("/confirm/{token}", name="confirm_registration", methods={"GET"})
      */
-    public function confirmRegistration($token, UserService $userService)
+    public function confirmRegistration($token)
     {
         //Check if the the 'isVerified' Bool is ok or not
-        $result = $userService->verifyToken($token);
+        $result = $this->userService->verifyToken($token);
 
         return $this->render('authentication/registration.html.twig', [
             'isVerified' => $result["isVerified"],
@@ -46,8 +56,12 @@ class RegistrationController extends AbstractController
      */
     public function sendConfirmationEmail($email)
     {
-        //WIP : send new email
-        UserService::sendNewEmail($email);
+        $this->emailService->sendNewEmail($email);
+
+        return $this->render('authentication/registration.html.twig', [
+        'isVerified' => false,
+        'login' => $email
+    ]);
 
     }
 }
