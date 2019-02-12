@@ -24,7 +24,8 @@ class EmailService {
     }
 
     //Email function for sending the confirmation email
-    public function confirmRegistration($username, $email, $token)
+    //$email, $login and $token are string value
+    public function confirmRegistration($login, $email, $token)
     {
         $message = (new \Swift_Message('Confirmez votre adresse email'))
             ->setFrom(getenv('MAILER_FROM'))
@@ -32,7 +33,7 @@ class EmailService {
             ->setBody(
                 $this->templating->render(
                     'emails/registration.html.twig',
-                    ['username' => $username,
+                    ['login' => $login,
                         'token' => $token]
                 ),
                 'text/html'
@@ -68,6 +69,7 @@ class EmailService {
     //    $this->mailer->send($message);
     //}
 
+    //Code found in https://stackoverflow.com/questions/2040240/php-function-to-generate-v4-uuid/2040279#2040279
     //Generate a token for the email_token (use in UserController
     function gen_uuid() {
         return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
