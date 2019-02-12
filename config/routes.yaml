@@ -4,9 +4,13 @@
 app_logout:
   path: /logout
 
-ConfirmRegistration:
+confirm_registration:
     path: /confirm/{token}
     controller: App\Controller\RegistrationController::confirmRegistration
+
+send_confirmation_email:
+  path: /send_confirmation_email/{email}
+  controller: App\Controller\RegistrationController::sendConfirmationEmail
 
 #resetPassword:
 #    path: /reset_password/{token}

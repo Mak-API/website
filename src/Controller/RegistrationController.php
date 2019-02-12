@@ -9,21 +9,21 @@ use App\Service\UserService;
 /**
  * Class DefaultController
  * @package App\Controller
- * @Route(name="app_default_")
+ * @Route(name="app_registration_")
  */
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/confirm/{token}", name="ConfirmRegistration", methods={"GET"})
+     * @Route("/confirm/{token}", name="confirm_registration", methods={"GET"})
      */
     public function confirmRegistration($token, UserService $userService)
     {
-
+        //Check if the the 'isVerified' Bool is ok or not
         $result = $userService->verifyToken($token);
 
         return $this->render('authentication/registration.html.twig', [
             'isVerified' => $result["isVerified"],
-            'username' => $result["user"]
+            'login' => $result["login"]
         ]);
     }
 
@@ -42,11 +42,12 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/send_confirmation_email", name="send_confirmation_email", methods={"GET"})
+     * @Route("/send_confirmation_email/{email}", name="send_confirmation_email", methods={"GET"})
      */
-    public function sendConfirmationEmail($token)
+    public function sendConfirmationEmail($email)
     {
-        return $this->render('authentication/send_confirmation_email.html.twig', []);
+        //WIP : send new email
+        UserService::sendNewEmail($email);
 
     }
 }
