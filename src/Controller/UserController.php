@@ -47,6 +47,18 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //generate and set email_token (for the email checking)
+            $token = $this->emailService->gen_uuid();
+            $user->setEmailToken($token);
+
+            //sending the confirmation email
+            if(!$this->emailService->confirmRegistration($user->getLogin(), $user->getEmail(), $user->getEmailToken())) {
+                return $this->render('user/new.html.twig', [
+                    'user' => $user,
+                    'form' => $form->createView()
+                ]);
+            }
+
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -54,16 +66,13 @@ class UserController extends AbstractController
                 )
             );
 
-            //generate and set email_token (for the email checking)
-            $token = $this->emailService->gen_uuid();
-            $user->setEmailToken($token);
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            //sending the confirmation email
-            $this->emailService->confirmRegistration($user->getLogin(), $user->getEmail(), $user->getEmailToken());
+
 
             return $this->redirectToRoute('app_user_index');
         }
