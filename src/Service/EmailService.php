@@ -5,6 +5,7 @@ use App\Entity\User;
 use Aws\Ses\SesClient;
 use Aws\Exception\AwsException;
 use Doctrine\Common\Persistence\ObjectManager;
+use mysql_xdevapi\Exception;
 
 class EmailService {
 
@@ -38,7 +39,16 @@ class EmailService {
                 ),
                 'text/html'
             );
-        $this->mailer->send($message);
+
+        try{
+            $send = $this->mailer->send($message);
+            if($send) {
+                return true;
+            }
+        }catch(\Swift_TransportException $e){
+            return false;
+        }
+
     }
 
     public function sendNewEmail($email) {
