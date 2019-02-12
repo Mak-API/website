@@ -26,14 +26,14 @@ class UserService
     public function verifyToken($token) {
         $user = $this->manager->getRepository(User::class)
             ->findOneBy(array('email_token' => $token));
+
         if ($user && !$user->getVerified()) {
             $user->setVerified(true);
             $this->manager->flush();
             return ["isVerified" => true,
-                "user" => $user->getLogin()];
+                "login" => $user->getEmail()];
         } else if($user && $user->getVerified()) {
-            return ["isVerified" => true,
-                "user" => $user->getLogin()];
+            throw new \Exception('Something went wrong!');
         } else if(!$user) {
             throw new \Exception('Something went wrong!');
         } else {
@@ -52,10 +52,10 @@ class UserService
         }
     }
 
-    public function redirectVerified($verified, $user) {
+    public function redirectAfterEmailChecking($verified, $user) {
         return $this->templating->render('authentication/registration.html.twig', [
             'isVerified' => $verified,
-            'username' => $user
+            'login' => $user
         ]);
     }
 

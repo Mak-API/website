@@ -82,9 +82,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function checkCredentials($credentials, UserInterface $user)
     {
         $email = $user->getEmail();
+        //checking if the profile is NOT verified, throw custom error with 410 code
         if( !$this->userService->isVerified($email)){
             throw new AuthenticationException($user->getEmail(),410);
         }
+        //check if the credentials are ok AND if the profile is verified
         return ($this->passwordEncoder->isPasswordValid($user, $credentials['password']) && $this->userService->isVerified($user->getEmail()));
     }
 
@@ -101,9 +103,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        
+            //Catch code, if it's the custom 410 error, call the function for rendering the template
           if($exception->getCode() == 410){
-                   return new Response($this->userService->redirectVerified(false, $exception->getMessage()));
+              return new Response($this->userService->redirectAfterEmailChecking(false, $exception->getMessage()));
           }
           return parent::onAuthenticationFailure($request, $exception);
 
