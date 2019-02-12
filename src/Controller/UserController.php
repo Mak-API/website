@@ -18,6 +18,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
+
+    private $emailService;
+
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
     /**
      * @Route("/",  name="index", methods={"GET"})
      */
@@ -32,7 +40,7 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, EmailService $emailService): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user, ['group' => 'new']);
@@ -45,14 +53,17 @@ class UserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-            $token = $emailService->gen_uuid();
+
+            //generate and set email_token (for the email checking)
+            $token = $this->emailService->gen_uuid();
             $user->setEmailToken($token);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $emailService->confirmRegistration($user->getLogin(), $user->getEmail(), $user->getEmailToken());
+            //sending the confirmation email
+            $this->emailService->confirmRegistration($user->getLogin(), $user->getEmail(), $user->getEmailToken());
 
             return $this->redirectToRoute('app_user_index');
         }
