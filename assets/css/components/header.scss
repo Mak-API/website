@@ -21,8 +21,11 @@ header {
       }
 
       > .navbar-list {
+        height: 100%;
         > li {
+          height: 100%;
           > a {
+            height: 100%;
             border-bottom: 3px solid transparent;
             transition: 0.2s;
             &:hover {
@@ -35,6 +38,7 @@ header {
             margin-left: 60px;
           }
           &.navbar-list_signup {
+            height: auto;
             margin-left: 30px;
             > a {
               &:hover {
@@ -42,16 +46,26 @@ header {
               }
             }
           }
+          &.active {
+            background: none;
+            > a {
+              border-bottom: 3px solid $color-livingCoral;
+            }
+          }
         }
       }
     }
   }
   &.gradient-header {
+    width: 100%;
+    z-index: 100000;
+    position: absolute;
     nav {
       background: none;
     }
   }
   &.linear-header {
+
     background : $color-blueDial;
     nav {
       background: none;
