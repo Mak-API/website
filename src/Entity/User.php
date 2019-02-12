@@ -27,6 +27,7 @@ class User implements UserInterface
      */
     const ROLE_USER = 'ROLE_USER';
     const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_UNVERIFIED = 'ROLE_UNVERIFIED';
 
 
     /**
@@ -147,8 +148,8 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_UNVERIFIED';
+        // guarantee every user at least has ROLE_UNVERIFIED
+        $roles[] = self::ROLE_UNVERIFIED;
 
         return array_unique($roles);
     }
