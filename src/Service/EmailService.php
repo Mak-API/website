@@ -57,10 +57,14 @@ class EmailService {
             ->findOneBy(array('email' => $email));
 
         $token = $this->gen_uuid();
-        $user->setToken($token);
+        $user->setEmailToken($token);
         $this->manager->flush();
 
-        $this->confirmRegistration($user->getLogin(), $user->getEmail(), $token);
+        if($this->confirmRegistration($user->getLogin(), $user->getEmail(), $token)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //[NOTE] Keep for later

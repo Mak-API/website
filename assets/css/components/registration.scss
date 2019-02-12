@@ -8,6 +8,10 @@
   .send-email {
     margin-bottom: 30px;
     background-color: $color-blueDial;
+
+    a {
+      color: $color-white;
+    }
   }
 }
 
