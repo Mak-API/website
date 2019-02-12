@@ -37,9 +37,9 @@ header {
           &.navbar-list_signup {
             margin-left: 30px;
             > a {
-              padding: 9px 21px;
-              background-color: $color-livingCoral;
-              border-radius: 20px;
+              &:hover {
+                background-color: $color-livingCoral;
+              }
             }
           }
         }
