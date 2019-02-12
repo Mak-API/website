@@ -1,7 +1,10 @@
 <?php
 namespace App\Service;
+
+use App\Entity\User;
 use Aws\Ses\SesClient;
 use Aws\Exception\AwsException;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class EmailService {
 
@@ -11,11 +14,13 @@ class EmailService {
      */
     private $mailer;
     private $templating;
+    private $manager;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating,ObjectManager $manager)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
+        $this->manager = $manager;
     }
 
     //Email function for sending the confirmation email
@@ -33,6 +38,18 @@ class EmailService {
                 'text/html'
             );
         $this->mailer->send($message);
+    }
+
+    public function sendNewEmail($email) {
+
+        $user = $this->manager->getRepository(User::class)
+            ->findOneBy(array('email' => $email));
+
+        $token = $this->gen_uuid();
+        $user->setToken($token);
+        $this->manager->flush();
+
+        $this->confirmRegistration($user->getLogin(), $user->getEmail(), $token);
     }
 
     //[NOTE] Keep for later
