@@ -1,14 +1,5 @@
 footer {
-  /**
-    Ovveride materialize
-   */
   &.page-footer {
-    background: none;
-  }
-  /**
-    Makapi footer homepage
-   */
-  &.homepage-footer {
     background: $color-blueDial;
   }
   .footer-logo_makapi {

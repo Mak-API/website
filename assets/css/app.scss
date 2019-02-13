@@ -12,11 +12,6 @@ body {
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
 }
-header {
-    position: absolute;
-    width: 100%;
-    z-index: 100000;
-}
 
 // Imports SCSS file
     @import "components/header";
