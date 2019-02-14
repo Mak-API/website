@@ -1,12 +1,11 @@
 import $ from 'jquery';
 
-let formApiName = document.getElementById('form-api-name');
-
 const onBlur = function(event) {
+    const parent = this.parentNode;
     const value = this.value;
     const text = document.createTextNode(value);
-    formApiName.removeChild(this);
-    formApiName.appendChild(text);
+    parent.removeChild(this);
+    parent.appendChild(text);
 };
 
 const onClick = function(event) {
@@ -19,5 +18,7 @@ const onClick = function(event) {
     this.appendChild(input);
     input.focus();
 };
+
+let formApiName = document.getElementById('form-api-name');
 
 formApiName.addEventListener('click', onClick);
