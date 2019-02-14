@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="{{ asset('build/vendor.css') }}">
         <script type="text/javascript" src="{{ asset('build/vendor.js') }}"></script>
 
+        {% block head_javascripts %}{% endblock %}
+
     </head>
     <body>
         {% block body %}{% endblock %}

@@ -14,7 +14,7 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down navbar-list">
             <li {% if app.request.get('_route') == 'app_default_index' %} class="active"{% endif %}><a href="{{ path('app_default_index') }}">Home</a></li>
-            <li><a href="#">Make your API</a></li>
+            <li {% if app.request.get('_route') == 'app_generator_form_index' %} class="active"{% endif %}><a href="{{ path('app_generator_form_index') }}">Make your API</a></li>
             <li><a href="#">Documentation</a></li>
             <li><a href="#">News</a></li>
             <li><a href="#">About us</a></li>
