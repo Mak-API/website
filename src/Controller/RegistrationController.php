@@ -17,6 +17,12 @@ class RegistrationController extends AbstractController
     private $emailService;
     private $userService;
 
+
+    /**
+     * RegistrationController constructor.
+     * @param EmailService $emailService
+     * @param UserService $userService
+     */
     public function __construct(EmailService $emailService, UserService $userService)
     {
         $this->emailService = $emailService;
@@ -24,6 +30,9 @@ class RegistrationController extends AbstractController
     }
 
     /**
+     * @param $token
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      * @Route("/confirm/{token}", name="confirm_registration", methods={"GET"})
      */
     public function confirmRegistration($token)
@@ -38,23 +47,24 @@ class RegistrationController extends AbstractController
     }
 
     /**
+     * @param string $token
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/reset_password/{token}", name="reset_password", methods={"GET"})
      */
-    public function forgotPassword($token)
+    public function forgotPassword(string $token)
     {
-        //if token == token envoyé a "mot de passe oublié?"
 
         return $this->render('authentication/resetPassword.html.twig', [
             'token' => $token
         ]);
-
-        //sinon return error
     }
 
     /**
+     * @param string $email
      * @Route("/send_confirmation_email/{email}", name="send_confirmation_email", methods={"GET"})
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function sendConfirmationEmail($email)
+    public function sendConfirmationEmail(string $email)
     {
         $this->emailService->sendNewEmail($email);
 
