@@ -17,13 +17,24 @@ class UserService
     private $manager;
     private $templating;
 
+
+    /**
+     * UserService constructor.
+     * @param ObjectManager $manager
+     * @param \Twig_Environment $templating
+     */
     public function __construct(ObjectManager $manager, \Twig_Environment $templating)
     {
         $this->manager = $manager;
         $this->templating = $templating;
     }
 
-    public function verifyToken($token) {
+    /**
+     * @param string $token
+     * @return array
+     * @throws \Exception
+     */
+    public function verifyToken(string $token) {
         $user = $this->manager->getRepository(User::class)
             ->findOneBy(array('email_token' => $token));
 
@@ -41,7 +52,11 @@ class UserService
         }
     }
 
-    public function isVerified($email) {
+    /**
+     * @param string $email
+     * @return bool|null
+     */
+    public function isVerified(string $email) {
         $user = $this->manager->getRepository(User::class)
             ->findOneBy(array('email' => $email));
 
@@ -52,7 +67,15 @@ class UserService
         }
     }
 
-    public function redirectAfterEmailChecking($verified, $user) {
+    /**
+     * @param bool $verified
+     * @param string $user
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function redirectAfterEmailChecking(bool $verified, string $user) {
         return $this->templating->render('authentication/registration.html.twig', [
             'isVerified' => $verified,
             'login' => $user

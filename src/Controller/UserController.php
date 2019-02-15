@@ -38,7 +38,13 @@ class UserController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @Route("/new", name="new", methods={"GET","POST"})
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -94,7 +100,11 @@ class UserController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param User $user
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @return Response
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -123,7 +133,10 @@ class UserController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param User $user
      * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @return Response
      */
     public function delete(Request $request, User $user): Response
     {

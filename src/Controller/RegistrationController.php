@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Service\EmailService;
 use App\Service\UserService;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -17,16 +19,26 @@ class RegistrationController extends AbstractController
     private $emailService;
     private $userService;
 
+
+    /**
+     * RegistrationController constructor.
+     * @param EmailService $emailService
+     * @param UserService $userService
+     */
     public function __construct(EmailService $emailService, UserService $userService)
     {
         $this->emailService = $emailService;
         $this->userService = $userService;
     }
 
+
     /**
+     * @param string $token
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      * @Route("/confirm/{token}", name="confirm_registration", methods={"GET"})
      */
-    public function confirmRegistration($token)
+    public function confirmRegistration(string $token) : Response
     {
         //Check if the the 'isVerified' Bool is ok or not
         $result = $this->userService->verifyToken($token);
@@ -38,23 +50,27 @@ class RegistrationController extends AbstractController
     }
 
     /**
+     * @param string $token
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/reset_password/{token}", name="reset_password", methods={"GET"})
      */
-    public function forgotPassword($token)
+    public function forgotPassword(string $token) : Response
     {
-        //if token == token envoyé a "mot de passe oublié?"
 
         return $this->render('authentication/resetPassword.html.twig', [
             'token' => $token
         ]);
-
-        //sinon return error
     }
 
     /**
+     * @param string $email
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
      * @Route("/send_confirmation_email/{email}", name="send_confirmation_email", methods={"GET"})
+     * @throws \Twig_Error_Syntax
      */
-    public function sendConfirmationEmail($email)
+    public function sendConfirmationEmail(string $email) : string
     {
         $this->emailService->sendNewEmail($email);
 

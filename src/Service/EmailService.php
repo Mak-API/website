@@ -6,6 +6,7 @@ use Aws\Ses\SesClient;
 use Aws\Exception\AwsException;
 use Doctrine\Common\Persistence\ObjectManager;
 use mysql_xdevapi\Exception;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class EmailService {
 
@@ -17,6 +18,12 @@ class EmailService {
     private $templating;
     private $manager;
 
+    /**
+     * EmailService constructor.
+     * @param \Swift_Mailer $mailer
+     * @param \Twig_Environment $templating
+     * @param ObjectManager $manager
+     */
     public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating,ObjectManager $manager)
     {
         $this->mailer = $mailer;
@@ -26,7 +33,16 @@ class EmailService {
 
     //Email function for sending the confirmation email
     //$email, $login and $token are string value
-    public function confirmRegistration($login, $email, $token)
+    /**
+     * @param string $login
+     * @param string $email
+     * @param string $token
+     * @return bool
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function confirmRegistration(string $login, string $email, string $token) : bool
     {
         $message = (new \Swift_Message('Confirmez votre adresse email'))
             ->setFrom(getenv('MAILER_FROM'))
@@ -51,7 +67,15 @@ class EmailService {
 
     }
 
-    public function sendNewEmail($email) {
+    /**
+     * @param string $email
+     * @return bool
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function sendNewEmail( string $email) : Boolean
+    {
 
         $user = $this->manager->getRepository(User::class)
             ->findOneBy(array('email' => $email));
@@ -85,7 +109,11 @@ class EmailService {
 
     //Code found in https://stackoverflow.com/questions/2040240/php-function-to-generate-v4-uuid/2040279#2040279
     //Generate a token for the email_token (use in UserController
-    function gen_uuid() {
+    /**
+     * @return string
+     */
+    function gen_uuid() : string
+    {
         return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"
             mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
