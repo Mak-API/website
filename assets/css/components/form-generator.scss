@@ -1,8 +1,12 @@
 body {
   main.submain {
     #form-api-name {
-      font-size: 2em;
+      font-size: 1.5rem;
       font-weight: 600;
+      > input {
+        @extend #form-api-name;
+        padding: 0 10px;
+      }
     }
   }
 }
