@@ -1,6 +1,7 @@
 import $ from "jquery";
+import M from 'materialize-css';
 
-const onBlurApiName = function(event) {
+const onBlurApiName = function() {
     const parent = this.parentNode;
     let value = this.value;
     parent.removeChild(this);
@@ -13,7 +14,7 @@ const onBlurApiName = function(event) {
     parent.appendChild(text);
 };
 
-const onClickApiName = function(event) {
+const onClickApiName = function() {
     const value = this.innerText;
     let input = document.createElement("input");
     $(input).attr({
