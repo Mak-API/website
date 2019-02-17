@@ -77,6 +77,12 @@ body {
         background-color: $color-livingCoral;
       }
     }
+    &.blue-dial{
+      background-color: $color-blueDial;
+      &:hover {
+        background-color: $color-blueDial;
+      }
+    }
   }
 }
 

@@ -18,4 +18,11 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('generator-form') }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let elems = document.querySelectorAll('.modal');
+            let instances = M.Modal.init(elems);
+        });
+    </script>
 {% endblock %}
