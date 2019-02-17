@@ -12,19 +12,22 @@ body {
     }
     #form-api-description {
       font-size: 0.8rem;
-      padding: 0 10px;
-      height: 30px;
+      padding: 10px 10px;
       display: flex;
-      line-height: 30px;
+      height: auto;
+      line-height: 100%;
       > i {
         margin-right: 5px;
       }
     }
     #form-api-options {
       display: flex;
+      flex-wrap: wrap;
+      flex-basis: 10px;
       a {
         @extend #form-api-description;
         margin-right: 15px;
+        margin-bottom: 15px;
         &:last-child{
           margin-right: 0;
         }
