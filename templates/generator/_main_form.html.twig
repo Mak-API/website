@@ -1,15 +1,60 @@
-<div class="col 3 generator-form">
+<div class="col 4 generator-form">
     <div class="bloc-entity">
-        Entity bloc 1
+        <ul class="collapsible">
+            <li class="active">
+                <div class="collapsible-header">User
+                    <i class="material-icons medium">arrow_drop_down</i>
+                </div>
+                <div class="collapsible-body form-makapi">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s10 m10 l10 offset-s1 offset-m1 offset-l1">
+                                <input value="" id="disabled" type="text" class="validate">
+                                <label for="user_entity">User</label>
+                            </div>
+                        </div>
+                    </form>
+                    <span>Lorem ipsum dolor sit amet.</span>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
-<div class="col 3 generator-form">
+<div class="col 4 generator-form">
     <div class="bloc-entity">
-        Entity bloc 1
+        <ul class="collapsible">
+            <li class="active">
+                <div class="collapsible-header">Post
+                    <i class="material-icons">arrow_drop_down</i>
+                </div>
+                <div class="collapsible-body">
+                    <span>Lorem ipsum dolor sit amet.</span>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
-<div class="col 3 generator-form">
+<div class="col 4 generator-form">
     <div class="bloc-entity">
-        Entity bloc 1
+        <ul class="collapsible">
+            <li class="active">
+                <div class="collapsible-header">
+                    Tag
+                    <i class="material-icons">arrow_drop_down</i>
+                </div>
+
+                <div class="collapsible-body">
+                    <span>Lorem ipsum dolor sit amet.</span>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems);
+        });
+    </script>
+{% endblock %}
