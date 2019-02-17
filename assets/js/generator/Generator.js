@@ -1,28 +1,29 @@
 import $ from "jquery";
 
-const onBlur = function(event) {
+const onBlurApiName = function(event) {
     const parent = this.parentNode;
-    const value = this.value;
-    const text = document.createTextNode(value);
+    let value = this.value;
     parent.removeChild(this);
     parent.removeChild(parent.getElementsByTagName('span')[0]);
-    parent.appendChild(text);
-    if(text.length > this.getAttribute('data-length')){
+    if(value.length > this.getAttribute('data-length')){
+        value = value.substr(0, this.getAttribute('data-length'));
         parent.classList = 'red-text text-darken-2';
     }
+    const text = document.createTextNode(value);
+    parent.appendChild(text);
 };
 
-const onClick = function(event) {
+const onClickApiName = function(event) {
     const value = this.innerText;
     let input = document.createElement('input');
     $(input).attr({
         'type':'text',
-        'data-length':'30',
+        'data-length':'25',
         'id':'input-api-name',
     });
     input.value = value;
     this.innerText = '';
-    input.addEventListener('blur', onBlur);
+    input.addEventListener('blur', onBlurApiName);
     this.appendChild(input);
     input.focus();
 
@@ -30,11 +31,11 @@ const onClick = function(event) {
 };
 
 class Generator {
-    static getOnClick(){
-        return onClick;
+    static getOnClickApiName(){
+        return onClickApiName;
     }
-    static getOnBlur(){
-        return onBlur;
+    static getOnBlurApiName(){
+        return onBlurApiName;
     }
 }
 
