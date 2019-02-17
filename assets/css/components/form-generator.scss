@@ -16,11 +16,18 @@ body {
       height: 30px;
       display: flex;
       line-height: 30px;
+      > i {
+        margin-right: 5px;
+      }
     }
     #form-api-options {
       display: flex;
       a {
         @extend #form-api-description;
+        margin-right: 15px;
+        &:last-child{
+          margin-right: 0;
+        }
       }
     }
   }
