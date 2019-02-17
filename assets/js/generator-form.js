@@ -1,1 +1,1 @@
-require('./generator/head_form');
+require("./generator/head_form");

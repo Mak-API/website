@@ -1,7 +1,7 @@
 
 import Generator from "./Generator";
 
-let formApiName = document.getElementById('form-api-name');
+let formApiName = document.getElementById("form-api-name");
 
-formApiName.addEventListener('click', Generator.getOnClickApiName());
+formApiName.addEventListener("click", Generator.getOnClickApiName());
 
