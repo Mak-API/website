@@ -86,9 +86,8 @@ class EmailService {
 
         if($this->confirmRegistration($user->getLogin(), $user->getEmail(), $token)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     //[NOTE] Keep for later

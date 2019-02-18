@@ -62,9 +62,8 @@ class UserService
 
         if ($user) {
             return $user->getVerified();
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
