@@ -47,9 +47,8 @@ class UserService
             throw new \Exception('Something went wrong!');
         } else if(!$user) {
             throw new \Exception('Something went wrong!');
-        } else {
-            throw new \Exception('Something went wrong!');
         }
+        throw new \Exception('Something went wrong!');
     }
 
     /**
