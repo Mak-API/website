@@ -4,6 +4,7 @@ namespace App\Controller\Front;
 
 use App\Form\UserType;
 use App\Entity\User;
+use App\Service\SecurityService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,18 +13,31 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+use Symfony\Component\Security\Core\Security;
+
+/**
+ * Class SecurityController
+ * @package App\Controller\Front
+ * @Route(name="app_security_")
+ */
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @Route("/login", name="login")
+     * @return Response
+     *
+     * Redirect to homepage if User is already authenticated
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        if($this->getUser()) {
+            return $this->redirectToRoute('app_default_index');
+        }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error
@@ -31,8 +45,9 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", name="logout")
      * @throws \Exception
+     * @return void
      */
     public function logout(): void
     {
