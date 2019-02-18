@@ -5,11 +5,12 @@ RUN apt-get update \
     build-essential locales acl mailutils wget zip unzip \
     gnupg gnupg1 gnupg2
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
 COPY php.ini /etc/php/7.2.3/php.ini
 COPY php.ini /usr/local/etc/php
 COPY php-fpm-pool.conf /etc/php/7.2.3/pool.d/www.conf
+COPY opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
    mv composer.phar /usr/local/bin/composer
