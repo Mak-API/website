@@ -51,6 +51,7 @@ Pour le faire, il faudra réaliser la procédure suivante :
 * `php bin/console d:d:d --force`
 * `php bin/console d:d:c`
 * `php bin/console d:s:u --dump-sql`
+* `php bin/console d:s:u --force`
 
 # OLD VERSION
 # Mak'API website
@@ -71,3 +72,17 @@ If you edit :
 
 Please, delete this folder :
 > /docker/db
+
+## Edit .env for emailService
+
+You will have several variables to set in your .env
+- MAILER_URL= ```Url of your server smtp for example```
+- MAILER_USERNAME= ```Username server```
+- MAILER_PASSWORD= ```Password server```
+- MAILER_TRANSPORT=```(ex: smtp)```
+- MAILER_HOST=```Host server```
+- MAILER_ENCRYPTION= ```Encryption server```
+- MAILER_PORT=```Port```
+- MAILER_FROM=```Sender of the mail```
+
+#####all of this informations need to stay secure, contact one of the developer in the team to have this informations.

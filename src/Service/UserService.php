@@ -30,21 +30,6 @@ class UserService
         $this->templating = $templating;
     }
 
-    public function deleteUser($id, User $user)
-    {
-        try {
-            //if ($user && $user->getStatus() > 0) {
-            if ($user) {
-                $user = $this->manager->getRepository(User::class)
-                    ->findOneBy(array('id' => $id));
-                $user->setStatus('0');
-                $this->manager->flush();
-            }
-        } catch (\RuntimeException $e) {
-            throw new \RuntimeException('Something went wrong' . + $e);
-        }
-    }
-
     /**
      * @param string $token
      * @return array
@@ -63,8 +48,52 @@ class UserService
             throw new \Exception('Something went wrong!');
         } else if(!$user) {
             throw new \Exception('Something went wrong!');
-        } else {
-            throw new \Exception('Something went wrong!');
+        }
+        throw new \Exception('Something went wrong!');
+    }
+
+    /**
+     * @param string $email
+     * @return bool|null
+     */
+    public function isVerified(string $email) {
+        $user = $this->manager->getRepository(User::class)
+            ->findOneBy(array('email' => $email));
+
+        if ($user) {
+            return $user->getVerified();
+        }
+        return false;
+    }
+
+    /**
+     * @param bool $verified
+     * @param string $user
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function redirectAfterEmailChecking(bool $verified, string $user) {
+        return $this->templating->render('authentication/registration.html.twig', [
+            'isVerified' => $verified,
+            'login' => $user
+        ]);
+    }
+
+    public function deleteUser($id, User $user)
+    {
+        try {
+            //if ($user && $user->getStatus() > 0) {
+            if ($user) {
+                $user = $this->manager->getRepository(User::class)
+                    ->findOneBy(array('id' => $id));
+                $user->setStatus('0');
+                $this->manager->flush();
+            }
+        } catch (\RuntimeException $e) {
+            throw new \RuntimeException('Something went wrong' . + $e);
         }
     }
+
 }

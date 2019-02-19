@@ -1,3 +1,7 @@
 swiftmailer:
-    url: '%env(MAILER_URL)%'
-    spool: { type: 'memory' }
+    transport:  "%env(MAILER_TRANSPORT)%"
+    host:       "%env(MAILER_HOST)%"
+    port:       "%env(MAILER_PORT)%" # different ports are available, see SES console
+    encryption: "%env(MAILER_ENCRYPTION)%" # TLS encryption is required
+    username:   "%env(MAILER_USERNAME)%"  # to be created in the SES console
+    password:   "%env(MAILER_PASSWORD)%"  # to be created in the SES console

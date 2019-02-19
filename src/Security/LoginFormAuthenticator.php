@@ -4,11 +4,14 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\UserService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -27,13 +30,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $router;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $userService;
 
-    public function __construct(EntityManagerInterface $entityManager, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, UserService $userService)
     {
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->userService = $userService;
     }
 
     public function supports(Request $request)
@@ -76,17 +81,35 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        $email = $user->getEmail();
+        //checking if the profile is NOT verified, throw custom error with 410 code
+        if( !$this->userService->isVerified($email)){
+            throw new AuthenticationException($user->getEmail(),410);
+        }
+        //check if the credentials are ok AND if the profile is verified
+        return ($this->passwordEncoder->isPasswordValid($user, $credentials['password']) && $this->userService->isVerified($user->getEmail()));
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
         // redirect to some "app_homepage" route - of wherever you want
         return new RedirectResponse($this->router->generate('app_default_index'));
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+            //Catch code, if it's the custom 410 error, call the function for rendering the template
+          if($exception->getCode() === 410){
+              return new Response($this->userService->redirectAfterEmailChecking(false, $exception->getMessage()));
+          }
+          return parent::onAuthenticationFailure($request, $exception);
+
+
     }
 
     protected function getLoginUrl()
