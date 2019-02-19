@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\UserService;
+use App\Service\EmailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,10 +14,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
+ * Class UserController
  * @Route(path="/user", name="app_user_")
+ * @package App\Controller
+ * @var EmailService
  */
 class UserController extends AbstractController
 {
+
+    private $emailService;
+
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
     /**
      * @Route("/",  name="index", methods={"GET"})
      */
@@ -29,15 +41,32 @@ class UserController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @Route("/new", name="new", methods={"GET","POST"})
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user, ['group' => 'new']);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //generate and set email_token (for the email checking)
+            $token = $this->emailService->gen_uuid();
+            $user->setEmailToken($token);
+
+            //sending the confirmation email
+            if(!$this->emailService->confirmRegistration($user->getLogin(), $user->getEmail(), $user->getEmailToken())) {
+                return $this->render('user/new.html.twig', [
+                    'user' => $user,
+                    'form' => $form->createView()
+                ]);
+            }
 
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -46,9 +75,13 @@ class UserController extends AbstractController
                 )
             );
 
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+
 
             return $this->redirectToRoute('app_user_index');
         }
@@ -70,7 +103,11 @@ class UserController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param User $user
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @return Response
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -99,7 +136,10 @@ class UserController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param User $user
      * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @return Response
      */
     public function delete(Request $request, User $user): Response
     {
