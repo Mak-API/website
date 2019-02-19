@@ -11,7 +11,9 @@ use phpDocumentor\Reflection\Types\Boolean;
 class EmailService {
 
     /**
-     * @var \Swift_Mailer
+     * @var $mailer
+     * @var $templating
+     * @var $manager
      *
      */
     private $mailer;

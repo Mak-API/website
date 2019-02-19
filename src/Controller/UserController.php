@@ -14,7 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
+ * Class UserController
  * @Route(path="/user", name="app_user_")
+ * @package App\Controller
+ * @var EmailService
  */
 class UserController extends AbstractController
 {
@@ -85,7 +88,7 @@ class UserController extends AbstractController
 
         return $this->render('user/new.html.twig', [
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 

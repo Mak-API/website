@@ -104,7 +104,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
             //Catch code, if it's the custom 410 error, call the function for rendering the template
-          if($exception->getCode() == 410){
+          if($exception->getCode() === 410){
               return new Response($this->userService->redirectAfterEmailChecking(false, $exception->getMessage()));
           }
           return parent::onAuthenticationFailure($request, $exception);
