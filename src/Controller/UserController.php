@@ -17,6 +17,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
+
+    private $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
     /**
      * @Route("/",  name="index", methods={"GET"})
      */
@@ -99,16 +106,28 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @param User $user
+     * @Route("/confirmdelete/{id}", name="confirmdelete")
+     * @return Response
      */
-    public function delete(Request $request, User $user): Response
+    public function confirmDeleteUser(User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
+        //$this->userService->deleteUser($user->getId(), $user);
+        //$test = 'toto';
+        return $this->render('user/_delete_form.html.twig', [
+           'user' => $user,
+          //  'test' => $test,
+        ]);
+    }
 
+    /**
+     * @param User $user
+     * @Route("/delete/{id}", name="delete", methods={"GET", "POST"})
+     * @return Response
+     */
+    public function delete(User $user): Response
+    {
+        $this->userService->deleteUser($user->getId(), $user);
         return $this->redirectToRoute('app_user_index');
     }
 }
