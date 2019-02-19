@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\UserService;
 use App\Service\EmailService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +31,10 @@ class UserController extends AbstractController
     }
 
     /**
+     * @param UserRepository $userRepository
      * @Route("/",  name="index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN", statusCode="404")
+     * @return Response
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -51,6 +55,12 @@ class UserController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        /**
+         * Redirection if user already authenticated
+         */
+        if($this->getUser()){
+            return $this->redirectToRoute('app_default_index');
+        }
         $user = new User();
         $form = $this->createForm(UserType::class, $user, ['group' => 'new']);
         $form->handleRequest($request);
