@@ -9,3 +9,11 @@
         {% include 'components/footer/footer.html.twig' %}
     </footer>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        let el = document.querySelectorAll('.tabs');
+        let instance = M.Tabs.init(el);
+    </script>
+{% endblock %}
