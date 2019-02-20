@@ -5,5 +5,13 @@ body {
       height: 1pt;
       width: 100%;
     }
+
+    .switch label input[type=checkbox]:checked + .lever {
+      background-color: $color-livingCoral;
+    }
+
+    .switch label input[type=checkbox]:checked + .lever:after {
+      background-color: $color-livingCoral;
+    }
   }
 }
