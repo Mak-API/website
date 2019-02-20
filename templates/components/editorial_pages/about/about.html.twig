@@ -1,0 +1,28 @@
+{% extends 'components/editorial_pages/editorial_page.html.twig' %}
+
+{% block title %}
+    Mak'API - About Us
+{% endblock %}
+
+{% block main %}
+    <main class="submain">
+        <div class="container makapi-container">
+            <div class="row">
+                <div class="col m6 s6">
+                    <h1>Who are we ?</h1>
+                    <p class="makapi-text tall">
+                        Mak’API is group of people who wants to simplify the use of APIs to all.
+                    </p>
+                    <p class="makapi-text tall">
+                        Some text here
+                    </p>
+                </div>
+                <div class="col m6 s6">
+                    <div class="makapi-content-img">
+                        <img class="responsive-img" src="{{ asset('images/png/builder.png') }}" alt="Makapi builder">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

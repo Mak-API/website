@@ -1,0 +1,11 @@
+{% extends 'pagelayout.html.twig' %}
+
+{% block body %}
+    <header class="linear-header">
+        {% include 'components/header/header.html.twig' %}
+    </header>
+    {% block main %}{% endblock %}
+    <footer class="page-footer">
+        {% include 'components/footer/footer.html.twig' %}
+    </footer>
+{% endblock %}
