@@ -111,6 +111,13 @@ body {
   .makapi-container {
     max-width: $size-maxWithWebsite;
   }
+  div.makapi-tabs-content {
+    background-color: white;
+    padding: 15px;
+    > h2 {
+      margin-top: 0;
+    }
+  }
 }
 
 a.makapi-corail {
