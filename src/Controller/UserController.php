@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class UserController
- * @Route(path="/user", name="app_user_")
+ * @Route(path="/profile", name="app_user_")
  * @package App\Controller
  * @var EmailService
  */
@@ -47,7 +47,7 @@ class UserController extends AbstractController
     /**
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @Route("/new", name="new", methods={"GET","POST"})
+     * @Route("/sign-up", name="new", methods={"GET","POST"})
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -103,7 +103,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show", methods={"GET"})
+     * @param User $user
+     * @return Response
+     * @Route("/{login}", name="show", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -116,7 +118,7 @@ class UserController extends AbstractController
      * @param Request $request
      * @param User $user
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/edit/{login}", name="edit", methods={"GET","POST"})
      * @return Response
      *
      * edit_profile => CONST variable in : UserVoter
