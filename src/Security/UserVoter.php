@@ -20,7 +20,7 @@ class UserVoter extends Voter
      */
     private $security;
 
-    const SHOW = 'show_profile';
+    const SHOW = 'SHOW_PROFILE';
     const EDIT = 'EDIT_PROFILE';
 
     /**
@@ -70,7 +70,7 @@ class UserVoter extends Voter
 
         switch ($attribute) {
             case self::SHOW:
-                return $this->canShow($user);
+                return $this->canShow($targettedUser, $user);
             case self::EDIT:
                 return $this->canEdit($targettedUser, $user);
         }
@@ -78,9 +78,14 @@ class UserVoter extends Voter
         throw new \LogicException('This code should not be reached!');
     }
 
-    public function canShow(User $user)
+    /**
+     * @param User $targettedUser
+     * @param User $user
+     * @return bool
+     */
+    public function canShow(User $targettedUser, User $user): bool
     {
-        return true;
+        return $user === $targettedUser;
     }
 
     /**

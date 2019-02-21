@@ -106,6 +106,9 @@ class UserController extends AbstractController
      * @param User $user
      * @return Response
      * @Route("/{login}", name="show", methods={"GET"})
+     * SHOW_PROFILE => CONST variable in : UserVoter
+     * user => $user in function parameter
+     * @IsGranted("SHOW_PROFILE", subject="user", statusCode="404")
      */
     public function show(User $user): Response
     {
@@ -121,7 +124,7 @@ class UserController extends AbstractController
      * @Route("/edit/{login}", name="edit", methods={"GET","POST"})
      * @return Response
      *
-     * edit_profile => CONST variable in : UserVoter
+     * EDIT_PROFILE => CONST variable in : UserVoter
      * user => $user in function parameter
      * @IsGranted("EDIT_PROFILE", subject="user", statusCode="404")
      */
