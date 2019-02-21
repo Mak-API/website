@@ -55,12 +55,6 @@ class UserController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        /**
-         * Redirection if user already authenticated
-         */
-        if($this->getUser()){
-            return $this->redirectToRoute('app_default_index');
-        }
         $user = new User();
         $form = $this->createForm(UserType::class, $user, ['group' => 'new']);
         $form->handleRequest($request);
