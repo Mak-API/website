@@ -118,10 +118,13 @@ class UserController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      * @return Response
+     *
+     * edit_profile => CONST variable in : UserVoter
+     * user => $user in function parameter
+     * @IsGranted("edit_profile", subject="user", statusCode="404")
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $this->denyAccessUnlessGranted('edit', $user);
 
         $form = $this->createForm(UserType::class, $user, ['group' => 'edit']);
         $form->handleRequest($request);

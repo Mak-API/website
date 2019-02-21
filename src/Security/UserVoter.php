@@ -20,8 +20,8 @@ class UserVoter extends Voter
      */
     private $security;
 
-    const SHOW = 'show';
-    const EDIT = 'edit';
+    const SHOW = 'show_profile';
+    const EDIT = 'edit_profile';
 
     /**
      * UserVoter constructor.
