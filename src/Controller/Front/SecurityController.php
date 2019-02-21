@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
 {
     /**
      * @param AuthenticationUtils $authenticationUtils
-     * @Route("/login", name="login")
+     * @Route("/sign-in", name="login")
      * @return Response
      *
      * Redirect to homepage if User is already authenticated
