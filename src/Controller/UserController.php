@@ -121,7 +121,7 @@ class UserController extends AbstractController
      *
      * edit_profile => CONST variable in : UserVoter
      * user => $user in function parameter
-     * @IsGranted("edit_profile", subject="user", statusCode="404")
+     * @IsGranted("EDIT_PROFILE", subject="user", statusCode="404")
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
