@@ -4,12 +4,15 @@ namespace App\Command;
 
 use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CreateUserCommand extends Command
 {
@@ -25,14 +28,9 @@ class CreateUserCommand extends Command
      * @var array
      */
     private $emailsList;
-    /**
-     * @var string
-     */
-    private $userPassword;
 
     public function __construct(ObjectManager $objectManager)
     {
-        parent::__construct();
         $this->objectManager = $objectManager;
 
         $usersList = $this->objectManager->getRepository(User::class)->findAll();
@@ -40,6 +38,7 @@ class CreateUserCommand extends Command
             $this->usernamesList[] = $user->getLogin();
             $this->emailsList[] = $user->getEmail();
         }
+        parent::__construct();
     }
 
     protected function configure()
@@ -90,23 +89,18 @@ class CreateUserCommand extends Command
         });
         $email = $helper->ask($input, $output, $emailQuestion);
 
-        $passwordQuestion = new Question('Enter password : ');
+        $application = $this->getApplication()->find('security:encode-password');
+        $argumentsEncodePassword = [
+            'command'    => 'security:encode-password',
+        ];
+        $passwordInput = new ArrayInput($argumentsEncodePassword);
+        $application->run($passwordInput, $output);
+
+        $passwordQuestion = new Question('Copy hashed password : ');
         $passwordQuestion->setHidden(true);
         $passwordQuestion->setHiddenFallback(false);
-        $this->userPassword = $helper->ask($input, $output, $passwordQuestion);
+        $password = $helper->ask($input, $output, $passwordQuestion);
 
-        $passwordConfirmQuestion = new Question('Confirm password : ');
-        $passwordConfirmQuestion->setHidden(true);
-        $passwordConfirmQuestion->setHiddenFallback(false);
-        $passwordConfirmQuestion->setValidator(function($answer){
-            if($answer !== $this->userPassword){
-                throw new \RuntimeException(
-                    'Confirm password is different.'
-                );
-            }
-            return $answer;
-        });
-        $confirmPassword = $helper->ask($input, $output, $passwordConfirmQuestion);
 
 
         $rolesQuestion = new ChoiceQuestion(
@@ -121,11 +115,13 @@ class CreateUserCommand extends Command
         $user = new User();
         $user->setEmail($email)
             ->setLogin($username)
-            ->setPassword($confirmPassword)
-            ->setRoles($roles);
+            ->setPassword($password)
+            ->setRoles($roles)
+            ->setVerified(1)
+        ;
         $this->objectManager->persist($user);
         $this->objectManager->flush();
 
-        $output->writeln("<comment>Created user {$user->getEmail()}.</comment> \n");
+        $output->writeln("You can loggin with the new created user : <comment>{$user->getEmail()}.</comment> \n");
     }
 }
