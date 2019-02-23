@@ -36,9 +36,13 @@ main.submain {
 }
 
 /**
-  Override Materialize
+  Override Materialize & global class
  */
 body {
+  h1 {
+    font-size: 38px;
+    font-weight: bold;
+  }
   h2 {
     font-size: 32px;
     font-weight: 800;
@@ -50,6 +54,22 @@ body {
   h4 {
     font-size: 16px;
     font-weight: 600;
+  }
+  p.makapi-text {
+    text-align: justify;
+    font-size: 16px;
+    &.small {
+      font-size: 14px;
+    }
+    &.tall {
+      font-size: 18px;
+    }
+    &.bold {
+      font-weight: bold;
+    }
+    &.italic {
+      font-style: italic;
+    }
   }
   .makapi-button {
     background-color: $color-livingCoral;
@@ -82,6 +102,20 @@ body {
       &:hover {
         background-color: $color-blueDial;
       }
+    }
+  }
+  div.makapi-content-img {
+    width: 75%;
+    margin: auto;
+  }
+  .makapi-container {
+    max-width: $size-maxWithWebsite;
+  }
+  div.makapi-tabs-content {
+    background-color: white;
+    padding: 15px;
+    > h2 {
+      margin-top: 0;
     }
   }
 }
