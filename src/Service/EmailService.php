@@ -76,7 +76,7 @@ class EmailService {
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function sendNewEmail( string $email) : Boolean
+    public function sendNewEmail( string $email) : bool
     {
 
         $user = $this->manager->getRepository(User::class)

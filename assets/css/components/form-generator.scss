@@ -1,0 +1,37 @@
+body {
+  main.submain {
+    #form-api-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 5px;
+      > input {
+        @extend #form-api-name;
+        padding: 0 10px;
+        margin-top: -10px;
+      }
+    }
+    #form-api-description {
+      font-size: 0.8rem;
+      padding: 10px 10px;
+      display: flex;
+      height: auto;
+      line-height: 100%;
+      > i {
+        margin-right: 5px;
+      }
+    }
+    #form-api-options {
+      display: flex;
+      flex-wrap: wrap;
+      flex-basis: 10px;
+      a {
+        @extend #form-api-description;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        &:last-child{
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

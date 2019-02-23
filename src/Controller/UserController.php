@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\UserService;
 use App\Service\EmailService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class UserController
- * @Route(path="/user", name="app_user_")
+ * @Route(path="/profile", name="app_user_")
  * @package App\Controller
  * @var EmailService
  */
@@ -32,7 +33,10 @@ class UserController extends AbstractController
     }
 
     /**
+     * @param UserRepository $userRepository
      * @Route("/",  name="index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN", statusCode="404")
+     * @return Response
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -45,7 +49,7 @@ class UserController extends AbstractController
     /**
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @Route("/new", name="new", methods={"GET","POST"})
+     * @Route("/sign-up", name="new", methods={"GET","POST"})
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -91,7 +95,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show", methods={"GET"})
+     * @param User $user
+     * @return Response
+     * @Route("/{login}", name="show", methods={"GET"})
+     * SHOW_PROFILE => CONST variable in : UserVoter
+     * user => $user in function parameter
+     * @IsGranted("SHOW_PROFILE", subject="user", statusCode="404")
      */
     public function show(User $user): Response
     {
@@ -104,11 +113,16 @@ class UserController extends AbstractController
      * @param Request $request
      * @param User $user
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/edit/{login}", name="edit", methods={"GET","POST"})
      * @return Response
+     *
+     * EDIT_PROFILE => CONST variable in : UserVoter
+     * user => $user in function parameter
+     * @IsGranted("EDIT_PROFILE", subject="user", statusCode="404")
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+
         $form = $this->createForm(UserType::class, $user, ['group' => 'edit']);
         $form->handleRequest($request);
 

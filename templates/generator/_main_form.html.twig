@@ -1,15 +1,175 @@
-<div class="col 3 generator-form">
-    <div class="bloc-entity">
-        Entity bloc 1
+<div class="row">
+    <div class="col l4 m4 s4 generator-form">
+        <div class="bloc-entity">
+            <ul class="collapsible">
+                <li class="active">
+                    <div class="collapsible-header right-align">Entity 1
+                        <i class="material-icons medium">arrow_drop_down</i>
+                    </div>
+                    <div class="collapsible-body form-makapi blueDial-text">
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row ">
+                                    <div class="input-field col s10 m10 l10 offset-s1 offset-m1 offset-l1">
+                                        <input value="" id="disabled" type="text" class="validate" data-length="40">
+                                        <label for="entity1">Entity 1</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row makapi-separator"></div>
+                        <section class="makapi-attributes">
+                            <div class="container makapi-container">
+                                <div class="row">
+                                    <h4>Attributes</h4>
+                                    <div class="makapi-chip">BENJAMM
+                                        <i class="material-icons right livingCoral-text">create</i>
+                                    </div>
+                                    <div class="makapi-chip">PREGENT
+                                        <i class="material-icons right">create</i>
+                                    </div>
+                                    <div class="makapi-chip">Ivan
+                                        <i class="material-icons right">create</i>
+                                    </div>
+                                    <div class="makapi-chip">Julien
+                                        <i class="material-icons right">create</i>
+                                    </div>
+                                    <div class="makapi-chip">Jeremie
+                                        <i class="material-icons right">create</i>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <a id="add-attr_" class="btn-floating btn-small orange-makapi right">
+                                        <i class="material-icons">add</i>
+                                    </a>
+                                </div>
+                                <div class="box hide" id="box_over-file_">
+                                    <ul class="collection with-header aog-box-content">
+                                        <li class="collection-header">
+                                            <h5>PN information</h5></li>
+                                        <li class="collection-item">Export control
+                                            <span class="secondary-content badge">
+                                                <div class='circleInfo amber'>
+                                                    <i class='material-icons white-text'>warning</i>
+                                                </div>
+                                            </span>
+                                        </li>
+                                        <li class="collection-item">PN checked
+                                            <span class="secondary-content badge">
+                                                <div class='circleInfo green'>
+                                                    <i class='material-icons white-text'>done</i>
+                                                </div>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="switch right-align">
+                            <label>
+                                Off
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                On
+                            </label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col l4 m4 s4 generator-form">
+        <div class="bloc-entity">
+            <ul class="collapsible">
+                <li class="active">
+                    <div class="collapsible-header right-align">Entity 2
+                        <i class="material-icons medium">arrow_drop_down</i>
+                    </div>
+                    <div class="collapsible-body form-makapi">
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row ">
+                                    <div class="input-field col s10 m10 l10 offset-s1 offset-m1 offset-l1">
+                                        <input value="" id="disabled" type="text" class="validate" data-length="40">
+                                        <label for="entity1">Entity 2</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row makapi-separator"></div>
+                        <div class="switch right-align">
+                            <label>
+                                Off
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                On
+                            </label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col l4 m4 s4 generator-form">
+        <div class="bloc-entity">
+            <ul class="collapsible">
+                <li class="active">
+                    <div class="collapsible-header right-align">Entity 3
+                        <i class="material-icons medium">arrow_drop_down</i>
+                    </div>
+                    <div class="collapsible-body form-makapi">
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row ">
+                                    <div class="input-field col s10 m10 l10 offset-s1 offset-m1 offset-l1">
+                                        <input value="" id="disabled" type="text" class="validate" data-length="40">
+                                        <label for="entity1">Entity 3</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row makapi-separator"></div>
+                        <div class="switch right-align">
+                            <label>
+                                Off
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                On
+                            </label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
-<div class="col 3 generator-form">
-    <div class="bloc-entity">
-        Entity bloc 1
-    </div>
-</div>
-<div class="col 3 generator-form">
-    <div class="bloc-entity">
-        Entity bloc 1
-    </div>
-</div>
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems);
+        });
+
+        /**
+         * @description: Display a box with additional data
+         */
+        document.getElementById('add-attr_').on("mouseover", "span[id^='over-']", function(){
+            currentOver = this.id;
+            document.getElementById("#box_over-file_").toggleClass("hide");
+        });
+
+        /**
+         * @description: Hide the last box 
+         */
+        document.getElementById('add-attr_').on("mouseout", "span[id^='over-']", function(){
+            $("#box_"+currentOver).toggleClass("hide");
+        })
+
+        /**
+         * @description: Move the current box depending mouse position
+         */
+        document.getElementById('add-attr_').on('mousemove', "span[id^='over-']", function (e){
+            $(".box").css({ left: e.pageX-50, top: e.pageY-450}).stop().show();
+        });
+    </script>
+{% endblock %}

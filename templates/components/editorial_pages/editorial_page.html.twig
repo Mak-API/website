@@ -1,0 +1,23 @@
+{% extends 'pagelayout.html.twig' %}
+
+{% block body %}
+    <header class="linear-header">
+        {% include 'components/header/header.html.twig' %}
+    </header>
+    {% block main %}{% endblock %}
+    <footer class="page-footer">
+        {% include 'components/footer/footer.html.twig' %}
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        let el = document.querySelectorAll('.tabs');
+        let instance = M.Tabs.init(el);
+        /**
+         * To activate swipeable tabs, uncomment
+         */
+        //let instance = M.Tabs.init(el, {'swipeable': true});
+    </script>
+{% endblock %}

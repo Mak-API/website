@@ -21,7 +21,7 @@ security:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
-                path: app_logout
+                path: app_security_logout
                 target: app_default_index
 
             # activate different ways to authenticate

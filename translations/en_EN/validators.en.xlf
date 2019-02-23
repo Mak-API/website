@@ -18,6 +18,10 @@
                 <source>user.login.empty</source>
                 <target>Your login must not be null.</target>
             </trans-unit>
+            <trans-unit id="user.login.special.char">
+                <source>user.login.special.char</source>
+                <target>No space and no special char.</target>
+            </trans-unit>
             <trans-unit id="user.password.must.match">
                 <source>user.password.must.match</source>
                 <target>The password fields must match.</target>
