@@ -70,7 +70,7 @@ class RegistrationController extends AbstractController
      * @Route("/send_confirmation_email/{email}", name="send_confirmation_email", methods={"GET"})
      * @throws \Twig_Error_Syntax
      */
-    public function sendConfirmationEmail(string $email) : string
+    public function sendConfirmationEmail(string $email) : Response
     {
         $this->emailService->sendNewEmail($email);
 
