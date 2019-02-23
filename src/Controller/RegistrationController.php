@@ -44,6 +44,7 @@ class RegistrationController extends AbstractController
         $result = $this->userService->verifyToken($token);
 
         return $this->render('authentication/registration.html.twig', [
+            'isDeleted' => false,
             'isVerified' => $result["isVerified"],
             'login' => $result["login"]
         ]);
@@ -75,8 +76,9 @@ class RegistrationController extends AbstractController
         $this->emailService->sendNewEmail($email);
 
         return $this->render('authentication/registration.html.twig', [
-        'isVerified' => false,
-        'login' => $email
+            'isDeleted' => false,
+            'isVerified' => false,
+            'login' => $email
     ]);
 
     }

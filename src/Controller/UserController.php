@@ -82,7 +82,7 @@ class UserController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_user_index');
-        } //else if ($this->userService->isDeleted($user->getEmail())){}
+        }
 
         return $this->render('user/new.html.twig', [
             'user' => $user,

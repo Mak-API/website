@@ -83,7 +83,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $email = $user->getEmail();
         //checking if the profile is NOT verified, throw custom error with 410 code
-        if( !$this->userService->isVerified($email) || $user->getStatus() < 1 ){
+        if( !$this->userService->isVerified($email) || $user->getStatus() === -1 ){
             throw new AuthenticationException($user->getEmail(),410);
         }
         //check if the credentials are ok AND if the profile is verified
