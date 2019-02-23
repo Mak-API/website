@@ -22,8 +22,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
-
+    /**
+     * @var EmailService
+     */
     private $emailService;
+    /**
+     * @var UserService
+     */
     private $userService;
 
     public function __construct(EmailService $emailService, UserService $userService)
