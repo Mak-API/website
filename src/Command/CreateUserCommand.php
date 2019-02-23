@@ -90,10 +90,10 @@ class CreateUserCommand extends Command
         $email = $helper->ask($input, $output, $emailQuestion);
 
         $application = $this->getApplication()->find('security:encode-password');
-        $argumentsEncodePassword = [
+        $argEncodePass = [
             'command'    => 'security:encode-password',
         ];
-        $passwordInput = new ArrayInput($argumentsEncodePassword);
+        $passwordInput = new ArrayInput($argEncodePass);
         $application->run($passwordInput, $output);
 
         $passwordQuestion = new Question('Copy hashed password : ');
