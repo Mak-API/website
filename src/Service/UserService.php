@@ -66,6 +66,10 @@ class UserService
         return false;
     }
 
+    /**
+     * @param $login
+     * @return bool
+     */
     public function isDeleted($login) {
         $user = $this->manager->getRepository(User::class)
             ->findOneBy(array('email' => $login));
@@ -83,22 +87,26 @@ class UserService
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function redirectAfterEmailChecking(bool $verified, string $login) {
-        if($this->isDeleted($login)){
+    public function redirectAfterEmailChecking(bool $verified, string $login)
+    {
+        if ($this->isDeleted($login)) {
             return $this->templating->render('authentication/registration.html.twig', [
                 'isDeleted' => true,
                 'isVerified' => $verified,
                 'login' => $login
             ]);
-        } else {
-            return $this->templating->render('authentication/registration.html.twig', [
-                'isDeleted' => false,
-                'isVerified' => $verified,
-                'login' => $login
-            ]);
         }
+        return $this->templating->render('authentication/registration.html.twig', [
+            'isDeleted' => false,
+            'isVerified' => $verified,
+            'login' => $login
+        ]);
     }
 
+    /**
+     * @param $id
+     * @param User $user
+     */
     public function deleteUser($id, User $user)
     {
         try {
