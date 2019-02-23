@@ -2,4 +2,4 @@
     <input type="hidden" name="_method" value="POST">
     <button class="btn">Delete</button>
 </form>
-<a href="{{ path('app_user_show', {'id': app.user.id}) }}"><button class="btn">No i'm not sure, i want to comeback to my profile</button></a>
+<a href="{{ path('app_user_show', {'login': app.user.login}) }}"><button class="btn">No i'm not sure, i want to comeback to my profile</button></a>

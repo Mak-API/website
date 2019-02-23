@@ -154,11 +154,8 @@ class UserController extends AbstractController
      */
     public function confirmDeleteUser(User $user): Response
     {
-        //$this->userService->deleteUser($user->getId(), $user);
-        //$test = 'toto';
         return $this->render('user/_delete_form.html.twig', [
-           'user' => $user,
-          //  'test' => $test,
+            'user' => $user,
         ]);
     }
 
@@ -170,6 +167,6 @@ class UserController extends AbstractController
     public function delete(User $user): Response
     {
         $this->userService->deleteUser($user->getId(), $user);
-        return $this->redirectToRoute('app_logout');
+        return $this->redirectToRoute('app_security_logout');
     }
 }
