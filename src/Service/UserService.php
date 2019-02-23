@@ -104,7 +104,7 @@ class UserService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param User $user
      */
     public function deleteUser($id, User $user)
