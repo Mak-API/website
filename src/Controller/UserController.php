@@ -82,7 +82,7 @@ class UserController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_user_index');
-        }
+        } //else if ($this->userService->isDeleted($user->getEmail())){}
 
         return $this->render('user/new.html.twig', [
             'user' => $user,
@@ -156,6 +156,6 @@ class UserController extends AbstractController
     public function delete(User $user): Response
     {
         $this->userService->deleteUser($user->getId(), $user);
-        return $this->redirectToRoute('app_user_index');
+        return $this->redirectToRoute('app_logout');
     }
 }

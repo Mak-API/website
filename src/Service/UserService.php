@@ -66,6 +66,16 @@ class UserService
         return false;
     }
 
+    public function isDeleted($email) {
+        $user = $this->manager->getRepository(User::class)
+            ->findOneBy(array('email' => $email));
+
+        if ($user && $user->getStatus() === 0) {
+            return $user;
+        }
+        return false;
+    }
+
     /**
      * @param bool $verified
      * @param string $user
