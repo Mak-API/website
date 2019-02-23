@@ -7,7 +7,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -37,9 +39,16 @@ class DeleteUserCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('user:delete')
-            ->setDescription('Create an user.')
+            ->setName('user:delete:inactive')
+            ->setDescription(
+                'Delete all users which were inactive since X days. 
+                Specified X days with argument. 
+                Default 5 days.'
+            )
             ->setHelp('This command allow you to create an user.')
+            ->setDefinition(array(
+                new InputOption('day', '-d')
+            ))
         ;
     }
 
