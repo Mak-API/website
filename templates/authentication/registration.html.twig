@@ -7,15 +7,21 @@
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
     <link rel="stylesheet" href="{{ asset('build/vendor.css') }}">
+    <script type="text/javascript" src="{{ asset('build/vendor.js') }}"></script>
 
+    {% block head_javascripts %}{% endblock %}
 </head>
 <body>
+{{ encore_entry_script_tags('app') }}
 {% block body %}
     <header class="linear-header">
         {% include 'components/header/header.html.twig' %}
     </header>
     <main>
         {% if isDeleted == true %}
+            <script>
+                M.toast({html: 'You have deleted your account not long ago, you just need to check your email for recover your account.'})
+            </script>
             <H1>USER DELETED</H1>
         {% endif %}
         <section class="form-registration row col l12 m12 s12">
