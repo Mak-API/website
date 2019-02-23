@@ -56,6 +56,9 @@ class RedirectUserListener
      */
     private function isUserLogged(): bool
     {
+        if(!$this->tokenStorage->getToken()){
+            return false;
+        }
         return $this->tokenStorage->getToken()->getUser() instanceof User;
     }
 
