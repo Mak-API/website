@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Kodchasan|Major+Mono+Display" rel="stylesheet">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <link rel="stylesheet" href="{{ asset('build/vendor.css') }}">
+
+</head>
+<body>
+{% block body %}
+    <header class="gradient-header">
+        {% include 'components/header/header.html.twig' %}
+    </header>
+    <main>
+        <section class="part-home">
+            Félicitations {{ token }}
+        </section>
+    </main>
+    <footer class="homepage-footer page-footer">
+        {% include 'components/footer/homepage_footer.html.twig' %}
+    </footer>
+{% endblock %}
+</body>
+</html>

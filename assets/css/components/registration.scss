@@ -1,0 +1,27 @@
+.validate-registration {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .send-email {
+    margin-bottom: 30px;
+    background-color: $color-blueDial;
+
+    a {
+      color: $color-white;
+    }
+  }
+}
+
+.form-registration {
+  width: 100%;
+  height: 65vh;
+  background:none;
+  .content-registration {
+    margin-top: 20vh;
+    background: #FFFFFF;
+    box-shadow: 4px 3px 4px;
+  }
+}

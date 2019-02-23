@@ -46,3 +46,10 @@ services:
                 # optional priority
                 # priority: 300
         public: false
+    app.tokens.action_listener:
+        class: App\EventListener\RedirectUserListener
+        arguments:
+            - "@security.token_storage"
+            - "@router"
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

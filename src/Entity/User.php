@@ -27,6 +27,7 @@ class User implements UserInterface
      */
     const ROLE_USER = 'ROLE_USER';
     const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_UNVERIFIED = 'ROLE_UNVERIFIED';
 
 
     /**
@@ -99,6 +100,16 @@ class User implements UserInterface
      */
     private $apis;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email_token;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $verified = false;
+
     public function __construct()
     {
         $this->apis = new ArrayCollection();
@@ -137,8 +148,8 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        // guarantee every user at least has ROLE_UNVERIFIED
+        $roles[] = self::ROLE_UNVERIFIED;
 
         return array_unique($roles);
     }
@@ -269,5 +280,29 @@ class User implements UserInterface
     public static function getExistingRoles(): array
     {
         return [self::ROLE_USER, self::ROLE_ADMIN];
+    }
+
+    public function getEmailToken(): ?string
+    {
+        return $this->email_token;
+    }
+
+    public function setEmailToken(?string $email_token): self
+    {
+        $this->email_token = $email_token;
+
+        return $this;
+    }
+
+    public function getVerified(): ?bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): self
+    {
+        $this->verified = $verified;
+
+        return $this;
     }
 }

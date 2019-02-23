@@ -71,3 +71,17 @@ If you edit :
 
 Please, delete this folder :
 > /docker/db
+
+## Edit .env for emailService
+
+You will have several variables to set in your .env
+- MAILER_URL
+- MAILER_USERNAME
+- MAILER_PASSWORD
+- MAILER_TRANSPORT
+- MAILER_HOST
+- MAILER_ENCRYPTION
+- MAILER_PORT
+- MAILER_FROM
+
+#####all of this informations need to stay secure, contact one of the developer in the team to have this informations.
