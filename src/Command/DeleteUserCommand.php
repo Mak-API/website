@@ -4,17 +4,11 @@ namespace App\Command;
 
 use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class DeleteUserCommand extends Command
 {
@@ -39,20 +33,27 @@ class DeleteUserCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('user:delete:inactive')
+            ->setName('user:delete:deactivates')
             ->setDescription(
-                'Delete all users which were inactive since X days. 
+                'Delete all users which were deactivates since X days. 
                 Specified X days with argument. 
                 Default 5 days.'
             )
-            ->setHelp('This command allow you to delete users which were inactive since X days.')
+            ->setHelp('This command allow you to delete users which were deactivates since X days.')
             ->setDefinition(array(
                 new InputOption(
                     'day',
                     '-d',
                     InputOption::VALUE_OPTIONAL,
-                    'How many inactive days ? Default 60',
+                    'How many deactivates days ? Default 60',
                     60
+                ),
+                new InputOption(
+                    'force',
+                    '-f',
+                    InputOption::VALUE_OPTIONAL,
+                    'Need to be force',
+                    false
                 )
             ))
         ;
@@ -61,23 +62,39 @@ class DeleteUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $helper = $this->getHelper('question');
+        $days = $input->getOption('day');
+        $force = $input->getOption('force');
+
+        if(!is_numeric($days)){
+            throw new \RuntimeException(
+                'Day need to be an integer'
+            );
+        }
+
+        if(!is_null($force)){
+            throw new \RuntimeException(
+                'You need use \'--force\' or \'-f\' to use this command with no value'
+            );
+        }
+
+        $now = new \DateTime();
         $output->writeln([
             '==========================================',
-            '     Delete inactive/unverified users     ',
+            '     Delete deactivates/unverified users     ',
+            "        Selected days : $days days        ",
             '==========================================',
             '',
         ]);
 
-        if(!is_numeric($input->getOption('day'))){
-            $output->writeln([
-                '<fg=black;bg=cyan>================================================',
-                '     --day option need to be numeric type !     ',
-                '================================================</>',
-                '',
-            ]);
-            die;
+        foreach($this->users as $user){
+            $interval = date_diff($user->getUpdatedAt(), $now);
+            if($interval->days >= $days && ($user->getStatus() === -1 || $user->getVerified() === false)){
+                $this->objectManager->remove($user);
+                $this->objectManager->flush();
+            }
         }
 
-        $output->writeln("All inactive and unverified (since 60 days ago) users were deleted. \n");
+
+        $output->writeln("All inactive and unverified (since $days days ago) users were deleted. \n");
     }
 }
