@@ -24,16 +24,13 @@ class SecurityController extends AbstractController
 {
     /**
      * @param AuthenticationUtils $authenticationUtils
-     * @Route("/login", name="login")
+     * @Route("/sign-in", name="login")
      * @return Response
      *
      * Redirect to homepage if User is already authenticated
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if($this->getUser()) {
-            return $this->redirectToRoute('app_default_index');
-        }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
