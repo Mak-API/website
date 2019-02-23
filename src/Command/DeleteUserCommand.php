@@ -45,9 +45,15 @@ class DeleteUserCommand extends Command
                 Specified X days with argument. 
                 Default 5 days.'
             )
-            ->setHelp('This command allow you to create an user.')
+            ->setHelp('This command allow you to delete users which were inactive since X days.')
             ->setDefinition(array(
-                new InputOption('day', '-d')
+                new InputOption(
+                    'day',
+                    '-d',
+                    InputOption::VALUE_OPTIONAL,
+                    'How many inactive days ? Default 60',
+                    60
+                )
             ))
         ;
     }
@@ -61,6 +67,16 @@ class DeleteUserCommand extends Command
             '==========================================',
             '',
         ]);
+
+        if(!is_numeric($input->getOption('day'))){
+            $output->writeln([
+                '<fg=black;bg=cyan>================================================',
+                '     --day option need to be numeric type !     ',
+                '================================================</>',
+                '',
+            ]);
+            die;
+        }
 
         $output->writeln("All inactive and unverified (since 60 days ago) users were deleted. \n");
     }
