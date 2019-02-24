@@ -41,13 +41,13 @@ class Generator {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    let elems = document.querySelectorAll(".collapsible");
-    let instances = M.Collapsible.init(elems);
+    const elems = document.querySelectorAll(".collapsible");
+    const instances = M.Collapsible.init(elems);
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    let elems = document.querySelectorAll("select");
-    let instances = M.FormSelect.init(elems);
+    const elems = document.querySelectorAll("select");
+    const instances = M.FormSelect.init(elems);
 });
 
 /**
@@ -55,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function() {
  */
 
 const btnBox = document.getElementById("add-attr_");
-let btnBoxValid = document.getElementById("valid-attr");
-let btnBoxCancel = document.getElementById("cancel-attr");
+const btnBoxValid = document.getElementById("valid-attr");
+const btnBoxCancel = document.getElementById("cancel-attr");
 
 
 btnBox.addEventListener("click", function(){

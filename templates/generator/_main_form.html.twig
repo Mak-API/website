@@ -180,7 +180,7 @@
          * Replace title of entity by value on input entity1
          * @type {HTMLElement}
          */
-        let inputEntity = document.getElementById("entity1");
+        const inputEntity = document.getElementById("entity1");
         inputEntity.addEventListener("keyup", function() {
             let title = document.getElementById("entity1").value;
             document.getElementById("entity-name").innerHTML = title;
