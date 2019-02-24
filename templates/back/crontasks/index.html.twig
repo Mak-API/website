@@ -1,0 +1,35 @@
+{% trans_default_domain 'app' %}
+{% extends 'pagelayout.html.twig' %}
+{% block title %}
+    Admin - Index CronTasks
+{% endblock %}
+
+{% block body %}
+    <main class="submain container">
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a href="#activated-tasks">Activated tasks</a></li>
+                    <li class="tab col s3"><a href="#tasks-lists">Tasks list</a></li>
+                    <li class="tab col s3"><a href="#add-task">Add task</a></li>
+                    <li class="tab col s3"><a href="#logs">Logs</a></li>
+                </ul>
+            </div>
+            <div id="activated-tasks" class="col s12">activated</div>
+            <div id="tasks-lists" class="col s12">tasks-lists</div>
+            <div id="add-task" class="col s12">
+                {{ render(controller(
+                    'App\\Controller\\Back\\CronTasksController::add'
+                )) }}
+            </div>
+            <div id="logs" class="col s12">Log</div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let el = document.querySelectorAll('.tabs');
+        let instance = M.Tabs.init(el);
+    </script>
+{% endblock %}

@@ -17,11 +17,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class CronTasksController extends AbstractController
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @Route(path="/", methods={"GET"}, name="index")
      */
     public function index(): Response
     {
-        return $this->render('back/crontasks/base_tasks.html.twig');
+        return $this->render('back/crontasks/index.html.twig');
+    }
+
+    /**
+     * @return Response
+     */
+    public function add(): Response
+    {
+        return $this->render('back/crontasks/add.html.twig');
     }
 }
