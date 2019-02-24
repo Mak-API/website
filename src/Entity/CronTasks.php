@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CronTasks
 {
-    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue()
