@@ -40,30 +40,15 @@ class Generator {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function() {
     var elems = document.querySelectorAll(".collapsible");
     var instances = M.Collapsible.init(elems);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function() {
     var elems = document.querySelectorAll("select");
     var instances = M.FormSelect.init(elems);
 });
-
-
-/**
- * Replace title of entity by value on input entity1
- * @type {HTMLElement}
- */
-/*document.addEventListener('DOMContentLoaded', function() {
-    let inputEntity = document.getElementById("entity1");
-
-    document.getElementById("entity1").addEventListener('keyup', function () {
-        console.log("coucou")
-        let title = document.getElementById("entity1").value;
-        document.getElementById('entity-name').innerHTML = title;
-    });
-});*/
 
 /**
  * @description: Display a box with additional data
@@ -74,7 +59,7 @@ let btnBoxValid = document.getElementById("valid-attr");
 let btnBoxCancel = document.getElementById("cancel-attr");
 
 
-btnBox.addEventListener('click', function(){
+btnBox.addEventListener("click", function(){
     document.getElementById("box_over-file_").classList.remove("hide");
     document.getElementById("box_over-file_").classList.add("box-placement");
 });

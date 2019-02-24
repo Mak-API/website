@@ -118,8 +118,8 @@
                             <form class="col s12">
                                 <div class="row ">
                                     <div class="input-field col s10 m10 l10 offset-s1 offset-m1 offset-l1">
-                                        <input value="" id="disabled" type="text" class="validate" data-length="40">
-                                        <label for="entity1">Entity 2</label>
+                                        <input value="" id="entity2" type="text" class="validate" data-length="40">
+                                        <label for="entity2">Entity 2</label>
                                     </div>
                                 </div>
                             </form>
@@ -150,8 +150,8 @@
                             <form class="col s12">
                                 <div class="row ">
                                     <div class="input-field col s10 m10 l10 offset-s1 offset-m1 offset-l1">
-                                        <input value="" id="disabled" type="text" class="validate" data-length="40">
-                                        <label for="entity1">Entity 3</label>
+                                        <input value="" id="entity3" type="text" class="validate" data-length="40">
+                                        <label for="entity3">Entity 3</label>
                                     </div>
                                 </div>
                             </form>
@@ -173,8 +173,12 @@
 </div>
 {% block javascripts %}
     <script>
-        let inputEntity = document.getElementById("entity1");
 
+        /**
+         * Replace title of entity by value on input entity1
+         * @type {HTMLElement}
+         */
+        let inputEntity = document.getElementById("entity1");
         inputEntity.addEventListener("keyup", function() {
             let title = document.getElementById("entity1").value;
             document.getElementById("entity-name").innerHTML = title;
