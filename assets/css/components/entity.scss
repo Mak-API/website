@@ -14,8 +14,29 @@ body {
       background-color: $color-livingCoral;
     }
 
+    .makapi-collection
+    {
+      margin: 0.5rem 0 1rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .makapi-collection.with-header .makapi-collection-header {
+      background-color: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 10px 20px;
+    }
+
+    .box-placement{
+      left: 260px;
+      top: -400px;
+      position: relative;
+      z-index: 1;
+    }
+
     .makapi-chip{
-      display: inline-block;
+      display: block;
       height: 32px;
       font-size: 13px;
       font-weight: 500;
@@ -26,8 +47,6 @@ body {
       background-color: $color-greyClaire;
       margin-bottom: 5px;
       margin-right: 5px;
-      width: -moz-available;
-
     }
 
     .makapi-chip i{
@@ -45,6 +64,7 @@ body {
     section.makapi-attributes {
       background-color: rgba(38,48,86, 0.1);
       border-radius: 10px;
+      padding: 1px 0 1px 0;
     }
   }
 }
