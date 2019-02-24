@@ -28,6 +28,13 @@ body {
       padding: 10px 20px;
     }
 
+    .box-placement{
+      left: 260px;
+      top: -400px;
+      position: relative;
+      z-index: 1;
+    }
+
     .makapi-chip{
       display: inline-block;
       height: 32px;
