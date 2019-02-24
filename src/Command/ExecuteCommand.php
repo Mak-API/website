@@ -50,7 +50,6 @@ class ExecuteCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         if($this->tasks === null){
             throw new \RuntimeException(
                 'No tasks founded.'
