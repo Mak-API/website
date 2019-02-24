@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class CronTasks
 {
     /**
-     * @ORM\Id()
+     * @ORM\Id
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
@@ -37,6 +37,7 @@ class CronTasks
     private $arguments;
 
     /**
+     * @see http://www.abunchofutils.com/utils/developer/cron-expression-helper/
      * @ORM\Column(type="string", length=255)
      */
     private $expression;
