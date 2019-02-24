@@ -2,7 +2,6 @@
 
 namespace App\Controller\Back;
 
-
 use App\Form\CronTasksType;
 use App\Repository\CronTasksRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
