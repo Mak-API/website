@@ -1,0 +1,237 @@
+{% extends 'pagelayout.html.twig' %}
+
+{% block title %}Administration Panel{% endblock %}
+
+{% block body %}
+    <header class="linear-header">
+        {% include 'components/header/header.html.twig' %}
+    </header>
+    {% block main %}
+        <main class="container-dashboard">
+            <div class="row">
+                <section class="col s12 m4 l3 xl3 navbar">
+                    <div class="container-bloc">
+                        <header>
+                            <h4>Dashboard</h4>
+                        </header>
+                        <div class="main-dashboard">
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        <i class="small material-icons">dashboard</i>
+                                        <span>Dashboard</span>
+                                        <i class="small material-icons">keyboard_arrow_right</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="small material-icons">filter_drama</i>
+                                        <span>Api's</span>
+                                        <i class="small material-icons">keyboard_arrow_right</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="small material-icons">group</i>
+                                        <span>Users</span>
+                                        <i class="small material-icons">keyboard_arrow_right</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="small material-icons">euro_symbol</i>
+                                        <span>Financial</span>
+                                        <i class="small material-icons">keyboard_arrow_right</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="small material-icons">play_circle_outline</i>
+                                        <span>Tasks</span>
+                                        <i class="small material-icons">keyboard_arrow_right</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="small material-icons">mode_edit</i>
+                                        <span>Blog</span>
+                                        <i class="small material-icons">keyboard_arrow_right</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="small material-icons">note</i>
+                                        <span>News</span>
+                                        <i class="small material-icons">keyboard_arrow_right</i>
+                                    </a>
+                                </li
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section class="col s12 m8 l9 panel">
+                    <div class="container-bloc">
+                        <header>
+                            <h4>Users</h4>
+                        </header>
+                        <div class="main">
+                                <section class="tabs-users">
+                                    <ul id="tabs-swipe-users" class="tabs makapi-tabs-ul">
+                                        <li class="tab col s3"><a class="active" href="#users-day">Users by day</a></li>
+                                        <li class="tab col s3"><a href="#users-month">Users by month</a></li>
+                                        <li class="tab col s3"><a href="#users-year">Users by year</a></li>
+                                    </ul>
+                                    <div id="users-day" class="col s12 tabs-canvas">
+                                        <div class="col s12 m4 l4 container-stats-users">
+                                            <h5>Users visited</h5>
+                                            <span>120</span>
+                                        </div>
+                                        <div class="col s12 m4 l4 container-stats-users">
+                                            <h5>Users registered</h5>
+                                            <span>35</span>
+                                        </div>
+                                        <div class="col s12 m4 l4 container-stats-users">
+                                            <h5>Users premium</h5>
+                                            <span>3</span>
+                                        </div>
+                                    </div>
+                                    <div id="users-month" class="col s12">Test 2</div>
+                                    <div id="users-year" class="col s12">Test 3</div>
+                                </section>
+                               <!--
+                                <div class="col s12 m4 l4">
+                                    <h5>Users visited</h5>
+                                </div>
+                                <div class="col s12 m4 l4">
+                                    <h5>Users registered</h5>
+                                </div>
+                                <div class="col s12 m4 l4">
+                                    <h5>Users premium</h5>
+                                </div>
+                            -->
+                        </div>
+                    </div>
+                    <div class="container-bloc">
+                        <header>
+                            <h4>API's</h4>
+                        </header>
+                        <div class="main">
+                            <section class="tabs-api">
+                                <ul id="tabs-swipe-demo" class="tabs makapi-tabs-ul">
+                                    <li class="tab col s3"><a class="active" href="#api-day">Api created by day</a></li>
+                                    <li class="tab col s3"><a href="#api-month">Api created by month</a></li>
+                                    <li class="tab col s3"><a href="#api-year">Api created by year</a></li>
+                                </ul>
+                                <div id="api-day" class="col s12 tabs-canvas">
+                                    <div class="container-canvas">
+                                        <canvas id="myChart" class="chart-api"></canvas>
+                                    </div>
+                                </div>
+                                <div id="api-month" class="col s12">Test 2</div>
+                                <div id="api-year" class="col s12">Test 3</div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="container-bloc">
+                        <header>
+                            <h4>FINANCIAL</h4>
+                        </header>
+                        <div class="main">
+                            <section class="tabs-financial">
+                                <ul id="tabs-swipe-report" class="tabs makapi-tabs-ul">
+                                    <li class="tab col s3"><a class="active" href="#report-day">Report by day</a></li>
+                                    <li class="tab col s3"><a href="#report-month">Report by month</a></li>
+                                    <li class="tab col s3"><a href="#report-year">Report by year</a></li>
+                                </ul>
+                                <div id="report-day" class="col s12 tabs-canvas">
+                                    <div class="container-canvas">
+                                        <canvas id="myChartReport" class="chart-financial"></canvas>
+                                    </div>
+                                </div>
+                                <div id="report-month" class="col s12">Test 2</div>
+                                <div id="report-year" class="col s12">Test 3</div>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    {% endblock %}
+    <footer class="page-footer">
+        {% include 'components/footer/footer.html.twig' %}
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const apiTabs = document.getElementById('tabs-swipe-demo');
+        const reportTabs = document.getElementById('tabs-swipe-report');
+        const usersTabs = document.getElementById('tabs-swipe-users');
+
+        const instance = M.Tabs.init(apiTabs,
+            swipeable = true,
+        );
+        const instance2 = M.Tabs.init(reportTabs,
+            swipeable = true,
+        );
+        const instance3 = M.Tabs.init(usersTabs,
+            swipeable = true,
+        );
+
+        var ctx = document.getElementById("myChart").getContext('2d');
+
+        var financial = document.getElementById("myChartReport").getContext('2d');
+
+        var myLineChart = new Chart(financial, {
+            type: 'line',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+            },
+        });
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+{% endblock %}
