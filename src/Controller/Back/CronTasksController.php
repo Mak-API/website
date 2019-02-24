@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 
 
 use App\Form\CronTasksType;
+use App\Repository\CronTasksRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,15 +21,19 @@ use App\Entity\CronTasks;
 class CronTasksController extends AbstractController
 {
     /**
+     * @param CronTasksRepository $cronTasksRepository
      * @return Response
      * @Route(path="/", methods={"GET"}, name="index")
      */
-    public function index(): Response
+    public function index(CronTasksRepository $cronTasksRepository): Response
     {
-        return $this->render('back/crontasks/index.html.twig');
+        return $this->render('back/crontasks/index.html.twig', [
+            'activatedTasks' => $cronTasksRepository->findBy(['disabled' => 0])
+        ]);
     }
 
     /**
+     * @param Request $request
      * @return Response
      * @Route("/add", name="add")
      */

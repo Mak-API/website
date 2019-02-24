@@ -11,11 +11,45 @@
                 <ul class="tabs">
                     <li class="tab col s3"><a href="#activated-tasks">Activated tasks</a></li>
                     <li class="tab col s3"><a href="#tasks-lists">Tasks list</a></li>
-                    <li class="tab col s3"><a class="active" href="#add-task">Add task</a></li>
+                    <li class="tab col s3"><a href="#add-task">Add task</a></li>
                     <li class="tab col s3"><a href="#logs">Logs</a></li>
                 </ul>
             </div>
-            <div id="activated-tasks" class="col s12">activated</div>
+            <div id="activated-tasks" class="col s12">
+                <div class="white">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Command</th>
+                                <th>Last activate</th>
+                                <th>Command result</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in activatedTasks %}
+                                <tr>
+                                    <td>{{ task.name }}</td>
+                                    <td>{{ task.command }}</td>
+                                    <td>{{ task.lastExecution ? task.lastExecution|date('Y-m-d H:i:s T') : '' }}</td>
+                                    <td>{{ task.lastReturnCode ? task.lastReturnCode : 'No result'}}</td>
+                                    <td>
+                                        <a href="#" class="btn makapi-button small red">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <h2>No tasks founded</h2>
+                                <p>
+                                    Go to add your first task or activate one task.
+                                </p>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div id="tasks-lists" class="col s12">tasks-lists</div>
             <div id="add-task" class="col s12">
                 <div id="makapi-task-form" class="white" style="
