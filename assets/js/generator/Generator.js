@@ -50,9 +50,25 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.FormSelect.init(elems);
 });
 
+
+/**
+ * Replace title of entity by value on input entity1
+ * @type {HTMLElement}
+ */
+/*document.addEventListener('DOMContentLoaded', function() {
+    let inputEntity = document.getElementById("entity1");
+
+    document.getElementById("entity1").addEventListener('keyup', function () {
+        console.log("coucou")
+        let title = document.getElementById("entity1").value;
+        document.getElementById('entity-name').innerHTML = title;
+    });
+});*/
+
 /**
  * @description: Display a box with additional data
  */
+
 let btnBox = document.getElementById('add-attr_');
 let btnBoxValid = document.getElementById('valid-attr');
 let btnBoxCancel = document.getElementById('cancel-attr');
