@@ -105,7 +105,7 @@ class DeleteUserCommand extends Command
             );
         }
 
-        if(!is_null($forceOption)){
+        if($forceOption !== null){
             throw new \RuntimeException(
                 'You need use \'--force\' or \'-f\' to use this command with no value'
             );
@@ -122,7 +122,7 @@ class DeleteUserCommand extends Command
         foreach($this->users as $user){
             $interval = date_diff($user->getUpdatedAt(), $now);
             if($interval->days >= $daysOption){
-                if(($user->getStatus() === self::DEACTIVATES) || (is_null($allOption) && $user->getStatus() === self::UNVERIFIED)){
+                if(($user->getStatus() === self::DEACTIVATES) || ($allOption === null && $user->getStatus() === self::UNVERIFIED)){
                     $this->objectManager->remove($user);
                     $this->objectManager->flush();
                     $output->writeln("User <comment>".$user->getEmail()."</comment> has been removed \n");
