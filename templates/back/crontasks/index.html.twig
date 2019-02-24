@@ -10,9 +10,9 @@
             <div class="col s12">
                 <ul class="tabs">
                     <li class="tab col s3"><a href="#activated-tasks">Activated tasks</a></li>
-                    <li class="tab col s3"><a href="#tasks-lists">Tasks list</a></li>
+                    <li class="tab col s3 disabled"><a href="#tasks-lists">Tasks list</a></li>
                     <li class="tab col s3"><a href="#add-task">Add task</a></li>
-                    <li class="tab col s3"><a href="#logs">Logs</a></li>
+                    <li class="tab col s3 disabled"><a href="#logs">Logs</a></li>
                 </ul>
             </div>
             <div id="activated-tasks" class="col s12">
@@ -35,16 +35,18 @@
                                     <td>{{ task.lastExecution ? task.lastExecution|date('Y-m-d H:i:s T') : '' }}</td>
                                     <td>{{ task.lastReturnCode ? task.lastReturnCode : 'No result'}}</td>
                                     <td>
-                                        <a href="#" class="btn makapi-button small red">
+                                        <a href="{{ path('app_crontasks_delete', {'id':task.id}) }}" class="btn makapi-button small red">
                                             <i class="material-icons">delete</i>
                                         </a>
                                     </td>
                                 </tr>
                             {% else %}
-                                <h2>No tasks founded</h2>
-                                <p>
-                                    Go to add your first task or activate one task.
-                                </p>
+                                <td colspan="5">
+                                    <h2>No tasks founded</h2>
+                                    <p>
+                                        Go to add your first task or activate one task.
+                                    </p>
+                                </td>
                             {% endfor %}
                         </tbody>
                     </table>

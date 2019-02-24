@@ -52,4 +52,17 @@ class CronTasksController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @param CronTasks $cronTasks
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route(path="/delete/{id}", name="delete")
+     */
+    public function remove(CronTasks $cronTasks)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($cronTasks);
+        $em->flush();
+        return $this->redirectToRoute('app_crontasks_index');
+    }
 }
