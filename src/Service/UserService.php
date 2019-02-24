@@ -11,6 +11,7 @@ namespace App\Service;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use App\Entity\User;
+use http\Exception\RuntimeException;
 
 class UserService
 {
@@ -66,18 +67,58 @@ class UserService
     }
 
     /**
+     * @param $login
+     * @return bool
+     */
+    public function isDeleted($login) {
+        $user = $this->manager->getRepository(User::class)
+            ->findOneBy(array('email' => $login));
+        if ($user && $user->getStatus() === -1) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @param bool $verified
-     * @param string $user
+     * @param string $login
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function redirectAfterEmailChecking(bool $verified, string $user) {
+    public function redirectAfterEmailChecking(bool $verified, string $login)
+    {
+        if ($this->isDeleted($login)) {
+            return $this->templating->render('authentication/registration.html.twig', [
+                'isDeleted' => true,
+                'isVerified' => $verified,
+                'login' => $login
+            ]);
+        }
         return $this->templating->render('authentication/registration.html.twig', [
+            'isDeleted' => false,
             'isVerified' => $verified,
-            'login' => $user
+            'login' => $login
         ]);
     }
 
+    /**
+     * @param int $id
+     * @param User $user
+     */
+    public function deleteUser($id, User $user)
+    {
+        try {
+            if ($user && $user->getStatus() > -1) {
+            //if ($user) {
+                $user = $this->manager->getRepository(User::class)
+                    ->findOneBy(array('id' => $id));
+                $user->setStatus('-1');
+                $this->manager->flush();
+            }
+        } catch (\RuntimeException $e) {
+            throw new \RuntimeException('Something went wrong' . + $e);
+        }
+    }
 }

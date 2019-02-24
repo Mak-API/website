@@ -22,12 +22,19 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
-
+    /**
+     * @var EmailService
+     */
     private $emailService;
+    /**
+     * @var UserService
+     */
+    private $userService;
 
-    public function __construct(EmailService $emailService)
+    public function __construct(EmailService $emailService, UserService $userService)
     {
         $this->emailService = $emailService;
+        $this->userService = $userService;
     }
 
     /**
@@ -79,13 +86,9 @@ class UserController extends AbstractController
                 )
             );
 
-
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
-
 
             return $this->redirectToRoute('app_user_index');
         }
@@ -150,19 +153,25 @@ class UserController extends AbstractController
     }
 
     /**
-     * @param Request $request
      * @param User $user
-     * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @Route("/confirmdelete/{id}", name="confirmdelete")
      * @return Response
      */
-    public function delete(Request $request, User $user): Response
+    public function confirmDeleteUser(User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
+        return $this->render('user/_delete_form.html.twig', [
+            'user' => $user,
+        ]);
+    }
 
-        return $this->redirectToRoute('app_user_index');
+    /**
+     * @param User $user
+     * @Route("/delete/{id}", name="delete", methods={"GET", "POST"})
+     * @return Response
+     */
+    public function delete(User $user): Response
+    {
+        $this->userService->deleteUser($user->getId(), $user);
+        return $this->redirectToRoute('app_security_logout');
     }
 }

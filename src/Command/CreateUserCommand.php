@@ -63,7 +63,7 @@ class CreateUserCommand extends Command
         $usernameQuestion = new Question('Enter an unknown username : ', 'username');
         $usernameQuestion->setAutocompleterValues($this->usernamesList);
         $usernameQuestion->setValidator(function($answer){
-           if(in_array($answer, $this->usernamesList)){
+           if($this->usernamesList && in_array($answer, $this->usernamesList)){
                throw new \RuntimeException(
                    'New user need an unique username.'
                );
@@ -75,7 +75,7 @@ class CreateUserCommand extends Command
         $emailQuestion = new Question('Enter an unknown email : ', 'email@email.com');
         $emailQuestion->setAutocompleterValues($this->emailsList);
         $emailQuestion->setValidator(function($answer){
-           if(in_array($answer, $this->emailsList)){
+           if($this->emailsList && in_array($answer, $this->emailsList)){
                throw new \RuntimeException(
                    'New user need an unique email.'
                );
