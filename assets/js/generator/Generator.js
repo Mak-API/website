@@ -41,12 +41,12 @@ class Generator {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.collapsible');
+    var elems = document.querySelectorAll(".collapsible");
     var instances = M.Collapsible.init(elems);
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('select');
+    var elems = document.querySelectorAll("select");
     var instances = M.FormSelect.init(elems);
 });
 
@@ -70,27 +70,27 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 
 let btnBox = document.getElementById('add-attr_');
-let btnBoxValid = document.getElementById('valid-attr');
-let btnBoxCancel = document.getElementById('cancel-attr');
+let btnBoxValid = document.getElementById("valid-attr");
+let btnBoxCancel = document.getElementById("cancel-attr");
 
 
 btnBox.addEventListener('click', function(){
-    document.getElementById('box_over-file_').classList.remove("hide");
-    document.getElementById('box_over-file_').classList.add("box-placement");
+    document.getElementById("box_over-file_").classList.remove("hide");
+    document.getElementById("box_over-file_").classList.add("box-placement");
 });
 
 /**
  * @description: Hide the last box with valid btn
  */
 btnBoxValid.addEventListener("click", function(){
-    document.getElementById('box_over-file_').classList.add("hide");
+    document.getElementById("box_over-file_").classList.add("hide");
 });
 
 /**
  * @description: Hide the last box with cancel btn
  */
 btnBoxCancel.addEventListener("click", function(){
-    document.getElementById('box_over-file_').classList.add("hide");
+    document.getElementById("box_over-file_").classList.add("hide");
 });
 
 export default Generator;
