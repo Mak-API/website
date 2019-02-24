@@ -56,7 +56,7 @@
                     </div>
                 </li>
             </ul>
-            <div class="box" id="box_over-file_" style="left: 260px;top: -400px;position: relative; z-index: 1">
+            <div class="box hide" id="box_over-file_">
                 <ul class="makapi-collection with-header white">
                     <li class="makapi-collection-header">
                         <h4>BENJAMM</h4>
@@ -71,11 +71,13 @@
                             <div class="input-field col l12 m12 s12">
                                 <select>
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                    <option value="int">Int</option>
+                                    <option value="string">String</option>
+                                    <option value="bool">Boolean</option>
+                                    <option value="float">Float</option>
+                                    <option value="date">Date</option>
                                 </select>
-                                <label>Materialize Select</label>
+                                <label>Type of your Attribute</label>
                             </div>
                             <p>
                                 <label>
@@ -88,12 +90,12 @@
                     <li class="collection-item">
                         <div class="row">
                             <div class="col l5 m5 s5">
-                                <a id="add-attr_" class="btn-floating btn-small red right">
+                                <a id="cancel-attr" class="btn-floating btn-small red right">
                                     <i class="material-icons">cancel</i>
                                 </a>
                             </div>
                             <div class="col l2 m2 s2 offset-l2 offset-m2 offset-s2">
-                                <a id="add-attr_" class="btn-floating btn-small green right">
+                                <a id="valid-attr" class="btn-floating btn-small green right">
                                     <i class="material-icons">done_all</i>
                                 </a>
                             </div>
@@ -170,40 +172,4 @@
     </div>
 </div>
 {% block javascripts %}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.collapsible');
-            var instances = M.Collapsible.init(elems);
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('select');
-            var instances = M.FormSelect.init(elems);
-        });
-
-        /**
-         * @description: Display a box with additional data
-         */
-        btnBox = document.getElementById('add-attr_');
-        btnBox.addEventListener('mouseover', function(){
-            document.getElementById('box_over-file_').classList.remove("hide");
-        });
-
-        /**
-         * @description: Hide the last box 
-         */
-        /*btnBox.addEventListener("mouseout", function(){
-            document.getElementById('box_over-file_').classList.add("hide");
-        });*/
-
-        /**
-         * @description: Move the current box depending mouse position
-         */
-        btnBox.addEventListener('mousemove', function (e){
-            document.getElementsByClassName('box').css({ left: e.pageX-50, top: e.pageY-450}).stop().show();
-            /*left: 230px;
-            top: -185px;
-            position: relative;*/
-        });
-    </script>
 {% endblock %}
