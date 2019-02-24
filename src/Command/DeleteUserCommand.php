@@ -31,6 +31,10 @@ class DeleteUserCommand extends Command
      */
     private $users;
 
+    /**
+     * DeleteUserCommand constructor.
+     * @param ObjectManager $objectManager
+     */
     public function __construct(ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
@@ -40,6 +44,9 @@ class DeleteUserCommand extends Command
         parent::__construct();
     }
 
+    /**
+     * Configure (option, argument, etc.) of our command
+     */
     protected function configure()
     {
         $this
@@ -79,6 +86,12 @@ class DeleteUserCommand extends Command
         ;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|void|null
+     * @throws \Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $daysOption = $input->getOption('day');
