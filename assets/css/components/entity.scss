@@ -14,6 +14,20 @@ body {
       background-color: $color-livingCoral;
     }
 
+    .makapi-collection
+    {
+      margin: 0.5rem 0 1rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .makapi-collection.with-header .makapi-collection-header {
+      background-color: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 10px 20px;
+    }
+
     .makapi-chip{
       display: inline-block;
       height: 32px;

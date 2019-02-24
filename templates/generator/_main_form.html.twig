@@ -43,26 +43,6 @@
                                         <i class="material-icons">add</i>
                                     </a>
                                 </div>
-                                <div class="box hide" id="box_over-file_">
-                                    <ul class="collection with-header aog-box-content">
-                                        <li class="collection-header">
-                                            <h5>PN information</h5></li>
-                                        <li class="collection-item">Export control
-                                            <span class="secondary-content badge">
-                                                <div class='circleInfo amber'>
-                                                    <i class='material-icons white-text'>warning</i>
-                                                </div>
-                                            </span>
-                                        </li>
-                                        <li class="collection-item">PN checked
-                                            <span class="secondary-content badge">
-                                                <div class='circleInfo green'>
-                                                    <i class='material-icons white-text'>done</i>
-                                                </div>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </section>
                         <div class="switch right-align">
@@ -76,8 +56,54 @@
                     </div>
                 </li>
             </ul>
+            <div class="box" id="box_over-file_" style="left: 260px;top: -400px;position: relative; z-index: 1">
+                <ul class="makapi-collection with-header white">
+                    <li class="makapi-collection-header">
+                        <h4>BENJAMM</h4>
+                        <p>in Entity <a href="#!">Entity 1</a></p>
+                    </li>
+                    <li>
+                        <form class="form-makapi col l12 m12 s12">
+                            <div class="input-field col l12 m12 s12 ">
+                                <input id="attribute_name" type="text" class="validate">
+                                <label for="attribute_name">Name of your Attribute</label>
+                            </div>
+                            <div class="input-field col l12 m12 s12">
+                                <select>
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                                <label>Materialize Select</label>
+                            </div>
+                            <p>
+                                <label>
+                                    <input type="checkbox" class="filled-in" />
+                                    <span>Nullable</span>
+                                </label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="collection-item">
+                        <div class="row">
+                            <div class="col l5 m5 s5">
+                                <a id="add-attr_" class="btn-floating btn-small red right">
+                                    <i class="material-icons">cancel</i>
+                                </a>
+                            </div>
+                            <div class="col l2 m2 s2 offset-l2 offset-m2 offset-s2">
+                                <a id="add-attr_" class="btn-floating btn-small green right">
+                                    <i class="material-icons">done_all</i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+    <!--style="left: 230px;top: -185px;position: relative;"-->
     <div class="col l4 m4 s4 generator-form">
         <div class="bloc-entity">
             <ul class="collapsible">
@@ -150,26 +176,34 @@
             var instances = M.Collapsible.init(elems);
         });
 
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+
         /**
          * @description: Display a box with additional data
          */
-        document.getElementById('add-attr_').on("mouseover", "span[id^='over-']", function(){
-            currentOver = this.id;
-            document.getElementById("#box_over-file_").toggleClass("hide");
+        btnBox = document.getElementById('add-attr_');
+        btnBox.addEventListener('mouseover', function(){
+            document.getElementById('box_over-file_').classList.remove("hide");
         });
 
         /**
          * @description: Hide the last box 
          */
-        document.getElementById('add-attr_').on("mouseout", "span[id^='over-']", function(){
-            $("#box_"+currentOver).toggleClass("hide");
-        })
+        /*btnBox.addEventListener("mouseout", function(){
+            document.getElementById('box_over-file_').classList.add("hide");
+        });*/
 
         /**
          * @description: Move the current box depending mouse position
          */
-        document.getElementById('add-attr_').on('mousemove', "span[id^='over-']", function (e){
-            $(".box").css({ left: e.pageX-50, top: e.pageY-450}).stop().show();
+        btnBox.addEventListener('mousemove', function (e){
+            document.getElementsByClassName('box').css({ left: e.pageX-50, top: e.pageY-450}).stop().show();
+            /*left: 230px;
+            top: -185px;
+            position: relative;*/
         });
     </script>
 {% endblock %}
