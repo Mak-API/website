@@ -200,6 +200,31 @@ body {
       border-bottom: 1px solid $color-livingCoral;
       box-shadow: 0 1px 0 0 $color-livingCoral;
     }
+
+    .select-dropdown li.disabled > span,
+    .select-dropdown li.optgroup {
+      color: rgba(0, 0, 0, 0.3);
+      background-color: transparent;
+    }
+
+    .dropdown-content li > a, .dropdown-content li > span {
+
+      font-size: 16px;
+      color: $color-livingCoral;
+      display: block;
+      line-height: 22px;
+      padding: 14px 16px;
+
+    }
+
+    [type="checkbox"].filled-in:checked + span:not(.lever):after {
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border: 2px solid $color-livingCoral;
+      background-color: $color-livingCoral;
+      z-index: 0;
+    }
   }
 }
 
