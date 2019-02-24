@@ -36,7 +36,7 @@ body {
     }
 
     .makapi-chip{
-      display: inline-block;
+      display: block;
       height: 32px;
       font-size: 13px;
       font-weight: 500;
@@ -47,8 +47,6 @@ body {
       background-color: $color-greyClaire;
       margin-bottom: 5px;
       margin-right: 5px;
-      width: -moz-available;
-
     }
 
     .makapi-chip i{
@@ -66,6 +64,7 @@ body {
     section.makapi-attributes {
       background-color: rgba(38,48,86, 0.1);
       border-radius: 10px;
+      padding: 1px 0 1px 0;
     }
   }
 }

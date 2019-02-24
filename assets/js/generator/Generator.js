@@ -41,20 +41,20 @@ class Generator {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    var elems = document.querySelectorAll(".collapsible");
-    var instances = M.Collapsible.init(elems);
+    let elems = document.querySelectorAll(".collapsible");
+    let instances = M.Collapsible.init(elems);
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    var elems = document.querySelectorAll("select");
-    var instances = M.FormSelect.init(elems);
+    let elems = document.querySelectorAll("select");
+    let instances = M.FormSelect.init(elems);
 });
 
 /**
  * @description: Display a box with additional data
  */
 
-let btnBox = document.getElementById('add-attr_');
+const btnBox = document.getElementById("add-attr_");
 let btnBoxValid = document.getElementById("valid-attr");
 let btnBoxCancel = document.getElementById("cancel-attr");
 
