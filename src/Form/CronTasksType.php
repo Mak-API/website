@@ -45,6 +45,7 @@ class CronTasksType extends AbstractType
             ])
             ->add('disabled', CheckboxType::class, [
                 'label' => 'Deactivate',
+                'required' => false,
             ])
         ;
     }

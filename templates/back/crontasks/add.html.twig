@@ -3,7 +3,7 @@
     Add or edit your task here. If you have difficult to found your Cron expression, go here :
     <a href="https://abunchofutils.com/u/computing/cron-format-helper/">Cron format helper</a>.
 </p>
-{{ form_start(form) }}
+{{ form_start(form, {'action': path('app_crontasks_add')}) }}
 
         {{ form_widget(form) }}
         <div class="center">

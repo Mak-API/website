@@ -30,6 +30,7 @@ class CronTasksController extends AbstractController
 
     /**
      * @return Response
+     * @Route("/add", name="add")
      */
     public function add(Request $request): Response
     {
@@ -37,7 +38,10 @@ class CronTasksController extends AbstractController
         $form = $this->createForm(CronTasksType::class, $crontasks);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump('test');
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($crontasks);
+            $em->flush();
+            return $this->redirectToRoute('app_crontasks_index');
         }
         return $this->render('back/crontasks/add.html.twig', [
             'form' => $form->createView(),
