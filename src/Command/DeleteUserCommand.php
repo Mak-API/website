@@ -13,6 +13,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DeleteUserCommand extends Command
 {
     /**
+     * const DEACTIVATES
+     * Users who wish want to delete their account.
+     */
+    const DEACTIVATES=-1;
+    /**
+     * const UNVERIFIED
+     * Users who aren't verified their account email.
+     */
+    const UNVERIFIED=0;
+    /**
      * @var ObjectManager
      */
     private $objectManager;
@@ -45,14 +55,24 @@ class DeleteUserCommand extends Command
                     'day',
                     '-d',
                     InputOption::VALUE_OPTIONAL,
-                    'How many deactivates days ? Default 60',
+                    'How many deactivates/unverified days ?\n
+                    Write \'--day\' or \'-d\' with integer value.',
                     60
                 ),
                 new InputOption(
                     'force',
                     '-f',
                     InputOption::VALUE_OPTIONAL,
-                    'Need to be force',
+                    'Need to be force. \n 
+                    Write \'--force\' or \'-f\' with no value.',
+                    false
+                ),
+                new InputOption(
+                    'all',
+                    '-a',
+                    InputOption::VALUE_OPTIONAL,
+                    'Delete unverified and deactivates accounts. \n 
+                    Write \'--all\' or \'-a\' with no value.',
                     false
                 )
             ))
@@ -61,40 +81,43 @@ class DeleteUserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $helper = $this->getHelper('question');
-        $days = $input->getOption('day');
-        $force = $input->getOption('force');
+        $daysOption = $input->getOption('day');
+        $forceOption = $input->getOption('force');
+        $allOption = $input->getOption('all');
+        $now = new \DateTime();
 
-        if(!is_numeric($days)){
+        if(!is_numeric($daysOption)){
             throw new \RuntimeException(
                 'Day need to be an integer'
             );
         }
 
-        if(!is_null($force)){
+        if(!is_null($forceOption)){
             throw new \RuntimeException(
                 'You need use \'--force\' or \'-f\' to use this command with no value'
             );
         }
 
-        $now = new \DateTime();
         $output->writeln([
             '==========================================',
             '     Delete deactivates/unverified users     ',
-            "        Selected days : $days days        ",
+            "        Selected days : $daysOption days        ",
             '==========================================',
             '',
         ]);
 
         foreach($this->users as $user){
             $interval = date_diff($user->getUpdatedAt(), $now);
-            if($interval->days >= $days && ($user->getStatus() === -1 || $user->getVerified() === false)){
-                $this->objectManager->remove($user);
-                $this->objectManager->flush();
+            if($interval->days >= $daysOption){
+                if(($user->getStatus() === self::DEACTIVATES) || (is_null($allOption) && $user->getStatus() === self::UNVERIFIED)){
+                    $this->objectManager->remove($user);
+                    $this->objectManager->flush();
+                    $output->writeln("User <comment>".$user->getEmail()."</comment> has been removed \n");
+                }
             }
         }
 
 
-        $output->writeln("All inactive and unverified (since $days days ago) users were deleted. \n");
+        $output->writeln("All inactive and unverified (since $daysOption days ago) users were deleted. \n");
     }
 }
