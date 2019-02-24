@@ -11,16 +11,25 @@
                 <ul class="tabs">
                     <li class="tab col s3"><a href="#activated-tasks">Activated tasks</a></li>
                     <li class="tab col s3"><a href="#tasks-lists">Tasks list</a></li>
-                    <li class="tab col s3"><a href="#add-task">Add task</a></li>
+                    <li class="tab col s3"><a class="active" href="#add-task">Add task</a></li>
                     <li class="tab col s3"><a href="#logs">Logs</a></li>
                 </ul>
             </div>
             <div id="activated-tasks" class="col s12">activated</div>
             <div id="tasks-lists" class="col s12">tasks-lists</div>
             <div id="add-task" class="col s12">
-                {{ render(controller(
-                    'App\\Controller\\Back\\CronTasksController::add'
-                )) }}
+                <div id="makapi-task-form" class="white" style="
+                    padding: 15px;
+                ">
+                    <div style="
+                        width: 70%;
+                        margin: auto;
+                    ">
+                        {{ render(controller(
+                            'App\\Controller\\Back\\CronTasksController::add'
+                        )) }}
+                    </div>
+                </div>
             </div>
             <div id="logs" class="col s12">Log</div>
         </div>

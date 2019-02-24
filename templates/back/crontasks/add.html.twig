@@ -1,1 +1,13 @@
-<p>Add form list</p>
+<h2>Makapi form task</h2>
+<p class="makapi-text">
+    Add or edit your task here. If you have difficult to found your Cron expression, go here :
+    <a href="https://abunchofutils.com/u/computing/cron-format-helper/">Cron format helper</a>.
+</p>
+{{ form_start(form) }}
+
+        {{ form_widget(form) }}
+        <div class="center">
+            <button type="submit" class="btn makapi-button corail">{{ button_label|default('Add task') }}</button>
+        </div>
+
+{{ form_end(form) }}
