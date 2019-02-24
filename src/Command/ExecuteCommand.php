@@ -13,6 +13,7 @@ use App\Entity\CronTasks;
 use Cron\CronExpression;
 use Symfony\Component\Console\Command\Command;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -48,6 +49,7 @@ class ExecuteCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
         if($this->tasks === null){
             throw new \RuntimeException(
                 'No tasks founded.'
@@ -56,15 +58,29 @@ class ExecuteCommand extends Command
 
         foreach($this->tasks as $task){
             if($task->getDisabled() === false){
+                $command = $this->getApplication()->find($task->getCommand());
+                $arguments = [
+                    'command' => $task->getCommand(),
+                    '--force' => null,
+                    '--day' => "200",
+                ];
+                $commandInput = new ArrayInput($arguments);
+                $returnCode = $command->run($commandInput, $output);
                 dump($task->getName());
-                dump($task->getDisabled());
-                dump($task->getExpression());
+                dump($task->getCommand());
+                dump($task->getLastExecution());
                 $cron = CronExpression::factory($task->getExpression());
                 $cron->isDue();
                 dump($cron->getNextRunDate()->format('Y-m-d H:i:s'));
                 dump($cron->getPreviousRunDate()->format('Y-m-d H:i:s'));
+                /*
+                 * Reste à découper les arguments et options de la commande pour ensuite le mettre dans l'arrayInput
+                 * Puis vérifier la dernière date d'execution avec le $cron->getPrevious...
+                 * Puis lancer et modifier l'entité. Modifié la dernière date d'exécution, le retour de la commande etc.
+                 */
             }
         }
+
 
         $output->writeln("Cron execute command has successfully done.\n");
     }
