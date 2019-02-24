@@ -40,4 +40,41 @@ class Generator {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+});
+
+/**
+ * @description: Display a box with additional data
+ */
+let btnBox = document.getElementById('add-attr_');
+let btnBoxValid = document.getElementById('valid-attr');
+let btnBoxCancel = document.getElementById('cancel-attr');
+
+
+btnBox.addEventListener('click', function(){
+    document.getElementById('box_over-file_').classList.remove("hide");
+    document.getElementById('box_over-file_').classList.add("box-placement");
+});
+
+/**
+ * @description: Hide the last box with valid btn
+ */
+btnBoxValid.addEventListener("click", function(){
+    document.getElementById('box_over-file_').classList.add("hide");
+});
+
+/**
+ * @description: Hide the last box with cancel btn
+ */
+btnBoxCancel.addEventListener("click", function(){
+    document.getElementById('box_over-file_').classList.add("hide");
+});
+
 export default Generator;
