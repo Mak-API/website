@@ -23,6 +23,11 @@
                 M.toast({html: 'You have deleted your account not long ago, you just need to check your email for recover your account.'})
             </script>
         {% endif %}
+        {% if isSend == true %}
+        <script>
+            M.toast({html: 'Email has  been sent ! Don\'t forget to check your spam !'});
+        </script>
+        {% endif %}
         <section class="form-registration row col l12 m12 s12">
             <div class="content-registration valign-wrapper offset-l3 col l6 offset-m2 m8 offset-s2 s8">
                 <div class="center-block">

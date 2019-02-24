@@ -43,6 +43,7 @@ class UserService
             $user->setVerified(true);
             $this->manager->flush();
             return ["isVerified" => true,
+                "isSend" => false,
                 "login" => $user->getEmail()];
         } else if($user && $user->getVerified()) {
             throw new \Exception('Something went wrong!');
@@ -92,12 +93,14 @@ class UserService
         if ($this->isDeleted($login)) {
             return $this->templating->render('authentication/registration.html.twig', [
                 'isDeleted' => true,
+                'isSend' => false,
                 'isVerified' => $verified,
                 'login' => $login
             ]);
         }
         return $this->templating->render('authentication/registration.html.twig', [
             'isDeleted' => false,
+            'isSend' => false,
             'isVerified' => $verified,
             'login' => $login
         ]);
