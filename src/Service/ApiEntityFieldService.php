@@ -67,10 +67,10 @@ class ApiEntityFieldService
      * @param string $type
      * @param bool $nullable
      * @param string $attributes
-     * @param UserInterface $creator
+     * @param UserInterface $createdBy
      * @return ApiEntityField
      */
-    public function createField(int $apiEntityId, string $name, string $type, bool $nullable, string $attributes, UserInterface $creator): ApiEntityField
+    public function createField(int $apiEntityId, string $name, string $type, bool $nullable, string $attributes, UserInterface $createdBy): ApiEntityField
     {
         $field = new ApiEntityField();
         $field->setEntity($this->apiEntityService->getEntity($apiEntityId))
@@ -78,7 +78,9 @@ class ApiEntityFieldService
             ->setType($type)
             ->setNullable($nullable)
             ->setAttributes($attributes)
-            ->setCreatedBy($creator);
+            ->setCreatedBy($createdBy)
+            ->setCreatedAt(new \DateTime())
+            ->setUpdatedAt(new \Datetime());
 
         $this->entityManager->persist($field);
         $this->entityManager->flush();

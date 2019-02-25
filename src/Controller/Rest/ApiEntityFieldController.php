@@ -3,6 +3,7 @@
 namespace App\Controller\Rest;
 
 use App\Entity\ApiEntityField;
+use App\Repository\UserRepository;
 use App\Service\ApiEntityFieldService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,19 +50,20 @@ class ApiEntityFieldController extends RestController
 
     /**
      * @param Request $request
+     * @param UserRepository $userRepository
      * @return Response
      *
      * @Route("/", methods={"POST"})
      */
-    public function createField(Request $request): Response
+    public function createField(Request $request, UserRepository $userRepository): Response
     {
         return $this->json($this->apiEntityFieldService->createField(
-            $request->get('id'),
+            $request->get('entityId'),
             $request->get('name'),
             $request->get('type'),
             $request->get('nullable'),
             $request->get('attributes'),
-            $this->getUser()
+            $userRepository->find(1)
         ));
     }
 }
