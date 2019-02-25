@@ -23,21 +23,7 @@
                                 <div class="row">
                                     <h4>Attributes</h4>
                                     <div id="list-attribute_1">
-                                        <div class="makapi-chip">BENJAMM
-                                            <i class="material-icons right livingCoral-text">create</i>
-                                        </div>
-                                        <div class="makapi-chip">PREGENT
-                                            <i class="material-icons right">create</i>
-                                        </div>
-                                        <div class="makapi-chip">Ivan
-                                            <i class="material-icons right">create</i>
-                                        </div>
-                                        <div class="makapi-chip">Julien
-                                            <i class="material-icons right">create</i>
-                                        </div>
-                                        <div class="makapi-chip">Jeremie
-                                            <i class="material-icons right">create</i>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -61,13 +47,13 @@
             <div class="box hide" id="box_over-file_">
                 <ul class="makapi-collection with-header white">
                     <li class="makapi-collection-header">
-                        <h4>BENJAMM</h4>
+                        <h4 id="box-attribute-name" >Default attribute</h4>
                         <p>in Entity <a href="#!">Entity 1</a></p>
                     </li>
                     <li>
                         <form class="form-makapi col l12 m12 s12">
                             <div class="input-field col l12 m12 s12 ">
-                                <input id="attribute_name" type="text" class="validate">
+                                <input value="" id="attribute_name" required type="text" class="validate">
                                 <label for="attribute_name">Name of your Attribute</label>
                             </div>
                             <div class="input-field col l12 m12 s12">
@@ -183,16 +169,31 @@
         const inputEntity = document.getElementById("entity1");
         inputEntity.addEventListener("keyup", function() {
             let title = document.getElementById("entity1").value;
-            document.getElementById("entity-name").innerHTML = title;
+            let template = title+"<i class=\"material-icons medium\">arrow_drop_down</i>";
+            document.getElementById("entity-name").innerHTML = template;
+        });
+
+        let inputAttribute = document.getElementById("attribute_name");
+        inputAttribute.addEventListener("keyup", function() {
+            let attrTitle = document.getElementById("attribute_name").value;
+            document.getElementById("box-attribute-name").innerHTML = attrTitle;
         });
 
 
         const btnAdd = document.getElementById("valid-attr");
+        const btnBoxValid = document.getElementById("valid-attr");
+
         btnAdd.addEventListener("click", function () {
             let inputAttribute = document.getElementById("attribute_name").value;
             const attributeChip = document.getElementById("list-attribute_1");
-            const template = "<div class=\"makapi-chip\">"+ inputAttribute + "<i class=\"material-icons right\">create</i></div>";
-            attributeChip.insertAdjacentHTML("beforeend", template);
+            const template = "<div class=\"makapi-chip\">"+ inputAttribute + "<i class=\"material-icons right\">delete_forever</i> <i class=\"material-icons right\">create</i></div>";
+            if(inputAttribute != ""){
+                attributeChip.insertAdjacentHTML("beforeend", template);
+                document.getElementById("attribute_name").value = "";
+                document.getElementById("box-attribute-name").innerHTML = "Default attribute";
+            }else{
+                M.toast({html: 'Can not add an attribute if the name field is empty'})
+            }
         });
 
     </script>
