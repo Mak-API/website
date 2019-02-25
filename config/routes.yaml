@@ -1,3 +1,17 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+app_security_logout:
+  path: /logout
+
+confirm_registration:
+    path: /confirm/{token}
+    controller: App\Controller\RegistrationController::confirmRegistration
+
+send_confirmation_email:
+  path: /send_confirmation_email/{email}
+  controller: App\Controller\RegistrationController::sendConfirmationEmail
+
+#resetPassword:
+#    path: /reset_password/{token}
+#    controller: App\Controller\RegistrationController::forgotPassword

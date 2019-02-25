@@ -1,0 +1,52 @@
+/*
+  Import all fonts here
+ */
+
+/*
+  Raleway Font
+  src : https://fonts.google.com/?query=Ral&selection.family=Raleway
+ */
+@font-face {
+  font-family: "Raleway";
+  src: url('../fonts/Raleway/Raleway-Regular.ttf');
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: bold;
+  src: url('../fonts/Raleway/Raleway-Bold.ttf');
+}
+@font-face {
+  font-family: "Raleway";
+  font-style: italic;
+  src: url('../fonts/Raleway/Raleway-Italic.ttf');
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 100;
+  src: url('../fonts/Raleway/Raleway-Thin.ttf');
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 200;
+  src: url('../fonts/Raleway/Raleway-ExtraLight.ttf');
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 300;
+  src: url('../fonts/Raleway/Raleway-Light.ttf');
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 500;
+  src: url('../fonts/Raleway/Raleway-Medium.ttf');
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 600;
+  src: url('../fonts/Raleway/Raleway-SemiBold.ttf');
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 800;
+  src: url('../fonts/Raleway/Raleway-ExtraBold.ttf');
+}

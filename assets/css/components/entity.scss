@@ -1,0 +1,70 @@
+body {
+  main {
+    .makapi-separator {
+      background-color: $color-blueDial;
+      height: 1pt;
+      width: 100%;
+    }
+
+    .switch label input[type=checkbox]:checked + .lever {
+      background-color: $color-livingCoral;
+    }
+
+    .switch label input[type=checkbox]:checked + .lever:after {
+      background-color: $color-livingCoral;
+    }
+
+    .makapi-collection
+    {
+      margin: 0.5rem 0 1rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .makapi-collection.with-header .makapi-collection-header {
+      background-color: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 10px 20px;
+    }
+
+    .box-placement{
+      left: 260px;
+      top: -400px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .makapi-chip{
+      display: block;
+      height: 32px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.6);
+      line-height: 32px;
+      padding: 0 12px;
+      border-radius: 16px;
+      background-color: $color-greyClaire;
+      margin-bottom: 5px;
+      margin-right: 5px;
+    }
+
+    .makapi-chip i{
+      color: $color-livingCoral;
+    }
+
+    a.orange-makapi{
+      background-color: $color-livingCoral;
+    }
+
+    a.orange-makapi.btn-floating:hover {
+      background-color: $color-livingCoral;
+    }
+
+    section.makapi-attributes {
+      background-color: rgba(38,48,86, 0.1);
+      border-radius: 10px;
+      padding: 1px 0 1px 0;
+    }
+  }
+}

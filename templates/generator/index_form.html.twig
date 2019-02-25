@@ -1,0 +1,28 @@
+{% extends 'pagelayout.html.twig' %}
+
+{% block title %}Mak'API - Generator{% endblock %}
+
+{% block body %}
+    <header class="linear-header">
+        {% include 'components/header/header.html.twig' %}
+    </header>
+    <main class="submain container">
+        <div class="row">
+            {% include 'generator/_head_form.html.twig' %}
+        </div>
+        <div class="row">
+            {% include 'generator/_main_form.html.twig' %}
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('generator-form') }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let elems = document.querySelectorAll('.modal');
+            let instances = M.Modal.init(elems);
+        });
+    </script>
+{% endblock %}

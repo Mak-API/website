@@ -1,0 +1,320 @@
+main {
+  .part-home {
+    width: 100%;
+    height: 100vh;
+    background: $background-makapiLinearOne;
+    .home-content {
+      height: 100%;
+      > .home-content_center_div {
+        .home-header_title {
+          display: flex;
+          justify-content: center;
+          color: white;
+          font-size: 3em;
+          .home-slider_bloc {
+            color: $color-livingCoral;
+            .slider-list {
+              list-style: none;
+              text-align: right;
+              margin-right: 5px;
+              height: 1.2em;
+              overflow: hidden;
+              vertical-align: middle;
+              .slider-word {
+                display: block;
+                height: 1.2em;
+                animation-name: homepageWordSlider;
+                animation-iteration-count: infinite;
+                animation-duration: 10s;
+
+              }
+            }
+          }
+        }
+        > .description {
+          text-align: center;
+          font-size: 18px;
+          color:white;
+          max-width: 630px;
+          margin: auto;
+          margin-top: 20px;
+        }
+        > .button-get_started {
+          margin-top: 50px;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .part-makapi {
+    width: 100%;
+    min-height: 100vh;
+    background: $color-greyClaire;
+    > .makapi-content {
+      max-width: $size-maxWithWebsite;
+      margin: auto;
+      height: 100%;
+      > .makapi-image {
+        height: 100%;
+        > .makapi-svg_builder {
+          margin:auto;
+          max-width: 460px;
+          justify-content: center;
+          > img {
+            max-width: 460px;
+          }
+        }
+      }
+      > .makapi-text {
+        height: 100%;
+        > .makapi-text_center_div {
+          > .homepage-bloc_title {
+            text-align: center;
+            max-width: 480px;
+            margin: auto;
+          }
+          > .makapi-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
+          }
+          > .makapi-button_go {
+            margin-top: 50px;
+            > .makapi-button_go_center_div {
+              justify-content: center;
+              > .makapi-button_separateur {
+                width: 100px;
+                border: 2px solid $color-blueDial;
+              }
+              > .makapi-button_go_action {
+                height: 100px;
+                width: 100px;
+                display: block;
+                line-height: 100px;
+                border-radius: 50px;
+                text-decoration: none;
+                background: $color-livingCoral;
+                color: $color-greyClaire;
+                margin: 0 15px;
+              }
+            }
+
+          }
+        }
+      }
+    }
+    &.container {
+      max-width: none;
+    }
+  }
+  .part-create {
+    width: 100%;
+    min-height: 100vh;
+    background: $color-livingCoral;
+    > .create-content {
+      max-width: $size-maxWithWebsite;
+      margin: auto;
+      height: 100%;
+      color: white;
+      > .create-image {
+        height: 100%;
+        > .create-svg_create {
+          margin:auto;
+          max-width: 400px;
+          justify-content: center;
+          > img {
+            max-width: 400px;
+          }
+        }
+      }
+      > .create-text {
+        height: 100%;
+        > .create-text_center_div {
+          > .homepage-bloc_title {
+            text-align: left;
+          }
+          > .create-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.container {
+      max-width: none;
+    }
+  }
+  .part-build {
+    width: 100%;
+    min-height: 100vh;
+    background: $color-greyClaire;
+    > .build-content {
+      max-width: $size-maxWithWebsite;
+      margin: auto;
+      height: 100%;
+      color: $color-blueDial;
+      > .build-image {
+        height: 100%;
+        > .build-svg_build {
+          margin:auto;
+          max-width: 480px;
+          justify-content: center;
+          > img {
+            max-width: 480px;
+          }
+        }
+      }
+      > .build-text {
+        height: 100%;
+        > .build-text_center_div {
+          > .homepage-bloc_title {
+            text-align: left;
+          }
+          > .build-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.container {
+      max-width: none;
+    }
+  }
+  .part-test {
+    width: 100%;
+    min-height: 100vh;
+    background: $color-blueDial;
+    > .test-content {
+      max-width: $size-maxWithWebsite;
+      margin: auto;
+      height: 100%;
+      color: white;
+      > .test-image {
+        height: 100%;
+        > .test-svg_test {
+          margin:auto;
+          max-width: 400px;
+          justify-content: center;
+          > img {
+            max-width: 400px;
+          }
+        }
+      }
+      > .test-text {
+        height: 100%;
+        > .test-text_center_div {
+          > .homepage-bloc_title {
+            text-align: left;
+          }
+          > .test-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.container {
+      max-width: none;
+    }
+  }
+  .part-host {
+    width: 100%;
+    min-height: 100vh;
+    background: $color-greyClaire;
+    > .host-content {
+      max-width: $size-maxWithWebsite;
+      margin: auto;
+      height: 100%;
+      color: $color-blueDial;
+      > .host-image {
+        height: 100%;
+        > .host-svg_host {
+          margin:auto;
+          max-width: 480px;
+          justify-content: center;
+          > img {
+            max-width: 480px;
+          }
+        }
+      }
+      > .host-text {
+        height: 100%;
+        > .host-text_center_div {
+          > .homepage-bloc_title {
+            text-align: left;
+          }
+          > .host-text_content {
+            font-weight: 500;
+            font-size: 22px;
+            text-align: justify;
+            > p {
+              margin-top: 15px;
+              &:first-child {
+                margin-top: 60px;
+              }
+              &:last-child {
+                margin-top: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.container {
+      max-width: none;
+    }
+  }
+  .part-ahead {
+    width: 100%;
+    height: 800px;
+    background: $background-makapiLinearTwo;
+    &.container {
+      max-width: none;
+    }
+    h3 {
+      color: $color-greyClaire;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+  }
+}

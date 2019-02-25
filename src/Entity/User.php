@@ -5,16 +5,30 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\Traits\TimestampableTrait;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user_account")
+ * @UniqueEntity("email", message="user.email.already.exist")
+ * @UniqueEntity("login", message="user.login.already.exist")
  */
 class User implements UserInterface
 {
     use TimestampableTrait;
+
+    /*
+     * User roles
+     */
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_UNVERIFIED = 'ROLE_UNVERIFIED';
+
 
     /**
      * @ORM\Id()
@@ -25,6 +39,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "user.email.format"
+     * )
      */
     private $email;
 
@@ -36,16 +53,40 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(
+     *     min = 8,
+     *     max = 100,
+     *     minMessage = "user.password.min.message",
+     *     maxMessage = "user.password.max.message"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^(?=.{3,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/",
+     *     match=true,
+     *     message="user.password.format.message"
+     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message = "user.login.empty"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[^<>%\$\/\\\s]*$/",
+     *     match=true,
+     *     message="user.login.special.char"
+     * )
+     */
+    private $login;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, options={"default":null})
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true, options={"default":null})
      */
     private $lastname;
 
@@ -58,6 +99,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Api", mappedBy="createdBy", orphanRemoval=true)
      */
     private $apis;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email_token;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $verified = false;
 
     public function __construct()
     {
@@ -97,8 +148,8 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        // guarantee every user at least has ROLE_UNVERIFIED
+        $roles[] = self::ROLE_UNVERIFIED;
 
         return array_unique($roles);
     }
@@ -140,6 +191,18 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(string $login): self
+    {
+        $this->login = $login;
+
+        return $this;
     }
 
     public function getFirstname(): ?string
@@ -205,6 +268,40 @@ class User implements UserInterface
                 $api->setCreator(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Returns the existing roles.
+     *
+     * @return array
+     */
+    public static function getExistingRoles(): array
+    {
+        return [self::ROLE_USER, self::ROLE_ADMIN];
+    }
+
+    public function getEmailToken(): ?string
+    {
+        return $this->email_token;
+    }
+
+    public function setEmailToken(?string $email_token): self
+    {
+        $this->email_token = $email_token;
+
+        return $this;
+    }
+
+    public function getVerified(): ?bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): self
+    {
+        $this->verified = $verified;
 
         return $this;
     }

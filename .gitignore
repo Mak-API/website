@@ -1,5 +1,5 @@
 ### For Docker
-/docker/db
+.docker/data/*
 ### For Docker
 
 ###>JetBrains
@@ -60,3 +60,9 @@ Temporary Items
 
 
 docker/*
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

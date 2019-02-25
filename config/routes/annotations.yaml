@@ -2,3 +2,13 @@ rest_controllers:
     resource: ../../src/Controller/Rest
     type: annotation
     prefix: '/api'
+
+front_controllers:
+    resource: ../../src/Controller/Front
+    type: annotation
+    prefix: '/'
+
+back_controllers:
+    resource: ../../src/Controller/Back
+    type: annotation
+    prefix: '/admin'

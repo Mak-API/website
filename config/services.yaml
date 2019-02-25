@@ -26,3 +26,30 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\EventListener\EntityListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+
+    App\EventListener\UserListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+
+    App\DataCollector\RequestCollector:
+        tags:
+            -
+                name:     data_collector
+                template: 'data_collector/template.html.twig'
+                # must match the value returned by the getName() method
+                id:       'app.request_collector'
+                # optional priority
+                # priority: 300
+        public: false
+    app.tokens.action_listener:
+        class: App\EventListener\RedirectUserListener
+        arguments:
+            - "@security.token_storage"
+            - "@router"
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
