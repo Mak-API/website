@@ -22,7 +22,7 @@
                             <div class="container makapi-container">
                                 <div class="row">
                                     <h4>Attributes</h4>
-                                    <div id="List-attribute_1">
+                                    <div id="list-attribute_1">
                                         <div class="makapi-chip">BENJAMM
                                             <i class="material-icons right livingCoral-text">create</i>
                                         </div>
@@ -50,7 +50,7 @@
                         <div class="switch right-align">
                             <label>
                                 Off
-                                <input type="checkbox">
+                                <input checked="" type="checkbox">
                                 <span class="lever"></span>
                                 On
                             </label>
@@ -130,7 +130,7 @@
                         <div class="switch right-align">
                             <label>
                                 Off
-                                <input type="checkbox">
+                                <input checked="" type="checkbox">
                                 <span class="lever"></span>
                                 On
                             </label>
@@ -162,7 +162,7 @@
                         <div class="switch right-align">
                             <label>
                                 Off
-                                <input type="checkbox">
+                                <input checked="" type="checkbox">
                                 <span class="lever"></span>
                                 On
                             </label>
@@ -185,5 +185,15 @@
             let title = document.getElementById("entity1").value;
             document.getElementById("entity-name").innerHTML = title;
         });
+
+
+        const btnAdd = document.getElementById("valid-attr");
+        btnAdd.addEventListener("click", function () {
+            let inputAttribute = document.getElementById("attribute_name").value;
+            const attributeChip = document.getElementById("list-attribute_1");
+            const template = "<div class=\"makapi-chip\">"+ inputAttribute + "<i class=\"material-icons right\">create</i></div>";
+            attributeChip.insertAdjacentHTML("beforeend", template);
+        });
+
     </script>
 {% endblock %}
