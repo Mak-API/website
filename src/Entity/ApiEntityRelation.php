@@ -13,6 +13,14 @@ class ApiEntityRelation
     use TimestampableTrait;
 
     /**
+     * Relation types.
+     */
+    const TYPE_ONE_TO_ONE = 'one-to-one';
+    const TYPE_ONE_TO_MANY = 'one-to-many';
+    const TYPE_MANY_TO_ONE = 'many-to-one';
+    const TYPE_MANY_TO_MANY = 'many-to-many';
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")

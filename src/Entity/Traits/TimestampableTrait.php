@@ -5,6 +5,8 @@ namespace App\Entity\Traits;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 trait TimestampableTrait
 {
@@ -21,6 +23,7 @@ trait TimestampableTrait
      *
      * @Gedmo\Blameable(on="create")
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @MaxDepth(2)
      */
     private $createdBy;
 
@@ -37,6 +40,7 @@ trait TimestampableTrait
      *
      * @Gedmo\Blameable(on="update")
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @MaxDepth(2)
      */
     private $updatedBy;
 
@@ -59,21 +63,21 @@ trait TimestampableTrait
         return $this;
     }
 
-
     /**
+     * @MaxDepth(2)
      * @return User|null
      */
-    public function getCreatedBy(): ?User
+    public function getCreatedBy(): ?UserInterface
     {
         return $this->createdBy;
     }
 
     /**
-     * @param User|null $createdBy
+     * @param UserInterface|null $createdBy
      *
      * @return TimestampableTrait
      */
-    public function setCreatedBy(?User $createdBy): self
+    public function setCreatedBy(?UserInterface $createdBy): self
     {
         $this->createdBy = $createdBy;
         return $this;
@@ -99,19 +103,20 @@ trait TimestampableTrait
     }
 
     /**
+     * @MaxDepth(2)
      * @return User|null
      */
-    public function getUpdatedBy(): ?User
+    public function getUpdatedBy(): ?UserInterface
     {
         return $this->updatedBy;
     }
 
     /**
-     * @param User|null $updatedBy
+     * @param UserInterface|null $updatedBy
      *
      * @return TimestampableTrait
      */
-    public function setUpdatedBy(?User $updatedBy): self
+    public function setUpdatedBy(?UserInterface $updatedBy): self
     {
         $this->updatedBy = $updatedBy;
         return $this;

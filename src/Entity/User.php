@@ -96,7 +96,7 @@ class User implements UserInterface
     private $status;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Api", mappedBy="creator", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Api", mappedBy="createdBy", orphanRemoval=true)
      */
     private $apis;
 
