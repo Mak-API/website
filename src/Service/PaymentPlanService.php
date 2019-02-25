@@ -19,9 +19,9 @@ class PaymentPlanService
         $this->paymentServiceRepository = $paymentPlanRepository;
         $this->entityManager = $entityManager;
     }
-    public function getPaymentPlan(int $id)
+    public function getPaymentPlan(int $apiId)
     {
-        return $this->paymentServiceRepository->find($id);
+        return $this->paymentServiceRepository->find($apiId);
     }
     public function getPaymentPlans()
     {
