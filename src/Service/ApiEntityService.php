@@ -63,19 +63,26 @@ class ApiEntityService
      *
      * @param int $apiId
      * @param string $name
-     * @param UserInterface $creator
+     * @param UserInterface $createdBy
      * @return ApiEntity
      */
-    public function createEntity(int $apiId, string $name, UserInterface $creator)
+    public function createEntity(int $apiId, string $name, UserInterface $createdBy)
     {
         $apiEntity = new ApiEntity();
         $apiEntity->setApi($this->apiService->getApi($apiId))
             ->setName($name)
-            ->setCreatedBy($creator);
+            ->setCreatedBy($createdBy);
 
         $this->entityManager->persist($apiEntity);
         $this->entityManager->flush();
 
         return $apiEntity;
+    }
+
+    public function updateEntity(ApiEntity $entity, string $name)
+    {
+        $entity->setName($name);
+        $this->entityManager->persist($entity);
+        return $entity;
     }
 }
