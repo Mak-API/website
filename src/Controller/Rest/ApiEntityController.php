@@ -4,7 +4,6 @@ namespace App\Controller\Rest;
 
 use App\Entity\ApiEntity;
 use App\Service\ApiEntityService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("entities")
  */
-class ApiEntityController extends AbstractController
+class ApiEntityController extends RestController
 {
     /**
      * @var ApiEntityService
