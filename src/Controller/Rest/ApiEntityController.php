@@ -58,6 +58,12 @@ class ApiEntityController extends RestController
         return new Response($this->serialize($api));
     }
 
+    /**
+     * @param Request $request
+     * @param ApiEntity $entity
+     * @return Response
+     * @Route("/{id}", methods={"PUT"})
+     */
     public function updateEntity(Request $request, ApiEntity $entity)
     {
         $entity = $this->apiEntityService->updateEntity($entity, $request->get('name'));
