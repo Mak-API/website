@@ -65,7 +65,7 @@ class ExecuteCommand extends Command
                     '--day' => "200",
                 ];
                 $commandInput = new ArrayInput($arguments);
-                $returnCode = $command->run($commandInput, $output);
+                //$returnCode = $command->run($commandInput, $output);
                 dump($task->getName());
                 dump($task->getCommand());
                 dump($task->getLastExecution());
