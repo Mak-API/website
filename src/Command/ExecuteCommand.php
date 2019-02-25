@@ -59,20 +59,25 @@ class ExecuteCommand extends Command
         foreach($this->tasks as $task){
             if($task->getDisabled() === false){
                 $command = $this->getApplication()->find($task->getCommand());
+                $cron = CronExpression::factory($task->getExpression());
+                $cron->isDue();
+
                 $arguments = [
                     'command' => $task->getCommand(),
                     '--force' => null,
                     '--day' => "200",
                 ];
+                $arguments = self::setArgumentCommand($task->getCommand(), $task->getOptions(), $task->getArguments());
                 $commandInput = new ArrayInput($arguments);
+                /*if($task->getLastExecution()->format('Y-m-d H:i:s') > $cron->getPreviousRunDate()->format('Y-m-d H:i:s')){
+                    dump($task->getCommand());
+                    dump($cron->getNextRunDate()->format('Y-m-d H:i:s'));
+                    dump($cron->getPreviousRunDate()->format('Y-m-d H:i:s'));
+                    $task->setLastReturnCode(1);
+                    $this->objectManager->persist($task);
+                    $this->objectManager->flush();
+                }
                 //$returnCode = $command->run($commandInput, $output);
-                dump($task->getName());
-                dump($task->getCommand());
-                dump($task->getLastExecution());
-                $cron = CronExpression::factory($task->getExpression());
-                $cron->isDue();
-                dump($cron->getNextRunDate()->format('Y-m-d H:i:s'));
-                dump($cron->getPreviousRunDate()->format('Y-m-d H:i:s'));
                 /*
                  * Reste à découper les arguments et options de la commande pour ensuite le mettre dans l'arrayInput
                  * Puis vérifier la dernière date d'execution avec le $cron->getPrevious...
@@ -83,5 +88,11 @@ class ExecuteCommand extends Command
 
 
         $output->writeln("Cron execute command has successfully done.\n");
+    }
+
+    private function setArgumentCommand(string $command, string $options, string $arguments): array
+    {
+
+
     }
 }
