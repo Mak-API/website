@@ -40,6 +40,7 @@ class ExecuteCommand extends Command
             ->setHelp('This command need to be in cron tab')
         ;
     }
+    
 
     /**
      * @param InputInterface $input
