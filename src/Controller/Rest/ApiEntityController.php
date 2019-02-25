@@ -3,6 +3,7 @@
 namespace App\Controller\Rest;
 
 use App\Entity\ApiEntity;
+use App\Repository\UserRepository;
 use App\Service\ApiEntityService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,7 @@ class ApiEntityController extends RestController
  */
     public function getEntities(): Response
     {
-        return $this->json($this->apiEntityService->getEntities());
+        return new Response($this->serialize($this->apiEntityService->getEntities()), Response::HTTP_OK);
     }
 
     /**
@@ -41,17 +42,25 @@ class ApiEntityController extends RestController
      */
     public function getEntity(ApiEntity $entity): Response
     {
-        return $this->json($entity);
+        return new Response($this->serialize($entity), Response::HTTP_OK);
     }
 
     /**
      * @param Request $request
+     * @param UserRepository $userRepository
      * @return Response
      *
      * @Route("/", methods={"POST"})
      */
-    public function createEntity(Request $request): Response
+    public function createEntity(Request $request, UserRepository $userRepository): Response
     {
-        return $this->json($this->apiEntityService->createEntity($request->get('apiId'), $request->get('name'), $this->getUser()));
+        $api = $this->apiEntityService->createEntity($request->get('apiId'), $request->get('name'), $userRepository->find(1));
+        return new Response($this->serialize($api));
+    }
+
+    public function updateEntity(Request $request, ApiEntity $entity)
+    {
+        $entity = $this->apiEntityService->updateEntity($entity, $request->get('name'));
+        return new Response($this->serialize($entity), Response::HTTP_OK);
     }
 }

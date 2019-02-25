@@ -76,11 +76,12 @@ class ApiController extends RestController
     /**
      * @param Request $request
      * @param Api $api
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return Response
      * @Route("/{id}", methods={"PUT"})
      */
-    public function updateEntity(Request $request, Api $api)
+    public function updateApi(Request $request, Api $api)
     {
-        return $this->json($this->apiService->updateApi($api, $request->get('name'), $request->get('description')));
+        $api = $this->apiService->updateApi($api, $request->get('name'), $request->get('description'));
+        return new Response($this->serialize($api), Response::HTTP_OK);
     }
 }
