@@ -58,17 +58,15 @@ class ExecuteCommand extends Command
 
         foreach($this->tasks as $task){
             if($task->getDisabled() === false){
-                $command = $this->getApplication()->find($task->getCommand());
+                $command = ($task->getCommand() === null)?'':$task->getCommand();
+                $options = ($task->getOptions() === null)?'':$task->getOptions();
+                $arguments = ($task->getArguments() === null)?'':$task->getArguments();
+                $application = $this->getApplication()->find($task->getCommand());
                 $cron = CronExpression::factory($task->getExpression());
                 $cron->isDue();
 
-                $arguments = [
-                    'command' => $task->getCommand(),
-                    '--force' => null,
-                    '--day' => "200",
-                ];
-                $arguments = self::setArgumentCommand($task->getCommand(), $task->getOptions(), $task->getArguments());
-                $commandInput = new ArrayInput($arguments);
+                $argInput = self::setArgumentCommand($command, $options, $arguments);
+                $commandInput = new ArrayInput($argInput);
                 /*if($task->getLastExecution()->format('Y-m-d H:i:s') > $cron->getPreviousRunDate()->format('Y-m-d H:i:s')){
                     dump($task->getCommand());
                     dump($cron->getNextRunDate()->format('Y-m-d H:i:s'));
@@ -92,7 +90,18 @@ class ExecuteCommand extends Command
 
     private function setArgumentCommand(string $command, string $options, string $arguments): array
     {
+        //dump($command);
+        $arrayOptions = self::getOptions($options);
+        //dump($arguments);
 
+        return [
+            'command' => $command
+        ];
+    }
 
+    private function getOptions(string $options): array
+    {
+        dump(explode(' ', $options));
+        return [];
     }
 }
