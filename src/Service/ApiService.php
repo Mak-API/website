@@ -83,8 +83,9 @@ class ApiService
      */
     public function updateApi(Api $api, string $name, string $description)
     {
-        return $api->setName($name)
-            ->setDescription($description);
+        $api->setName($name)->setDescription($description);
+        $this->entityManager->persist($api);
+        return $api;
     }
 
     /**
