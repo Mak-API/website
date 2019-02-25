@@ -38,9 +38,9 @@ class ApiService
         $this->entityManager = $entityManager;
     }
 
-    public function getApi(int $id): Api
+    public function getApi(int $apiId): Api
     {
-        return $this->apiRepository->find($id);
+        return $this->apiRepository->find($apiId);
     }
 
     public function getApis(): array

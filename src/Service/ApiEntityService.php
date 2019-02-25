@@ -50,12 +50,12 @@ class ApiEntityService
     /**
      * Gets an entity.
      *
-     * @param int $id
+     * @param int $entityId
      * @return ApiEntity
      */
-    public function getEntity(int $id): ApiEntity
+    public function getEntity(int $entityId): ApiEntity
     {
-        return $this->apiEntityRepository->find($id);
+        return $this->apiEntityRepository->find($entityId);
     }
 
     /**

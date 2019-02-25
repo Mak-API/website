@@ -12,7 +12,7 @@ class ApiEntityRelationService
     /**
      * @var ApiEntityRelationRepository
      */
-    private $apiEntityRelationRepository;
+    private $entityRelationRepository;
 
     /**
      * @var ApiEntityFieldService
@@ -26,13 +26,13 @@ class ApiEntityRelationService
 
     /**
      * ApiEntityRelationService constructor.
-     * @param ApiEntityRelationRepository $apiEntityRelationRepository
+     * @param ApiEntityRelationRepository $entityRelationRepository
      * @param ApiEntityFieldService $apiEntityFieldService
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(ApiEntityRelationRepository $apiEntityRelationRepository, ApiEntityFieldService $apiEntityFieldService, EntityManagerInterface $entityManager)
+    public function __construct(ApiEntityRelationRepository $entityRelationRepository, ApiEntityFieldService $apiEntityFieldService, EntityManagerInterface $entityManager)
     {
-        $this->apiEntityRelationRepository = $apiEntityRelationRepository;
+        $this->entityRelationRepository = $entityRelationRepository;
         $this->apiEntityFieldService = $apiEntityFieldService;
         $this->entityManager = $entityManager;
     }

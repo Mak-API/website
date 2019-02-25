@@ -13,7 +13,7 @@ class ApiEntityFieldService
     /**
      * @var ApiEntityFieldRepository
      */
-    private $apiEntityFieldRepository;
+    private $entityFieldRepository;
 
     /**
      * @var ApiEntityService
@@ -27,13 +27,13 @@ class ApiEntityFieldService
 
     /**
      * ApiEntityFieldService constructor.
-     * @param ApiEntityFieldRepository $apiEntityFieldRepository
+     * @param ApiEntityFieldRepository $entityFieldRepository
      * @param ApiEntityService $apiEntityService
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(ApiEntityFieldRepository $apiEntityFieldRepository, ApiEntityService $apiEntityService, EntityManagerInterface $entityManager)
+    public function __construct(ApiEntityFieldRepository $entityFieldRepository, ApiEntityService $apiEntityService, EntityManagerInterface $entityManager)
     {
-        $this->apiEntityFieldRepository = $apiEntityFieldRepository;
+        $this->entityFieldRepository = $entityFieldRepository;
         $this->apiEntityService = $apiEntityService;
         $this->entityManager = $entityManager;
     }
@@ -45,7 +45,7 @@ class ApiEntityFieldService
      */
     public function getFields(): array
     {
-        return $this->apiEntityFieldRepository->findAll();
+        return $this->entityFieldRepository->findAll();
     }
 
     /**
@@ -56,7 +56,7 @@ class ApiEntityFieldService
      */
     public function getField(int $fieldId): ApiEntityField
     {
-        return $this->apiEntityFieldRepository->find($fieldId);
+        return $this->entityFieldRepository->find($fieldId);
     }
 
     /**

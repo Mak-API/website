@@ -20,11 +20,11 @@ class ApiEntityFieldController extends RestController
     /**
      * @var ApiEntityFieldService
      */
-    private $apiEntityFieldService;
+    private $entityFieldService;
 
-    public function __construct(ApiEntityFieldService $apiEntityFieldService)
+    public function __construct(ApiEntityFieldService $entityFieldService)
     {
-        $this->apiEntityFieldService = $apiEntityFieldService;
+        $this->entityFieldService = $entityFieldService;
     }
 
     /**
@@ -34,7 +34,7 @@ class ApiEntityFieldController extends RestController
      */
     public function getFields(): Response
     {
-        return $this->json($this->apiEntityFieldService->getFields());
+        return $this->json($this->entityFieldService->getFields());
     }
 
     /**
@@ -57,7 +57,7 @@ class ApiEntityFieldController extends RestController
      */
     public function createField(Request $request, UserRepository $userRepository): Response
     {
-        return $this->json($this->apiEntityFieldService->createField(
+        return $this->json($this->entityFieldService->createField(
             $request->get('entityId'),
             $request->get('name'),
             $request->get('type'),
