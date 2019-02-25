@@ -29,7 +29,7 @@ class CronTasksType extends AbstractType
                 'required' => false,
             ])
             ->add('arguments', TextType::class, [
-                'label' => 'Add argument(s) (example : "argument1 argument2")',
+                'label' => 'Add argument(s) (example : "nameArgument=argument1 nameArgument=argument2")',
                 'required' => false,
             ])
             ->add('expression', TextType::class, [

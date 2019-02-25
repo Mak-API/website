@@ -15,6 +15,7 @@ use Symfony\Component\Console\Command\Command;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ExecuteCommand extends Command
@@ -58,22 +59,34 @@ class ExecuteCommand extends Command
 
         foreach($this->tasks as $task){
             if($task->getDisabled() === false){
-                $command = ($task->getCommand() === null)?'':$task->getCommand();
-                $options = ($task->getOptions() === null)?'':$task->getOptions();
-                $arguments = ($task->getArguments() === null)?'':$task->getArguments();
-                $application = $this->getApplication()->find($task->getCommand());
+                /**
+                 * @var CronExpression $cron
+                 */
                 $cron = CronExpression::factory($task->getExpression());
                 $cron->isDue();
+                if($task->getLastExecution()->format('Y-m-d H:i:s') > $cron->getPreviousRunDate()->format('Y-m-d H:i:s')){
+                    /*
+                     * Get command name, options and arguments
+                     */
+                    $command = ($task->getCommand() === null)?'':$task->getCommand();
+                    $options = ($task->getOptions() === null)?'':$task->getOptions();
+                    $arguments = ($task->getArguments() === null)?'':$task->getArguments();
+                    $argInput = self::setArgumentCommand($command, $options, $arguments);
 
-                $argInput = self::setArgumentCommand($command, $options, $arguments);
-                $commandInput = new ArrayInput($argInput);
-                /*if($task->getLastExecution()->format('Y-m-d H:i:s') > $cron->getPreviousRunDate()->format('Y-m-d H:i:s')){
-                    dump($task->getCommand());
+                    /*
+                     * Create command and it argument
+                     */
+                    $application = $this->getApplication()->find($task->getCommand());
+                    $argInput = new ArrayInput($argInput);
+                    $outputCommand = new BufferedOutput();
+
+                    $returnCode = $application->run($argInput, $outputCommand);
+                    dump($returnCode);
                     dump($cron->getNextRunDate()->format('Y-m-d H:i:s'));
                     dump($cron->getPreviousRunDate()->format('Y-m-d H:i:s'));
-                    $task->setLastReturnCode(1);
+                    /*$task->setLastReturnCode(1);
                     $this->objectManager->persist($task);
-                    $this->objectManager->flush();
+                    $this->objectManager->flush();*/
                 }
                 //$returnCode = $command->run($commandInput, $output);
                 /*
@@ -90,18 +103,46 @@ class ExecuteCommand extends Command
 
     private function setArgumentCommand(string $command, string $options, string $arguments): array
     {
-        //dump($command);
         $arrayOptions = self::getOptions($options);
-        //dump($arguments);
-
-        return [
-            'command' => $command
-        ];
+        $arrayArguments = self::getArgument($arguments);
+        $argumentCommand = array_merge(
+            ['command' => $command],
+            array_merge($arrayArguments, $arrayOptions)
+        );
+        return $argumentCommand;
     }
 
     private function getOptions(string $options): array
     {
-        dump(explode(' ', $options));
+        $optExploded = [];
+        if(!empty($options)){
+            $options = explode(' ', $options);
+            foreach($options as $option){
+                if(strstr($option, '-')){
+                    if(strstr($option, '=')){
+                        list($name, $value) = explode('=', $option);
+                        $optExploded[$name] = $value;
+                    } else {
+                        $optExploded[$option] = null;
+                    }
+                }
+            }
+        }
         return [];
+    }
+
+    private function getArgument(string $arguments): array
+    {
+        $argExploded = [];
+        if(!empty($arguments)){
+            $arguments = explode(' ', $arguments);
+            foreach($arguments as $argument){
+                if(strstr($argument, '=')){
+                    list($name, $value) = explode('=', $argument);
+                    $argExploded[$name] = $value;
+                }
+            }
+        }
+        return $argExploded;
     }
 }
