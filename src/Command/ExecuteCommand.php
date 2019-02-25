@@ -132,7 +132,6 @@ class ExecuteCommand extends Command
         return [];
     }
     
-
     private function getArgument(string $arguments): array
     {
         $argExploded = [];
