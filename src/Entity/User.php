@@ -10,6 +10,7 @@ use App\Entity\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="user_account")
  */
 class User implements UserInterface
 {
@@ -54,7 +55,7 @@ class User implements UserInterface
     private $status;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Api", mappedBy="creator", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Api", mappedBy="createdBy", orphanRemoval=true)
      */
     private $apis;
 

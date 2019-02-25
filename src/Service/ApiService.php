@@ -53,17 +53,17 @@ class ApiService
      *
      * @param string $name
      * @param string $description
-     * @param UserInterface $creator
+     * @param UserInterface $createdBy
      * @return Api
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createApi(string $name, string $description, UserInterface $creator): Api
+    public function createApi(string $name, string $description, UserInterface $createdBy): Api
     {
         $api = new Api();
         $api->setName($name)
             ->setDescription($description)
-            ->setCreatedBy($creator)
+            ->setCreatedBy($createdBy)
+            ->setCreatedAt(new \DateTime())
+            ->setUpdatedAt(new \Datetime())
             ->setStatus(Api::STATUS_INIT)
             ->setPaymentPlan($this->paymentPlanService->getFreePaymentPlan());
 
@@ -95,6 +95,8 @@ class ApiService
      */
     public function deleteApi(Api $api)
     {
-        return $api->setDeleted(true);
+        $api->setDeleted(true);
+        $this->entityManager->persist($api);
+        return $api;
     }
 }
