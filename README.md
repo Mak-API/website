@@ -59,27 +59,7 @@ On your server :
 * Add the following command in your crontab : `* * * * * /home/wwwroot/makapi/bin/console cron:exec`
 * Or execute this command : `php bin/console cron:exec`
 
-# OLD VERSION
-# Mak'API website
-
-## Description
-
-
-# README Dev
-
-## Edit database var in .env
-
-If you edit :
-* DATABASE_PASSWORD
-* DATABASE_USER
-* DATABASE_NAME
-* DATABASE_URL
-* DATABASE_PORT
-
-Please, delete this folder :
-> /docker/db
-
-## Edit .env for emailService
+### Edit .env for emailService
 
 You will have several variables to set in your .env
 - MAILER_URL= ```Url of your server smtp for example```
