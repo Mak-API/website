@@ -71,7 +71,11 @@ class ExecuteCommand extends Command
                  */
                 $cron = CronExpression::factory($task->getExpression());
                 $cron->isDue();
-                if($task->getLastExecution()->format('Y-m-d H:i:s') > $cron->getPreviousRunDate()->format('Y-m-d H:i:s')){
+                if($task->getLastExecution()->format('Y-m-d H:i:s') < $cron->getPreviousRunDate()->format('Y-m-d H:i:s')){
+                    /**
+                     * @var \DateTime $now
+                     */
+                    $now = new \DateTime();
                     /*
                      * Get command name, options and arguments
                      */
