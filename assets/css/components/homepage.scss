@@ -49,7 +49,7 @@ main {
   .part-makapi {
     width: 100%;
     min-height: 100vh;
-    background: $color-greyClaire;
+    background: $color-lightGrey;
     > .makapi-content {
       max-width: $size-maxWithWebsite;
       margin: auto;
@@ -103,7 +103,7 @@ main {
                 border-radius: 50px;
                 text-decoration: none;
                 background: $color-livingCoral;
-                color: $color-greyClaire;
+                color: $color-lightGrey;
                 margin: 0 15px;
               }
             }
@@ -166,7 +166,7 @@ main {
   .part-build {
     width: 100%;
     min-height: 100vh;
-    background: $color-greyClaire;
+    background: $color-lightGrey;
     > .build-content {
       max-width: $size-maxWithWebsite;
       margin: auto;
@@ -260,7 +260,7 @@ main {
   .part-host {
     width: 100%;
     min-height: 100vh;
-    background: $color-greyClaire;
+    background: $color-lightGrey;
     > .host-content {
       max-width: $size-maxWithWebsite;
       margin: auto;
@@ -312,7 +312,7 @@ main {
       max-width: none;
     }
     h3 {
-      color: $color-greyClaire;
+      color: $color-lightGrey;
       margin-top: 40px;
       margin-bottom: 40px;
     }

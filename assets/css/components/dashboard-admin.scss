@@ -1,0 +1,94 @@
+a:link, a:visited {
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  text-decoration: none;
+}
+
+.container-dashboard {
+  margin: 20px 15px 0 15px;
+
+  .container-bloc {
+    margin: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+
+    header {
+      border-bottom: 1px solid #ddd;
+
+      h4 {
+        padding-left: 15px;
+      }
+    }
+
+    .main-dashboard {
+      ul {
+        background-color: $color-lightGrey;
+        padding-bottom: 250px;
+
+        li {
+          border-bottom: 1px solid #ddd;
+
+          a {
+            padding: 15px 5px 15px 10px;
+            background-color: $color-lightGrey;
+            display: flex;
+            align-items: center;
+            color: $color-blueDial;
+
+            span {
+              margin-left: 10px;
+            }
+          }
+
+          a:hover {
+            color: $color-livingCoral;
+          }
+        }
+      }
+    }
+    .main {
+      .tabs-users {
+        height: 150px;
+        .container-stats-users {
+          display: flex;
+          align-items: center;
+          span {
+            margin-left: 24px;
+            color: $color-livingCoral;
+            font-weight: bold;
+            font-size: 20px;
+          }
+        }
+        .makapi-tabs-ul {
+          display: flex!important;
+        }
+      }
+      .tabs-api {
+        height: 600px;
+        .makapi-tabs-ul {
+          display: flex!important;
+        }
+        .chart-api {
+          height: 500px;
+        }
+      }
+      .tabs-financial {
+        height: 600px;
+        .makapi-tabs-ul {
+          display: flex!important;
+        }
+        .chart-financial {
+          height: 500px;
+        }
+      }
+    }
+
+  }
+}
+
