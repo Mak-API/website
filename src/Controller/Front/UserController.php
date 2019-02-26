@@ -93,6 +93,7 @@ class UserController extends AbstractController
             return $this->render('authentication/registration.html.twig', [
                 'isDeleted' => false,
                 'isVerified' => false,
+                'isSend' => true,
                 'login' => $user->getEmail(),
             ]);
         }
