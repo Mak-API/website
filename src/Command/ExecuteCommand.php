@@ -81,20 +81,20 @@ class ExecuteCommand extends Command
                     $argInput = new ArrayInput($argInput);
                     $outputCommand = new BufferedOutput();
 
-                    $returnCode = $application->run($argInput, $outputCommand);
-                    dump($returnCode);
-                    dump($cron->getNextRunDate()->format('Y-m-d H:i:s'));
-                    dump($cron->getPreviousRunDate()->format('Y-m-d H:i:s'));
-                    /*$task->setLastReturnCode(1);
+                    /*
+                     * Try to run command
+                     */
+                    try {
+                        $returnCode = $application->run($argInput, $outputCommand);
+                    } catch (\Exception $e){
+                        $returnCode = 1;
+                    }
+
+                    $task->setLastReturnCode($returnCode);
+                    $task->setLastExecution($now);
                     $this->objectManager->persist($task);
-                    $this->objectManager->flush();*/
+                    $this->objectManager->flush();
                 }
-                //$returnCode = $command->run($commandInput, $output);
-                /*
-                 * Reste à découper les arguments et options de la commande pour ensuite le mettre dans l'arrayInput
-                 * Puis vérifier la dernière date d'execution avec le $cron->getPrevious...
-                 * Puis lancer et modifier l'entité. Modifié la dernière date d'exécution, le retour de la commande etc.
-                 */
             }
         }
 
@@ -129,7 +129,7 @@ class ExecuteCommand extends Command
                 }
             }
         }
-        return [];
+        return $optExploded;
     }
     
     private function getArgument(string $arguments): array
