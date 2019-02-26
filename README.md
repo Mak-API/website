@@ -53,6 +53,12 @@ Pour le faire, il faudra réaliser la procédure suivante :
 * `php bin/console d:s:u --dump-sql`
 * `php bin/console d:s:u --force`
 
+### Add cron or execute our cron
+
+On your server :
+* Add the following command in your crontab : `* * * * * /home/wwwroot/makapi/bin/console cron:exec`
+* Or execute this command : `php bin/console cron:exec`
+
 # OLD VERSION
 # Mak'API website
 
