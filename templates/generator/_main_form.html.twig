@@ -182,11 +182,11 @@
 
         const btnAdd = document.getElementById("valid-attr");
         const btnBoxValid = document.getElementById("valid-attr");
-
+        
         btnAdd.addEventListener("click", function () {
             let inputAttribute = document.getElementById("attribute_name").value;
             const attributeChip = document.getElementById("list-attribute_1");
-            const template = "<div class=\"makapi-chip\">"+ inputAttribute + "<i class=\"material-icons right\">delete_forever</i> <i class=\"material-icons right\">create</i></div>";
+            const template = "<div class=\"makapi-chip\">"+ inputAttribute + "<i class=\"material-icons right\" onclick=\"deleteAttribute(this)\">delete_forever</i> <i class=\"material-icons right\">create</i></div>";
             if(inputAttribute != ""){
                 attributeChip.insertAdjacentHTML("beforeend", template);
                 document.getElementById("attribute_name").value = "";
@@ -195,6 +195,10 @@
                 M.toast({html: 'Can not add an attribute if the name field is empty'})
             }
         });
+
+        function deleteAttribute(value) {
+            value.parentNode.remove();
+        }
 
     </script>
 {% endblock %}
