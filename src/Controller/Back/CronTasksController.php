@@ -16,7 +16,7 @@ use App\Entity\CronTasks;
  * Class CronTasksController
  * @package App\Controller\Back
  * @IsGranted("ROLE_ADMIN", statusCode="404")
- * @Route(path="/admin/tasks", name="app_crontasks_")
+ * @Route(path="/tasks", name="app_crontasks_")
  */
 class CronTasksController extends AbstractController
 {
