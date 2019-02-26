@@ -21,7 +21,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ExecuteCommand extends Command
 {
 
+    /**
+     * @var ObjectManager
+     */
     private $objectManager;
+    /**
+     * @var CronTasks[]
+     */
     private $tasks;
 
     public function __construct(ObjectManager $objectManager)
@@ -40,6 +46,7 @@ class ExecuteCommand extends Command
             ->setHelp('This command need to be in cron tab')
         ;
     }
+    
 
     /**
      * @param InputInterface $input
@@ -64,7 +71,11 @@ class ExecuteCommand extends Command
                  */
                 $cron = CronExpression::factory($task->getExpression());
                 $cron->isDue();
-                if($task->getLastExecution()->format('Y-m-d H:i:s') > $cron->getPreviousRunDate()->format('Y-m-d H:i:s')){
+                if($task->getLastExecution()->format('Y-m-d H:i:s') < $cron->getPreviousRunDate()->format('Y-m-d H:i:s')){
+                    /**
+                     * @var \DateTime $now
+                     */
+                    $now = new \DateTime();
                     /*
                      * Get command name, options and arguments
                      */
@@ -80,20 +91,20 @@ class ExecuteCommand extends Command
                     $argInput = new ArrayInput($argInput);
                     $outputCommand = new BufferedOutput();
 
-                    $returnCode = $application->run($argInput, $outputCommand);
-                    dump($returnCode);
-                    dump($cron->getNextRunDate()->format('Y-m-d H:i:s'));
-                    dump($cron->getPreviousRunDate()->format('Y-m-d H:i:s'));
-                    /*$task->setLastReturnCode(1);
+                    /*
+                     * Try to run command
+                     */
+                    try {
+                        $returnCode = $application->run($argInput, $outputCommand);
+                    } catch (\Exception $e){
+                        $returnCode = 1;
+                    }
+
+                    $task->setLastReturnCode($returnCode);
+                    $task->setLastExecution($now);
                     $this->objectManager->persist($task);
-                    $this->objectManager->flush();*/
+                    $this->objectManager->flush();
                 }
-                //$returnCode = $command->run($commandInput, $output);
-                /*
-                 * Reste à découper les arguments et options de la commande pour ensuite le mettre dans l'arrayInput
-                 * Puis vérifier la dernière date d'execution avec le $cron->getPrevious...
-                 * Puis lancer et modifier l'entité. Modifié la dernière date d'exécution, le retour de la commande etc.
-                 */
             }
         }
 
@@ -101,6 +112,13 @@ class ExecuteCommand extends Command
         $output->writeln("Cron execute command has successfully done.\n");
     }
 
+    /**
+     * Build command's arguments and command's options.
+     * @param string $command
+     * @param string $options
+     * @param string $arguments
+     * @return array
+     */
     private function setArgumentCommand(string $command, string $options, string $arguments): array
     {
         $arrayOptions = self::getOptions($options);
@@ -112,6 +130,11 @@ class ExecuteCommand extends Command
         return $argumentCommand;
     }
 
+    /**
+     * String option to array
+     * @param string $options
+     * @return array
+     */
     private function getOptions(string $options): array
     {
         $optExploded = [];
@@ -128,9 +151,14 @@ class ExecuteCommand extends Command
                 }
             }
         }
-        return [];
+        return $optExploded;
     }
 
+    /**
+     * String argument to array
+     * @param string $arguments
+     * @return array
+     */
     private function getArgument(string $arguments): array
     {
         $argExploded = [];
