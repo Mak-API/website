@@ -57,7 +57,7 @@ class CronTasksController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route(path="/delete/{id}", name="delete")
      */
-    public function remove(CronTasks $cronTasks)
+    public function remove(CronTasks $cronTasks): Response
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($cronTasks);

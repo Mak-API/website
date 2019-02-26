@@ -21,7 +21,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ExecuteCommand extends Command
 {
 
+    /**
+     * @var ObjectManager
+     */
     private $objectManager;
+    /**
+     * @var CronTasks[]
+     */
     private $tasks;
 
     public function __construct(ObjectManager $objectManager)
@@ -102,6 +108,13 @@ class ExecuteCommand extends Command
         $output->writeln("Cron execute command has successfully done.\n");
     }
 
+    /**
+     * Build command's arguments and command's options.
+     * @param string $command
+     * @param string $options
+     * @param string $arguments
+     * @return array
+     */
     private function setArgumentCommand(string $command, string $options, string $arguments): array
     {
         $arrayOptions = self::getOptions($options);
@@ -113,6 +126,11 @@ class ExecuteCommand extends Command
         return $argumentCommand;
     }
 
+    /**
+     * String option to array
+     * @param string $options
+     * @return array
+     */
     private function getOptions(string $options): array
     {
         $optExploded = [];
@@ -131,7 +149,12 @@ class ExecuteCommand extends Command
         }
         return $optExploded;
     }
-    
+
+    /**
+     * String argument to array
+     * @param string $arguments
+     * @return array
+     */
     private function getArgument(string $arguments): array
     {
         $argExploded = [];
