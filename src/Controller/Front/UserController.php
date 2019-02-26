@@ -90,7 +90,11 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_user_index');
+            return $this->render('authentication/registration.html.twig', [
+                'isDeleted' => false,
+                'isVerified' => false,
+                'login' => $user->getEmail(),
+            ]);
         }
 
         return $this->render('user/new.html.twig', [

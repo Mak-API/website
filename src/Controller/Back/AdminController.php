@@ -4,15 +4,13 @@ namespace App\Controller\Back;
 
 use App\Form\UserType;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\Security\Core\Security;
 
 /**
  * Class AdminController
@@ -29,5 +27,18 @@ class AdminController extends AbstractController
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
+    }
+
+    /**
+     * @param UserRepository $userRepository
+     * @Route("/users",  name="showUser", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN", statusCode="404")
+     * @return Response
+     */
+    public function users(UserRepository $userRepository): Response
+    {
+        return $this->render('user/index.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
     }
 }

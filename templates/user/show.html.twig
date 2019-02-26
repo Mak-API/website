@@ -49,6 +49,14 @@
                     Delete my profile
                 </a>
             </div>
+            {% if is_granted('ROLE_ADMIN') %}
+            <div class="btn-control-action">
+                <a class="btn" href="{{ path('app_admin_index') }}">
+                    <i class="material-icons large">dashboard</i>
+                    Dashboard
+                </a>
+            </div>
+            {% endif %}
         </section>
         <section class="part-table-action-API row">
             <div class="col l12 m12 s12 ">
