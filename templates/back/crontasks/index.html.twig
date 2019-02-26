@@ -33,7 +33,13 @@
                                     <td>{{ task.name }}</td>
                                     <td>{{ task.command }}</td>
                                     <td>{{ task.lastExecution ? task.lastExecution|date('Y-m-d H:i:s T') : '' }}</td>
-                                    <td>{{ task.lastReturnCode ? task.lastReturnCode : 'No result'}}</td>
+                                    {% if task.lastReturnCode == 0 %}
+                                        <td>Success</td>
+                                    {% elseif task.lastReturnCode == true %}
+                                        <td>Failed</td>
+                                    {% else %}
+                                        <td>No result</td>
+                                    {% endif %}
                                     <td>
                                         <a href="{{ path('app_crontasks_delete', {'id':task.id}) }}" class="btn makapi-button small red">
                                             <i class="material-icons">delete</i>
