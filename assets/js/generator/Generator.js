@@ -55,20 +55,12 @@ document.addEventListener("DOMContentLoaded", function() {
  */
 
 const btnBox = document.getElementById("add-attr_");
-const btnBoxValid = document.getElementById("valid-attr");
 const btnBoxCancel = document.getElementById("cancel-attr");
 
 
 btnBox.addEventListener("click", function(){
     document.getElementById("box_over-file_").classList.remove("hide");
     document.getElementById("box_over-file_").classList.add("box-placement");
-});
-
-/**
- * @description: Hide the last box with valid btn
- */
-btnBoxValid.addEventListener("click", function(){
-    document.getElementById("box_over-file_").classList.add("hide");
 });
 
 /**
