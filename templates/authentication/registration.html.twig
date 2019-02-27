@@ -49,11 +49,28 @@
                                 </div>
                             </div>
                         </div>
+                    {% elseif isNotVerified is defined %}
+                        <div class="validate-registration container">
+                            <div class="row">
+                                <div class="col s12">
+                                    <h2 class="center-align">Oops ! </h2>
+                                    <p class="makapi-text center bold">Your mail hasn't been verified.</p>
+                                    <p class="makapi-text center">Check your email box to activate your account.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <button  class="send-email btn waves-effect waves-light makapi-button corail small" type="submit" name="action">
+                                        <a href="{{ path('send_confirmation_email', {'email': login }) }}">No mail received ? Click here</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     {% else %}
                         <div class="validate-registration container">
                             <div class="row">
                                 <div class="col s12">
-                                    <h2 class="center-align">Success !</h2>
+                                    <h2 class="center-align">Success ! </h2>
                                     <p class="makapi-text center">Check your email box to activate your account.</p>
                                 </div>
                             </div>
