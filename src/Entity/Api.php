@@ -46,12 +46,6 @@ class Api
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="apis")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $creator;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $email_token;
@@ -120,18 +114,6 @@ class Api
     public function setStatus(int $status): self
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getCreator(): ?User
-    {
-        return $this->creator;
-    }
-
-    public function setCreator(?User $creator): self
-    {
-        $this->creator = $creator;
 
         return $this;
     }
