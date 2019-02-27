@@ -81,7 +81,7 @@ class ApiService
      * @param string $description
      * @return Api
      */
-    public function updateApi(Api $api, string $name, string $description)
+    public function updateApi(Api $api, string $name, string $description): Api
     {
         $api->setName($name)->setDescription($description);
         $this->entityManager->persist($api);
@@ -92,12 +92,12 @@ class ApiService
      * Deletes an api
      *
      * @param Api $api
-     * @return Api
+     * @return bool
      */
-    public function deleteApi(Api $api)
+    public function deleteApi(Api $api): bool
     {
         $api->setDeleted(true);
-        $this->entityManager->persist($api);
-        return $api;
+        $this->entityManager->flush();
+        return true;
     }
 }

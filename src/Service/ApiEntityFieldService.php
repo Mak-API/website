@@ -87,4 +87,27 @@ class ApiEntityFieldService
 
         return $field;
     }
+
+    /**
+     * @param ApiEntityField $field
+     * @param string $name
+     * @param string $type
+     * @param bool $nullable
+     * @param string $attributes
+     * @param UserInterface $updatedBy
+     * @return ApiEntityField
+     */
+    public function updateField(ApiEntityField $field, string $name, string $type, bool $nullable, string $attributes, UserInterface $updatedBy): ApiEntityField
+    {
+        $field->setName($name)
+            ->setType($type)
+            ->setNullable($nullable)
+            ->setAttributes($attributes)
+            ->setUpdatedBy($updatedBy)
+            ->setUpdatedAt(new \DateTime());
+
+        $this->entityManager->flush();
+
+        return $field;
+    }
 }
