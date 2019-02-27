@@ -31,7 +31,7 @@ class ApiController extends RestController
     /**
      * @Route("/", methods={"GET"})
      */
-    public function getEntities(): Response
+    public function getApis(): Response
     {
         return new Response($this->serialize($this->apiService->getApis()), Response::HTTP_OK);
     }
@@ -41,7 +41,7 @@ class ApiController extends RestController
      * @return Response
      * @Route("/{id}", methods={"GET"})
      */
-    public function getEntity(Api $api): Response
+    public function getApi(Api $api): Response
     {
         if ($api->isDeleted()) {
             return new JsonResponse(['error' => 'no_api_found'], Response::HTTP_NOT_FOUND);
