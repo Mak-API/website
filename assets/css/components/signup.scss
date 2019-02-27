@@ -2,9 +2,10 @@ body{
   background: $color-lightGrey;
   main {
     .form-signin {
-      margin-top: 5vh;
       .form-content {
+        min-width: 500px;
         background: #FFFFFF;
+        padding: 15px 35px;
         -webkit-box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
         -moz-box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
         box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
