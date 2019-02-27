@@ -5,7 +5,9 @@ body{
       margin-top: 5vh;
       .form-content {
         background: #FFFFFF;
-        box-shadow: 4px 3px 4px;
+        -webkit-box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
+        -moz-box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
+        box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
       }
     }
   }
