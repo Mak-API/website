@@ -70,6 +70,9 @@ body {
     &.italic {
       font-style: italic;
     }
+    &.center {
+      text-align: center;
+    }
   }
   .makapi-button {
     background-color: $color-livingCoral;
