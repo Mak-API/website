@@ -69,4 +69,15 @@ class ApiEntityController extends RestController
         $entity = $this->apiEntityService->updateEntity($entity, $request->get('name'));
         return new Response($this->serialize($entity), Response::HTTP_OK);
     }
+
+    /**
+     * @param ApiEntity $entity
+     * @return Response
+     * @Route("/{id}", methods={"DELETE"})
+     */
+    public function deleteEntity(ApiEntity $entity)
+    {
+        $this->apiEntityService->deleteEntity($entity);
+        return new Response(null, Response::HTTP_OK);
+    }
 }
