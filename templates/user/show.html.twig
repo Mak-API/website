@@ -8,24 +8,45 @@
     </header>
     <main>
         <section class="part-profile white-text">
-            <div class="profile-content valign-wrapper">
+            <div class="profile-content container">
                 <div class="profile-content_center_div center-block">
                     <div class="row">
                         <img class="profile-picture" src="{{ asset('images/png/Moi2_190118.png') }}" alt="Profile_picture">
                     </div>
                     <div class="row center">
                         <h4>{{ user.firstname }}</h4>
-                        <p> {{ user.email }}</p>
+                        <p class="makapi-text center"> {{ user.email }}</p>
                     </div>
                     <div class="row info-API">
-                        <span>API created : </span>
-                        <span class="offset-l1 offset-s1 offset-m1">Request traited : </span>
+                        <div class="col m5 s12">
+                            <p class="makapi-text">
+                                API created :
+                                {% if numberAPI is defined %}
+                                    {{ numberAPI }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col offset-m2 m5 s12">
+                            <p class="makapi-text">
+                                Request traited :
+                                {% if apiRequest is defined %}
+                                    {{ apiRequest }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </p>
+                        </div>
                     </div>
                     <div class="profile-setting center">
                         <a class="btn-flat white-text" href="{{ path('app_user_edit', {'login': user.login}) }}">
                             <i class="material-icons medium left">settings</i>
                             Settings
                         </a>
+                    </div>
+                    <div id="wave">
+
                     </div>
                 </div>
             </div>
