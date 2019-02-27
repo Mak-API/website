@@ -79,6 +79,7 @@ class ApiEntityFieldService
             ->setNullable($nullable)
             ->setAttributes($attributes)
             ->setCreatedBy($createdBy)
+            ->setUpdatedBy($createdBy)
             ->setCreatedAt(new \DateTime())
             ->setUpdatedAt(new \Datetime());
 

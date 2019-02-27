@@ -62,6 +62,7 @@ class ApiService
         $api->setName($name)
             ->setDescription($description)
             ->setCreatedBy($createdBy)
+            ->setUpdatedBy($createdBy)
             ->setCreatedAt(new \DateTime())
             ->setUpdatedAt(new \Datetime())
             ->setStatus(Api::STATUS_INIT)
@@ -79,11 +80,15 @@ class ApiService
      * @param Api $api
      * @param string $name
      * @param string $description
+     * @param UserInterface $updatedBy
      * @return Api
      */
-    public function updateApi(Api $api, string $name, string $description): Api
+    public function updateApi(Api $api, string $name, string $description, UserInterface $updatedBy): Api
     {
-        $api->setName($name)->setDescription($description);
+        $api->setName($name)
+            ->setDescription($description)
+            ->setUpdatedBy($updatedBy)
+            ->setUpdatedAt(new \DateTime());
         $this->entityManager->persist($api);
         return $api;
     }

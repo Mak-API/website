@@ -50,12 +50,11 @@ class ApiEntityFieldController extends RestController
 
     /**
      * @param Request $request
-     * @param UserRepository $userRepository
      * @return Response
      *
      * @Route("/", methods={"POST"})
      */
-    public function createField(Request $request, UserRepository $userRepository): Response
+    public function createField(Request $request): Response
     {
         return $this->json($this->entityFieldService->createField(
             $request->get('entityId'),
@@ -63,7 +62,7 @@ class ApiEntityFieldController extends RestController
             $request->get('type'),
             $request->get('nullable'),
             $request->get('attributes'),
-            $userRepository->find(1)
+            $this->getUser()
         ));
     }
 

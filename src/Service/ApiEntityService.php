@@ -71,6 +71,9 @@ class ApiEntityService
         $apiEntity = new ApiEntity();
         $apiEntity->setApi($this->apiService->getApi($apiId))
             ->setName($name)
+            ->setCreatedAt(new \DateTime())
+            ->setUpdatedAt(new \DateTime())
+            ->setUpdatedBy($createdBy)
             ->setCreatedBy($createdBy);
 
         $this->entityManager->persist($apiEntity);
@@ -82,11 +85,14 @@ class ApiEntityService
     /**
      * @param ApiEntity $entity
      * @param string $name
+     * @param UserInterface $updatedBy
      * @return ApiEntity
      */
-    public function updateEntity(ApiEntity $entity, string $name): ApiEntity
+    public function updateEntity(ApiEntity $entity, string $name, UserInterface $updatedBy): ApiEntity
     {
-        $entity->setName($name);
+        $entity->setName($name)
+            ->setUpdatedBy($updatedBy)
+            ->setUpdatedAt(new \DateTime());
         $this->entityManager->persist($entity);
         return $entity;
     }
