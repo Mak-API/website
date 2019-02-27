@@ -2,9 +2,8 @@ body{
   background: $color-lightGrey;
   main {
     .form-signin {
-      height: 65vh;
+      margin-top: 5vh;
       .form-content {
-        margin-top: 20vh;
         background: #FFFFFF;
         box-shadow: 4px 3px 4px;
       }
