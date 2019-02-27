@@ -51,14 +51,13 @@ class ApiController extends RestController
 
     /**
      * @param Request $request
-     * @param UserRepository $userRepository
      * @return Response
      *
      * @Route("/", methods={"POST"})
      */
-    public function createApi(Request $request, UserRepository $userRepository): Response
+    public function createApi(Request $request): Response
     {
-        $api = $this->apiService->createApi($request->get('name'), $request->get('description'), $userRepository->find(1));
+        $api = $this->apiService->createApi($request->get('name'), $request->get('description'), $this->getUser());
         return new Response($this->serialize($api), Response::HTTP_CREATED);
     }
 
@@ -81,7 +80,7 @@ class ApiController extends RestController
      */
     public function updateApi(Request $request, Api $api)
     {
-        $api = $this->apiService->updateApi($api, $request->get('name'), $request->get('description'));
+        $api = $this->apiService->updateApi($api, $request->get('name'), $request->get('description'), $this->getUser());
         return new Response($this->serialize($api), Response::HTTP_OK);
     }
 }
