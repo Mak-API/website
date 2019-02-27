@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\TimestampableTrait;
+use App\Entity\Traits\DeletedTrait;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ApiRepository")
@@ -13,6 +14,14 @@ use App\Entity\Traits\TimestampableTrait;
 class Api
 {
     use TimestampableTrait;
+    use DeletedTrait;
+    /**
+     * Status constants
+     */
+    const STATUS_DELETED = 0;
+    const STATUS_INIT = 1;
+    const STATUS_CREATED = 2;
+    const STATUS_HOSTED = 3;
 
     /**
      * @ORM\Id()
