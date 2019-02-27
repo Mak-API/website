@@ -66,4 +66,37 @@ class ApiEntityFieldController extends RestController
             $userRepository->find(1)
         ));
     }
+
+    /**
+     * @param Request $request
+     * @param ApiEntityField $field
+     * @return Response
+     *
+     * @Route("/{id}", methods={"PUT"})
+     */
+    public function updateField(Request $request, ApiEntityField $field): Response
+    {
+        $field = $this->entityFieldService->updateField(
+            $field,
+            $request->get('name'),
+            $request->get('type'),
+            $request->get('nullable'),
+            $request->get('attributes'),
+            $this->getUser()
+        );
+
+        return new Response($this->serialize($field), Response::HTTP_OK);
+    }
+
+    /**
+     * @param ApiEntityField $field
+     * @return Response
+     * @Route("/{id}", methods={"DELETE"})
+     */
+    public function deleteField(ApiEntityField $field): Response
+    {
+        $this->entityFieldService->deleteField($field);
+
+        return new Response(null, Response::HTTP_OK);
+    }
 }

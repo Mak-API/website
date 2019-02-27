@@ -110,4 +110,16 @@ class ApiEntityFieldService
 
         return $field;
     }
+
+    /**
+     * @param ApiEntityField $field
+     * @return bool
+     */
+    public function deleteField(ApiEntityField $field): bool
+    {
+        $this->entityManager->remove($field);
+        $this->entityManager->flush();
+
+        return true;
+    }
 }
