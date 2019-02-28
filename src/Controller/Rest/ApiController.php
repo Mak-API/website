@@ -5,11 +5,9 @@ namespace App\Controller\Rest;
 use App\Entity\Api;
 use App\Service\ApiService;
 use App\Service\Generator\Framework\SymfonyGenerator;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
