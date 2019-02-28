@@ -3,7 +3,7 @@
         <div class="bloc-entity">
             <ul class="collapsible">
                 <li class="active">
-                    <div id="entity-name" class="collapsible-header right-align">Entity 1
+                    <div id="entity-name" data-entity-name="entity-name" class="collapsible-header right-align">Entity 1
                         <i class="material-icons medium">arrow_drop_down</i>
                     </div>
                     <div class="collapsible-body form-makapi blueDial-text">
@@ -57,7 +57,7 @@
                                 <label for="attribute_name">Name of your Attribute</label>
                             </div>
                             <div class="input-field col l12 m12 s12">
-                                <select>
+                                <select id="select-type-attr">
                                     <option value="" disabled selected>Choose your option</option>
                                     <option value="int">Int</option>
                                     <option value="string">String</option>
@@ -69,7 +69,7 @@
                             </div>
                             <p>
                                 <label>
-                                    <input type="checkbox" class="filled-in" />
+                                    <input id="checkbx-attr" type="checkbox" class="filled-in" />
                                     <span>Nullable</span>
                                 </label>
                             </p>
@@ -162,15 +162,18 @@
 {% block javascripts %}
     <script>
 
+
         /**
          * Replace title of entity by value on input entity1
          * @type {HTMLElement}
          */
         const inputEntity = document.getElementById("entity1");
         inputEntity.addEventListener("keyup", function() {
-            let title = document.getElementById("entity1").value;
-            let template = title+"<i class=\"material-icons medium\">arrow_drop_down</i>";
-            document.getElementById("entity-name").innerHTML = template;
+            const entity = document.getElementById("entity-name");
+            let entityName = document.getElementById("entity1").value;
+            let template = entityName+"<i class=\"material-icons medium\">arrow_drop_down</i>";
+            entity.innerHTML = template;
+            entity.setAttribute("data-entity-name", entityName);
         });
 
         let inputAttribute = document.getElementById("attribute_name");
@@ -185,8 +188,12 @@
         
         btnAdd.addEventListener("click", function () {
             let inputAttribute = document.getElementById("attribute_name").value;
+            let selectValue = document.getElementById("select-type-attr").value;
+            let checkbxValue= document.getElementById("checkbx-attr").checked;
+
             const attributeChip = document.getElementById("list-attribute_1");
-            const template = "<div class=\"makapi-chip\">"+ inputAttribute + "<i class=\"material-icons right\" onclick=\"deleteAttribute(this)\">delete_forever</i> <i class=\"material-icons right\">create</i></div>";
+            const template = "<div class=\"makapi-chip\" data-name-attribute=\""+inputAttribute+"\" data-type-attribute=\""+selectValue+"\" data-nullable-attribute=\""+checkbxValue+"\">"+ inputAttribute + "<i class=\"material-icons right\" style=\"cursor: pointer;\" onclick=\"deleteAttribute(this)\">delete_forever</i> <i class=\"material-icons right\" style=\"cursor: pointer;\" onclick=\"editAttribute(this)\">create</i></div>";
+
             if(inputAttribute != ""){
                 attributeChip.insertAdjacentHTML("beforeend", template);
                 document.getElementById("attribute_name").value = "";
@@ -198,6 +205,36 @@
 
         function deleteAttribute(value) {
             value.parentNode.remove();
+        }
+
+        /**
+         *
+         * @param value
+         */
+        function editAttribute(value) {
+            let nameAttr = value.parentNode.getAttribute("data-name-attribute");
+            document.getElementById("attribute_name").value = nameAttr;
+            document.getElementById("box_over-file_").classList.remove("hide");
+            document.getElementById("box_over-file_").classList.add("box-placement");
+            document.getElementById("valid-attr").id = "edit-attr";
+
+            const btnEdit = document.getElementById("edit-attr");
+            btnEdit.addEventListener("click", function () {
+                let inputAttribute = document.getElementById("attribute_name").value;
+                let selectValue = document.getElementById("select-type-attr").value;
+                let checkbxValue= document.getElementById("checkbx-attr").checked;
+
+                const attributeChip = document.getElementById("list-attribute_1");
+                const template = "<div class=\"makapi-chip\" data-name-attribute=\""+inputAttribute+"\" data-type-attribute=\""+selectValue+"\" data-nullable-attribute=\""+checkbxValue+"\">"+ inputAttribute + "<i class=\"material-icons right\" style=\"cursor: pointer;\" onclick=\"deleteAttribute(this)\">delete_forever</i> <i class=\"material-icons right\" style=\"cursor: pointer;\" onclick=\"editAttribute(this)\">create</i></div>";
+                if(inputAttribute != ""){
+                    attributeChip.insertAdjacentHTML("beforeend", template);
+                    document.getElementById("attribute_name").value = "";
+                    document.getElementById("box-attribute-name").innerHTML = "Default attribute";
+                }
+                value.parentNode.remove();
+                document.getElementById("edit-attr").id = "valid-attr";
+                document.getElementById("box_over-file_").classList.add("hide");
+            });
         }
 
     </script>
