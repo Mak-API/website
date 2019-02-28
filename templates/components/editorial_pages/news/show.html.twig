@@ -39,7 +39,7 @@
     {% if is_granted("ROLE_ADMIN") %}
         <a href="{{ path('app_admin_news_index') }}">back to list</a>
         <a href="{{ path('app_admin_news_edit', {'id': news.id}) }}">edit</a>
-        {{ include('news/_delete_form.html.twig') }}
+        {{ include('components/editorial_pages/news/_delete_form.html.twig') }}
     {% else %}
         <a href="{{ path('app_news_index') }}">back to list</a>
     {% endif %}

@@ -23,7 +23,7 @@ class NewsController extends AbstractController
      */
     public function index(NewsRepository $newsRepository): Response
     {
-        return $this->render('news/index.html.twig', [
+        return $this->render('components/editorial_pages/news/index.html.twig', [
             'news' => $newsRepository->findBy(['isPublished' => true]),
         ]);
     }
@@ -35,7 +35,7 @@ class NewsController extends AbstractController
      */
     public function show(News $news): Response
     {
-        return $this->render('news/show.html.twig', [
+        return $this->render('components/editorial_pages/news/show.html.twig', [
             'news' => $news,
         ]);
     }

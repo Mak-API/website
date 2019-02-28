@@ -37,7 +37,7 @@ class NewsController extends AbstractController
      */
     public function index(NewsRepository $newsRepository): Response
     {
-        return $this->render('news/index.html.twig', [
+        return $this->render('components/editorial_pages/news/index.html.twig', [
             'news' => $newsRepository->findAll(),
         ]);
     }
@@ -62,7 +62,7 @@ class NewsController extends AbstractController
             return $this->redirectToRoute('app_admin_news_index');
         }
 
-        return $this->render('news/new.html.twig', [
+        return $this->render('components/editorial_pages/news/new.html.twig', [
             'news' => $news,
             'form' => $form->createView(),
         ]);
@@ -75,7 +75,7 @@ class NewsController extends AbstractController
      */
     public function show(News $news): Response
     {
-        return $this->render('news/show.html.twig', [
+        return $this->render('components/editorial_pages/news/show.html.twig', [
             'news' => $news,
         ]);
     }
@@ -99,7 +99,7 @@ class NewsController extends AbstractController
             ]);
         }
 
-        return $this->render('news/edit.html.twig', [
+        return $this->render('components/editorial_pages/news/edit.html.twig', [
             'news' => $news,
             'form' => $form->createView(),
         ]);
