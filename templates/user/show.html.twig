@@ -6,7 +6,7 @@
     <header class="gradient-header">
         {% include 'components/header/header.html.twig' %}
     </header>
-    <main>
+    <main class="submain">
         <section class="part-profile white-text">
             <div class="profile-content container">
                 <div class="profile-content_center_div center-block">
@@ -141,7 +141,9 @@
             </div>
         </section>
     </main>
-
+    <footer class="page-footer">
+        {% include 'components/footer/footer.html.twig' %}
+    </footer>
 {% endblock %}
 {% block javascripts %}
     <script>
