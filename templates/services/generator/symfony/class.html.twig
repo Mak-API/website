@@ -1,0 +1,19 @@
+<?php
+
+namespace {% block namespace %}{% endblock %};
+
+{% block uses %}
+{% endblock %}
+
+
+{% block classPhpDoc %}
+{% endblock %}
+class {{ name }}{% if extends is defined %} extends {{ extends }}{% endif %}{% if implements is defined %} implements {{ implements }}{% endif %}
+
+{
+{% block attributes %}
+{% endblock %}
+
+{% block methods %}
+{% endblock %}
+}

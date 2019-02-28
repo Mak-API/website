@@ -1,0 +1,62 @@
+{% extends 'services/generator/symfony/class.html.twig' %}
+
+{% block namespace 'App\\Entity' %}
+{% block uses 'Doctrine\\ORM\\Mapping as ORM;' %}
+
+{% block classPhpDoc %}
+    /**
+    * @ORM\Entity(repositoryClass="App\Repository\{{ name|capitalize }}Repository")
+    */
+{% endblock %}
+
+{% block attributes %}
+    /**
+    * @ORM\Id()
+    * @ORM\GeneratedValue()
+    * @ORM\Column(type="integer")
+    */
+    private $id;
+
+{% for attribute in attributes %}
+
+    /**
+    * @ORM\Column(type="{{ attribute.type }}", nullable="{{ attribute.nullable }}"{% if attribute.extra is defined %}{{ attribute.extra }}{% endif %})
+    */
+    private ${{ attribute.name }};
+
+{% endfor %}
+{% endblock %}
+
+{% block methods %}
+    /**
+    * @return int|null
+    */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+
+{% for attribute in attributes %}
+
+    /**
+    * @return {{ attribute.type }}|null
+    */
+    public function get{{ attribute.name|capitalize }}(): ?{{ attribute.type }}
+    {
+        return $this->{{ attribute.name }};
+    }
+
+    /**
+    * @param {{ attribute.type }} ${{ attribute.name }}
+    * @return self
+    */
+    public function set{{ attribute.name|capitalize }}({{ attribute.type }} ${{ attribute.name }}): self
+    {
+        $this->{{ attribute.name }} = ${{ attribute.name }}
+
+        return $this;
+    }
+
+{% endfor %}
+{% endblock %}
