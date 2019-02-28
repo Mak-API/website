@@ -89,7 +89,7 @@ class ApiService
             ->setDescription($description)
             ->setUpdatedBy($updatedBy)
             ->setUpdatedAt(new \DateTime());
-        $this->entityManager->persist($api);
+        $this->entityManager->flush();
         return $api;
     }
 
@@ -104,5 +104,29 @@ class ApiService
         $api->setDeleted(true);
         $this->entityManager->flush();
         return true;
+    }
+
+    /**
+     * @param Api $api
+     * @param string $path
+     * @return Api
+     */
+    public function setPath(Api $api, string $path): Api
+    {
+        $api->setPath($path);
+        $this->entityManager->flush();
+        return $api;
+    }
+
+    /**
+     * @param Api $api
+     * @param string $downloadLink
+     * @return Api
+     */
+    public function setDownloadLink(Api $api, string $downloadLink): Api
+    {
+        $api->setDownloadLink($downloadLink);
+        $this->entityManager->flush();
+        return $api;
     }
 }
