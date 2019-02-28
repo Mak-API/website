@@ -28,17 +28,4 @@ class AdminController extends AbstractController
     {
         return $this->render('back/admin/index.html.twig');
     }
-
-    /**
-     * @param UserRepository $userRepository
-     * @Route("/users",  name="showUser", methods={"GET"})
-     * @IsGranted("ROLE_ADMIN", statusCode="404")
-     * @return Response
-     */
-    public function users(UserRepository $userRepository): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
 }

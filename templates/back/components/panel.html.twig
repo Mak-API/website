@@ -7,7 +7,7 @@
         </a>
     </li>
     <li class="collection-item">
-        <a href="#" class="valign-wrapper">
+        <a href="{{ path('app_admin_users_index') }}" class="valign-wrapper {% if app.request.get('_route') == 'app_admin_users_index' %} active{% endif %}">
             <i class="small material-icons">group</i>
             Users
         </a>
