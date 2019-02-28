@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class NewsController extends AbstractController
 {
     /**
-     * @Route("/", name="news_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(NewsRepository $newsRepository): Response
     {
@@ -29,7 +29,7 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="news_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -42,7 +42,7 @@ class NewsController extends AbstractController
             $entityManager->persist($news);
             $entityManager->flush();
 
-            return $this->redirectToRoute('news_index');
+            return $this->redirectToRoute('app_admin_news_index');
         }
 
         return $this->render('news/new.html.twig', [
@@ -52,7 +52,7 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="news_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(News $news): Response
     {
@@ -84,7 +84,7 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="news_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, News $news): Response
     {

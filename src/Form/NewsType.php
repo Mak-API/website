@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\News;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,10 +16,6 @@ class NewsType extends AbstractType
             ->add('title')
             ->add('body')
             ->add('isPublished')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('createdBy')
-            ->add('updatedBy')
         ;
     }
 
