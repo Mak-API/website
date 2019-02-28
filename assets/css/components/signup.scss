@@ -18,6 +18,9 @@ body{
         background-color: $color-lightGrey;
         margin-bottom: 5px;
         @extend .makapi-form-box-shadow;
+        > h2 {
+          margin-top: 5px;
+        }
       }
     }
     .part-edit-profile-second {
