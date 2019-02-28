@@ -19,6 +19,7 @@ main.container-dashboard {
       li.collection-header{
         > h4 {
           margin: 0;
+          color: $color-blueDial;
         }
       }
       li.collection-item {
@@ -53,7 +54,8 @@ main.container-dashboard {
       div.header {
         border-bottom: 1px solid #ddd;
         > h4 {
-          margin: 10px 15px;
+          margin: 20px 15px;
+          color: $color-blueDial;
         }
       }
       div.main {
