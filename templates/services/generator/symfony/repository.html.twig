@@ -1,0 +1,24 @@
+{% extends 'services/generator/symfony/class.html.twig' %}
+
+{% block namespace 'App\\Repository' %}
+{% block uses %}
+use App\Entity\{{ entityName }};
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+{% endblock %}
+
+{% block classPhpDoc %}
+/**
+* @method {{ entityName}}|null find($id, $lockMode = null, $lockVersion = null)
+* @method {{ entityName }}|null findOneBy(array $criteria, array $orderBy = null)
+* @method {{ entityName }}[]    findAll()
+* @method {{ entityName }}[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+*/
+{% endblock %}
+
+{% block methods %}
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, {{ entityName }}::class);
+    }
+{% endblock %}

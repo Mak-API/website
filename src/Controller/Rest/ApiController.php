@@ -31,7 +31,7 @@ class ApiController extends RestController
     /**
      * @Route("/", methods={"GET"})
      */
-    public function getEntities(): Response
+    public function getApis(): Response
     {
         return new Response($this->serialize($this->apiService->getApis()), Response::HTTP_OK);
     }
@@ -41,7 +41,7 @@ class ApiController extends RestController
      * @return Response
      * @Route("/{id}", methods={"GET"})
      */
-    public function getEntity(Api $api): Response
+    public function getApi(Api $api): Response
     {
         if ($api->isDeleted()) {
             return new JsonResponse(['error' => 'no_api_found'], Response::HTTP_NOT_FOUND);
@@ -51,14 +51,13 @@ class ApiController extends RestController
 
     /**
      * @param Request $request
-     * @param UserRepository $userRepository
      * @return Response
      *
      * @Route("/", methods={"POST"})
      */
-    public function createApi(Request $request, UserRepository $userRepository): Response
+    public function createApi(Request $request): Response
     {
-        $api = $this->apiService->createApi($request->get('name'), $request->get('description'), $userRepository->find(1));
+        $api = $this->apiService->createApi($request->get('name'), $request->get('description'), $this->getUser());
         return new Response($this->serialize($api), Response::HTTP_CREATED);
     }
 
@@ -81,7 +80,7 @@ class ApiController extends RestController
      */
     public function updateApi(Request $request, Api $api)
     {
-        $api = $this->apiService->updateApi($api, $request->get('name'), $request->get('description'));
+        $api = $this->apiService->updateApi($api, $request->get('name'), $request->get('description'), $this->getUser());
         return new Response($this->serialize($api), Response::HTTP_OK);
     }
 }

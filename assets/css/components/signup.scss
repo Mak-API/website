@@ -2,12 +2,29 @@ body{
   background: $color-lightGrey;
   main {
     .form-signin {
-      height: 65vh;
       .form-content {
         margin-top: 20vh;
+        min-width: 500px;
         background: #FFFFFF;
-        box-shadow: 4px 3px 4px;
+        padding: 15px 35px;
+        @extend .makapi-form-box-shadow;
       }
+    }
+    .part-edit-profile {
+      @extend .part-profile;
+      .edit-form {
+        margin-top: 15vh;
+        padding: 10px 15px;
+        background-color: $color-lightGrey;
+        margin-bottom: 5px;
+        @extend .makapi-form-box-shadow;
+        > h2 {
+          margin-top: 5px;
+        }
+      }
+    }
+    .part-edit-profile-second {
+      height: 600px;
     }
   }
 }

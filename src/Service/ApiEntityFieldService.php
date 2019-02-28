@@ -79,6 +79,7 @@ class ApiEntityFieldService
             ->setNullable($nullable)
             ->setAttributes($attributes)
             ->setCreatedBy($createdBy)
+            ->setUpdatedBy($createdBy)
             ->setCreatedAt(new \DateTime())
             ->setUpdatedAt(new \Datetime());
 
@@ -86,5 +87,40 @@ class ApiEntityFieldService
         $this->entityManager->flush();
 
         return $field;
+    }
+
+    /**
+     * @param ApiEntityField $field
+     * @param string $name
+     * @param string $type
+     * @param bool $nullable
+     * @param string $attributes
+     * @param UserInterface $updatedBy
+     * @return ApiEntityField
+     */
+    public function updateField(ApiEntityField $field, string $name, string $type, bool $nullable, string $attributes, UserInterface $updatedBy): ApiEntityField
+    {
+        $field->setName($name)
+            ->setType($type)
+            ->setNullable($nullable)
+            ->setAttributes($attributes)
+            ->setUpdatedBy($updatedBy)
+            ->setUpdatedAt(new \DateTime());
+
+        $this->entityManager->flush();
+
+        return $field;
+    }
+
+    /**
+     * @param ApiEntityField $field
+     * @return bool
+     */
+    public function deleteField(ApiEntityField $field): bool
+    {
+        $this->entityManager->remove($field);
+        $this->entityManager->flush();
+
+        return true;
     }
 }

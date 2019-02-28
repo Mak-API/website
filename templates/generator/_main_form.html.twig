@@ -162,6 +162,7 @@
 {% block javascripts %}
     <script>
 
+
         /**
          * Replace title of entity by value on input entity1
          * @type {HTMLElement}
@@ -196,8 +197,30 @@
             }
         });
 
+        const btnGenerate = document.getElementById("generate-api");
+        let apiName = document.getElementById('form-api-name');
+        let apiDescription = document.getElementById('textarea-edit-description');
+
+        btnGenerate.addEventListener('click', function() {
+           let payload = {
+               name: apiName.textContent,
+               description: apiDescription.value
+           };
+           initiateAPi("{{path('app_default_index')}}api/apis/", payload);
+        });
+
         function deleteAttribute(value) {
             value.parentNode.remove();
+        }
+
+        function initiateAPi(route, payload) {
+            $.ajax({
+                url: route,
+                type: 'POST',
+                data: payload
+            }).done(function(res) {
+                return res;
+            });
         }
 
     </script>

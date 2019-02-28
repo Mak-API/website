@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\TimestampableTrait;
+use App\Entity\Traits\DeletedTrait;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ApiRepository")
@@ -13,6 +14,14 @@ use App\Entity\Traits\TimestampableTrait;
 class Api
 {
     use TimestampableTrait;
+    use DeletedTrait;
+    /**
+     * Status constants
+     */
+    const STATUS_DELETED = 0;
+    const STATUS_INIT = 1;
+    const STATUS_CREATED = 2;
+    const STATUS_HOSTED = 3;
 
     /**
      * @ORM\Id()
@@ -35,12 +44,6 @@ class Api
      * @ORM\Column(type="integer")
      */
     private $status;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="apis")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $creator;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -67,6 +70,11 @@ class Api
      * @ORM\OneToMany(targetEntity="App\Entity\ApiEntity", mappedBy="api", orphanRemoval=true)
      */
     private $entities;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $path;
 
     public function __construct()
     {
@@ -111,18 +119,6 @@ class Api
     public function setStatus(int $status): self
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getCreator(): ?User
-    {
-        return $this->creator;
-    }
-
-    public function setCreator(?User $creator): self
-    {
-        $this->creator = $creator;
 
         return $this;
     }
@@ -221,6 +217,18 @@ class Api
                 $entity->setApi(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPath(): ?string
+    {
+        return $this->path;
+    }
+
+    public function setPath(?string $path): self
+    {
+        $this->path = $path;
 
         return $this;
     }

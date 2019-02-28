@@ -28,8 +28,8 @@ class ApiEntityController extends RestController
     }
 
     /**
- * @Route("/", methods={"GET"})
- */
+     * @Route("/", methods={"GET"})
+     */
     public function getEntities(): Response
     {
         return new Response($this->serialize($this->apiEntityService->getEntities()), Response::HTTP_OK);
@@ -47,14 +47,13 @@ class ApiEntityController extends RestController
 
     /**
      * @param Request $request
-     * @param UserRepository $userRepository
      * @return Response
      *
      * @Route("/", methods={"POST"})
      */
-    public function createEntity(Request $request, UserRepository $userRepository): Response
+    public function createEntity(Request $request): Response
     {
-        $api = $this->apiEntityService->createEntity($request->get('apiId'), $request->get('name'), $userRepository->find(1));
+        $api = $this->apiEntityService->createEntity($request->get('apiId'), $request->get('name'), $this->getUser());
         return new Response($this->serialize($api));
     }
 
@@ -66,7 +65,18 @@ class ApiEntityController extends RestController
      */
     public function updateEntity(Request $request, ApiEntity $entity)
     {
-        $entity = $this->apiEntityService->updateEntity($entity, $request->get('name'));
+        $entity = $this->apiEntityService->updateEntity($entity, $request->get('name'), $this->getUser());
         return new Response($this->serialize($entity), Response::HTTP_OK);
+    }
+
+    /**
+     * @param ApiEntity $entity
+     * @return Response
+     * @Route("/{id}", methods={"DELETE"})
+     */
+    public function deleteEntity(ApiEntity $entity)
+    {
+        $this->apiEntityService->deleteEntity($entity);
+        return new Response(null, Response::HTTP_OK);
     }
 }
