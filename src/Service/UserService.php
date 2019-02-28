@@ -41,6 +41,7 @@ class UserService
 
         if ($user && !$user->getVerified()) {
             $user->setVerified(true);
+            $user->setRoles(array('ROLE_USER'));
             $this->manager->flush();
             return ["isVerified" => true,
                 "isSend" => false,
