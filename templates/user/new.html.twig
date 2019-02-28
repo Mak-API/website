@@ -7,17 +7,21 @@
         {% include 'components/header/header.html.twig' %}
     </header>
 
-    <main class="submain container">
+    <main class="linear-submain container">
         <section class="form-signin row col l12 m12 s12">
-            <div class="form-content valign-wrapper offset-l3 col l6 m6 s6">
+            <div class="form-content col offset-s3 s6">
                 <div class="center-block">
-                    <h2>Sign up to MAK'API</h2>
-                    <div class="form-makapi row col l12 blueDial-text">
-                        {{ include('user/_form.html.twig') }}
-                        <div class="center">
-                            <h4>Already an account ?
-                                <a href="#">Sign in.</a>
-                            </h4>
+                    <div class="row">
+                        <div class="col s12">
+                            <h2>Sign up to MAK'API</h2>
+                            <div class="form-makapi blueDial-text">
+                                {{ include('user/_form.html.twig') }}
+                                <div class="center">
+                                    <h4>Already an account ?
+                                        <a href="#">Sign in.</a>
+                                    </h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

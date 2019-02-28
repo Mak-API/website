@@ -102,7 +102,8 @@ class UserService
             'isDeleted' => false,
             'isSend' => false,
             'isVerified' => $verified,
-            'login' => $login
+            'login' => $login,
+            'isNotVerified' => true,
         ]);
     }
 

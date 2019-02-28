@@ -1,22 +1,51 @@
 main {
   .part-profile{
-    width: 100vw;
-    height: 65vh;
+    position: relative;
+    height: 600px;
+    padding: 80px 0;
     background: $background-makapiLinearOne;
     .profile-content {
       height: 100%;
+      max-width: 600px;
       > .profile-content_center_div {
-          > div.row img.profile-picture{
+          .profile-picture{
+            display: block;
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            margin: 20px;
-
+            margin: auto;
             object-fit: cover;
             object-position: center right;
             border: 2px solid white;
           }
       }
+    }
+    .profile-panel {
+      position: absolute;
+      bottom: 0;
+        > ul {
+          z-index: 100;
+          list-style: none;
+          display: flex;
+          > li {
+            display: block;
+            height: 60px;
+            a {
+              display: flex;
+              height: 100%;
+              width: 100%;
+              padding: 0 10px;
+              line-height: 1.8rem;
+              color: $color-lightGrey;
+              > i {
+                margin-right: 5px;
+              }
+              &:hover {
+                background-color: rgba(0,0,0,0.1);
+              }
+            }
+          }
+        }
     }
   }
   .part-control-action{
@@ -31,27 +60,43 @@ main {
       }
     }
   }
-  .part-table-action-API{
-    .makapi-table {
-      table, th, td {
-        border-color: $color-livingCoral;
-        border-style: inherit;
-        border-bottom-width: 1.1px;
-      }
-      thead {
-        color : $color-livingCoral;
-      }
-      tbody {
-        a {
-          i {
-            color: $color-blueDial;
-          }
+  section.profile-panel {
+    margin-top: 15px;
+    div.profile-panel-button {
+      display: flex;
+      justify-content: center;
+      > a.makapi-button {
+        display: flex;
+        margin-right: 5px;
+        &:last-child {
+          margin-right: 0;
         }
       }
     }
   }
-
-
-
-
+  section.profile-content{
+    margin-top: 15px;
+    h4 {
+      display: flex;
+      margin: 0;
+      > i {
+        margin: 0;
+      }
+    }
+    table, th, td {
+      border-color: $color-livingCoral;
+      border-style: inherit;
+      border-bottom-width: 1.1px;
+    }
+    thead {
+      color : $color-livingCoral;
+    }
+    tbody {
+      a {
+        i {
+          color: $color-blueDial;
+        }
+      }
+    }
+  }
 }
