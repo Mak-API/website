@@ -76,6 +76,11 @@ class Api
      */
     private $path;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $downloadLink;
+
     public function __construct()
     {
         $this->apiRequests = new ArrayCollection();
@@ -229,6 +234,18 @@ class Api
     public function setPath(?string $path): self
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getDownloadLink(): ?string
+    {
+        return $this->downloadLink;
+    }
+
+    public function setDownloadLink(?string $downloadLink): self
+    {
+        $this->downloadLink = $downloadLink;
 
         return $this;
     }
