@@ -29,14 +29,14 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @param News $news
+     * @param News $new
      * @Route("/{id}", name="show", methods={"GET"})
      * @return Response
      */
-    public function show(News $news): Response
+    public function show(News $new): Response
     {
         return $this->render('components/editorial_pages/news/show.html.twig', [
-            'news' => $news,
+            'new' => $new,
         ]);
     }
 

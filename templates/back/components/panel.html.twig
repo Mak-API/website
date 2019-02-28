@@ -29,7 +29,7 @@
         </a>
     </li>
     <li class="collection-item">
-        <a href="#" class="valign-wrapper">
+        <a href="{{ path('app_admin_news_index') }}" class="valign-wrapper {% if app.request.get('_route') == 'app_admin_news_index' %} active{% endif %}">
             <i class="small material-icons">note</i>
             News
             <i class="small material-icons icons-arrow-panel">keyboard_arrow_right</i>
