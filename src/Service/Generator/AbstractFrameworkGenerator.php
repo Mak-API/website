@@ -39,10 +39,16 @@ abstract class AbstractFrameworkGenerator
      */
     protected $logger;
 
-    public function __construct(KernelInterface $kernel, LoggerInterface $logger)
+    /**
+     * @var \Twig_Environment
+     */
+    protected $twigEnvironment;
+
+    public function __construct(KernelInterface $kernel, LoggerInterface $logger, \Twig_Environment $twigEnvironment)
     {
         $this->rootPath = realpath(sprintf('%s/../generatedApis', $kernel->getProjectDir()));
         $this->logger = $logger;
+        $this->twigEnvironment = $twigEnvironment;
     }
 
     /**
@@ -86,14 +92,58 @@ abstract class AbstractFrameworkGenerator
         return exec($command);
     }
 
-
-    public function generate(): bool
+    /**
+     * Renders a file from a $template using the given $context.
+     *
+     * @param string $template
+     * @param array $context
+     * @return string
+     */
+    public function renderFile(string $template, array $context): string
     {
-        return $this->createFolder()
-            ->generateProject()
-            ->generateEntities();
+        $templatePath = sprintf('services/generator/%s.html.twig', $template);
+        try {
+            $render = $this->twigEnvironment->render($templatePath, $context);
+            $this->logger->info($render);
+        } catch (\Twig_Error $e) {
+            $this->logger->error("Could not render template, error: '{$e->getMessage()}'.", $context);
+            $render = ''; // TODO Throw a custom exception to be caught and handled properly.
+        }
+
+        return $render;
     }
 
+    /**
+     * Creates a file and writes in it if $content is specified.
+     *
+     * @param string $path
+     * @param string $fileName
+     * @param string $content
+     * @return bool
+     */
+    protected function createFile(string $path, string $fileName, string $content = ''): bool
+    {
+        $fileHandle = fopen(sprintf('%s/%s/%s', $this->getApiPath(), $path, $fileName), 'a+');
+        return (bool) fwrite($fileHandle, $content);
+    }
+
+    /**
+     * Generates the API.
+     *
+     * @return bool
+     */
+    public function generate(): bool
+    {
+        $this->createFolder()
+            ->generateProject()
+            ->generateEntities();
+
+        return true;
+    }
+
+    /**
+     * @return string
+     */
     public function getApiPath(): string
     {
         return $this->apiPath;
@@ -111,5 +161,5 @@ abstract class AbstractFrameworkGenerator
      *
      * @return AbstractFrameworkGenerator
      */
-    abstract protected function generateEntities(): string;
+    abstract protected function generateEntities(): AbstractFrameworkGenerator;
 }

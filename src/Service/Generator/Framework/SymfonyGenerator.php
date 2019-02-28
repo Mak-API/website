@@ -3,6 +3,7 @@
 namespace App\Service\Generator\Framework;
 
 
+use App\Entity\ApiEntity;
 use App\Service\Generator\AbstractFrameworkGenerator;
 
 class SymfonyGenerator extends AbstractFrameworkGenerator
@@ -25,10 +26,63 @@ class SymfonyGenerator extends AbstractFrameworkGenerator
     /**
      * Generates the entities.
      *
-     * @return string
+     * @return AbstractFrameworkGenerator
      */
-    protected function generateEntities(): string
+    protected function generateEntities(): AbstractFrameworkGenerator
     {
+        foreach ($this->api->getEntities() as $entity) {
+            $this->generateEntity($entity);
+            $this->generateRepository($entity);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Generates an entity.
+     *
+     * @param ApiEntity $entity
+     * @return SymfonyGenerator
+     */
+    private function generateEntity(ApiEntity $entity): SymfonyGenerator
+    {
+        $context = [
+            'name' => ucfirst($entity->getName()),
+            'attributes' => [],
+        ];
+
+        foreach ($entity->getFields() as $field) {
+            $context['attributes'][$field->getId()] = [
+                'name' => $field->getName(),
+                'type' => $field->getType(),
+                'nullable' => (bool) $field->getNullable() ? 'true' : 'false',
+            ];
+
+            if ($field->getType() === 'string') {
+                $context['attributes'][$field->getId()]['extra'] = ', length=255';
+            }
+        }
+        $render = $this->renderFile('symfony/entity', $context);
+
+        $filename = sprintf('%s.php', ucfirst($entity->getName()));
+        $this->createFile('src/Entity', $filename, $render);
+        return $this;
+    }
+
+    /**
+     * Generates a repository.
+     */
+    public function generateRepository(ApiEntity $entity)
+    {
+        $classname = sprintf('%sRepository', ucfirst($entity->getName()));
+        $context = [
+            'name' => $classname,
+            'entityName' => ucfirst($entity->getName())
+        ];
+
+        $render = $this->renderFile('symfony/repository', $context);
+
+        $this->createFile('src/Repository', sprintf('%s.php', $classname), $render);
     }
 
     /**
