@@ -16,7 +16,13 @@
             <li {% if app.request.get('_route') == 'app_default_index' %} class="active"{% endif %}><a href="{{ path('app_default_index') }}">Home</a></li>
             <li {% if app.request.get('_route') == 'app_generator_form_index' %} class="active"{% endif %}><a href="{{ path('app_generator_form_index') }}">Generator</a></li>
             <li><a href="#">Documentation</a></li>
-            <li><a href="#">News</a></li>
+            <li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_admin_news_index') }}">News</a>
+                {% else %}
+                <a href="{{ path('app_news_index') }}">News</a>
+                {% endif %}
+            </li>
             <li {% if app.request.get('_route') == 'app_editorial_about_us' %} class="active"{% endif %}><a href="{{ path('app_editorial_about_us') }}">About us</a></li>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="navbar-list_signin {% if app.request.get('_route') == 'app_user_show' %}active{% endif %}"><a href="{{ path('app_user_show', {'login': app.user.login}) }}">{{ app.user.login }}</a></li>

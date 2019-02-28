@@ -110,9 +110,15 @@ class User implements UserInterface
      */
     private $verified = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\News", mappedBy="createdBy")
+     */
+    private $news;
+
     public function __construct()
     {
         $this->apis = new ArrayCollection();
+        $this->news = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -304,5 +310,43 @@ class User implements UserInterface
         $this->verified = $verified;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|News[]
+     */
+    public function getNews(): Collection
+    {
+        return $this->news;
+    }
+
+    public function addNews(News $news): self
+    {
+        if (!$this->news->contains($news)) {
+            $this->news[] = $news;
+            $news->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNews(News $news): self
+    {
+        if ($this->news->contains($news)) {
+            $this->news->removeElement($news);
+            // set the owning side to null (unless already changed)
+            if ($news->getCreatedBy() === $this) {
+                $news->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+    return $this->firstname . ' ' . $this->lastname;
     }
 }
