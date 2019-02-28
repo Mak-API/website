@@ -4,9 +4,9 @@
 {% block uses 'Doctrine\\ORM\\Mapping as ORM;' %}
 
 {% block classPhpDoc %}
-    /**
-    * @ORM\Entity(repositoryClass="App\Repository\{{ name|capitalize }}Repository")
-    */
+/**
+* @ORM\Entity(repositoryClass="App\Repository\{{ name|capitalize }}Repository")
+*/
 {% endblock %}
 
 {% block attributes %}
@@ -20,7 +20,7 @@
 {% for attribute in attributes %}
 
     /**
-    * @ORM\Column(type="{{ attribute.type }}", nullable="{{ attribute.nullable }}"{% if attribute.extra is defined %}{{ attribute.extra }}{% endif %})
+    * @ORM\Column(type="{{ attribute.type }}", nullable={{ attribute.nullable }}{% if attribute.extra is defined %}{{ attribute.extra }}{% endif %})
     */
     private ${{ attribute.name }};
 
