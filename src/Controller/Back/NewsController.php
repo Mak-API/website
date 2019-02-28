@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\News;
 use App\Form\NewsType;
 use App\Repository\NewsRepository;
+use App\Service\NewsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,24 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller\Back
  * @Route("/news", name="app_admin_news_")
  * @IsGranted("ROLE_ADMIN", statusCode="404")
+ * @var NewsService
  */
 class NewsController extends AbstractController
 {
     /**
+     * @var NewsService
+     */
+    private $newsService;
+
+    public function __construct(NewsService $newsService)
+    {
+        $this->newsService = $newsService;
+    }
+
+    /**
+     * @param NewsRepository$newsRepository
      * @Route("/", name="index", methods={"GET"})
+     * @return Response
      */
     public function index(NewsRepository $newsRepository): Response
     {
@@ -29,7 +43,9 @@ class NewsController extends AbstractController
     }
 
     /**
+     * @param Request $request
      * @Route("/new", name="new", methods={"GET","POST"})
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -38,6 +54,7 @@ class NewsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->newsService->setTimestamps($news, $this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($news);
             $entityManager->flush();
@@ -52,7 +69,9 @@ class NewsController extends AbstractController
     }
 
     /**
+     * @param News $news
      * @Route("/{id}", name="show", methods={"GET"})
+     * @return Response
      */
     public function show(News $news): Response
     {
@@ -62,7 +81,10 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="news_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param News $news
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @return Response
      */
     public function edit(Request $request, News $news): Response
     {
@@ -72,7 +94,7 @@ class NewsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('news_index', [
+            return $this->redirectToRoute('app_admin_news_index', [
                 'id' => $news->getId(),
             ]);
         }
@@ -84,7 +106,10 @@ class NewsController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param News $news
      * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @return Response
      */
     public function delete(Request $request, News $news): Response
     {
@@ -94,6 +119,6 @@ class NewsController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('news_index');
+        return $this->redirectToRoute('app_admin_news_index');
     }
 }
