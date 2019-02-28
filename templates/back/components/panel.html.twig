@@ -1,7 +1,7 @@
 <ul class="collection with-header panel-dashboard">
     <li class="collection-header"><h4>Menu</h4></li>
     <li class="collection-item">
-        <a href="#" class="valign-wrapper">
+        <a href="{{ path('app_admin_index') }}" class="valign-wrapper {% if app.request.get('_route') == 'app_admin_index' %} active{% endif %}">
             <i class="small material-icons">dashboard</i>
             Dashboard
         </a>

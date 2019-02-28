@@ -1,0 +1,79 @@
+{% extends 'back/admin_base.html.twig' %}
+{% block title %}
+    Admin - Administration Panel
+{% endblock %}
+
+{% block content_main %}
+    <div class="container-bloc">
+        <header>
+            <h4>Users</h4>
+        </header>
+        <div class="main">
+            <section class="tabs-users">
+                <ul id="tabs-swipe-users" class="tabs makapi-tabs-ul">
+                    <li class="tab col s3"><a class="active" href="#users-day">Users by day</a></li>
+                    <li class="tab col s3"><a href="#users-month">Users by month</a></li>
+                    <li class="tab col s3"><a href="#users-year">Users by year</a></li>
+                </ul>
+                <div id="users-day" class="col s12 tabs-canvas">
+                    <div class="col s12 m4 l4 container-stats-users">
+                        <h5>Users visited</h5>
+                        <span>120</span>
+                    </div>
+                    <div class="col s12 m4 l4 container-stats-users">
+                        <h5>Users registered</h5>
+                        <span>35</span>
+                    </div>
+                    <div class="col s12 m4 l4 container-stats-users">
+                        <h5>Users premium</h5>
+                        <span>3</span>
+                    </div>
+                </div>
+                <div id="users-month" class="col s12">Test 2</div>
+                <div id="users-year" class="col s12">Test 3</div>
+            </section>
+        </div>
+    </div>
+    <div class="container-bloc">
+        <header>
+            <h4>API's</h4>
+        </header>
+        <div class="main">
+            <section class="tabs-api">
+                <ul id="tabs-swipe-demo" class="tabs makapi-tabs-ul">
+                    <li class="tab col s3"><a class="active" href="#api-day">Api created by day</a></li>
+                    <li class="tab col s3"><a href="#api-month">Api created by month</a></li>
+                    <li class="tab col s3"><a href="#api-year">Api created by year</a></li>
+                </ul>
+                <div id="api-day" class="col s12 tabs-canvas">
+                    <div class="container-canvas">
+                        <canvas id="myChart" class="chart-api"></canvas>
+                    </div>
+                </div>
+                <div id="api-month" class="col s12">Test 2</div>
+                <div id="api-year" class="col s12">Test 3</div>
+            </section>
+        </div>
+    </div>
+    <div class="container-bloc">
+        <header>
+            <h4>FINANCIAL</h4>
+        </header>
+        <div class="main">
+            <section class="tabs-financial">
+                <ul id="tabs-swipe-report" class="tabs makapi-tabs-ul">
+                    <li class="tab col s3"><a class="active" href="#report-day">Report by day</a></li>
+                    <li class="tab col s3"><a href="#report-month">Report by month</a></li>
+                    <li class="tab col s3"><a href="#report-year">Report by year</a></li>
+                </ul>
+                <div id="report-day" class="col s12 tabs-canvas">
+                    <div class="container-canvas">
+                        <canvas id="myChartReport" class="chart-financial"></canvas>
+                    </div>
+                </div>
+                <div id="report-month" class="col s12">Test 2</div>
+                <div id="report-year" class="col s12">Test 3</div>
+            </section>
+        </div>
+    </div>
+{% endblock %}
