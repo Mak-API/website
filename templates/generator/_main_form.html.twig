@@ -3,7 +3,7 @@
         <div class="bloc-entity">
             <ul class="collapsible">
                 <li class="active">
-                    <div id="entity-name" data-entity-name="entity-name" class="collapsible-header right-align">Entity 1
+                    <div id="entity-name" data-entity-id="entity-id" data-entity-name="entity-name" class="collapsible-header right-align">Entity 1
                         <i class="material-icons medium">arrow_drop_down</i>
                     </div>
                     <div class="collapsible-body form-makapi blueDial-text">
@@ -93,7 +93,6 @@
             </div>
         </div>
     </div>
-    <!--style="left: 230px;top: -185px;position: relative;"-->
     <div class="col l4 m4 s4 generator-form">
         <div class="bloc-entity">
             <ul class="collapsible">
@@ -167,32 +166,41 @@
          * Replace title of entity by value on input entity1
          * @type {HTMLElement}
          */
+        const api = document.getElementById("form-api-name").textContent;
+        const simplifiedApiName = api.replace(/ /g, "");
         const inputEntity = document.getElementById("entity1");
+        const inputAttribute = document.getElementById("attribute_name");
+        const btnAdd = document.getElementById("valid-attr");
+        const btnGenerate = document.getElementById("generate-api");
+        let apiName = document.getElementById('form-api-name');
+        let apiDescription = document.getElementById('textarea-edit-description');
+        let entityId = document.getElementById("entity-name").getAttribute("data-entity-id");
+        let entityName = document.getElementById("entity-name").getAttribute("data-entity-name");
+        /**/
+
         inputEntity.addEventListener("keyup", function() {
             const entity = document.getElementById("entity-name");
-            let entityName = document.getElementById("entity1").value;
-            let template = entityName+"<i class=\"material-icons medium\">arrow_drop_down</i>";
+            let entityValue = document.getElementById("entity1").value;
+            let template = entityValue+"<i class=\"material-icons medium\">arrow_drop_down</i>";
             entity.innerHTML = template;
-            entity.setAttribute("data-entity-name", entityName);
+            entity.setAttribute("data-entity-name", entityValue);
+            entity.setAttribute("data-entity-id", simplifiedApiName+"_"+entityValue);
         });
 
-        let inputAttribute = document.getElementById("attribute_name");
         inputAttribute.addEventListener("keyup", function() {
             let attrTitle = document.getElementById("attribute_name").value;
             document.getElementById("box-attribute-name").innerHTML = attrTitle;
         });
 
-
-        const btnAdd = document.getElementById("valid-attr");
-        const btnBoxValid = document.getElementById("valid-attr");
-        
         btnAdd.addEventListener("click", function () {
             let inputAttribute = document.getElementById("attribute_name").value;
+            let entityValue = document.getElementById("entity1").value;
             let selectValue = document.getElementById("select-type-attr").value;
             let checkbxValue= document.getElementById("checkbx-attr").checked;
+            let attributeId = simplifiedApiName+"_"+entityValue+"_"+inputAttribute;
 
             const attributeChip = document.getElementById("list-attribute_1");
-            const template = "<div class=\"makapi-chip\" data-name-attribute=\""+inputAttribute+"\" data-type-attribute=\""+selectValue+"\" data-nullable-attribute=\""+checkbxValue+"\">"+ inputAttribute + "<i class=\"material-icons right\" style=\"cursor: pointer;\" onclick=\"deleteAttribute(this)\">delete_forever</i> <i class=\"material-icons right\" style=\"cursor: pointer;\" onclick=\"editAttribute(this)\">create</i></div>";
+            const template = "<div class=\"makapi-chip\" id=\""+attributeId+"\" data-id-attribute=\""+attributeId+"\" data-name-attribute=\""+inputAttribute+"\" data-type-attribute=\""+selectValue+"\" data-nullable-attribute=\""+checkbxValue+"\">"+ inputAttribute + "<i class=\"material-icons right\" style=\"cursor:pointer;\" onclick=\"deleteAttribute(this)\">delete_forever</i> <i class=\"material-icons right\" style=\"cursor:pointer;\" onclick=\"editAttribute(this)\">create</i></div>";
 
             if(inputAttribute != ""){
                 attributeChip.insertAdjacentHTML("beforeend", template);
@@ -203,21 +211,66 @@
             }
         });
 
-        const btnGenerate = document.getElementById("generate-api");
-        let apiName = document.getElementById('form-api-name');
-        let apiDescription = document.getElementById('textarea-edit-description');
+        function editAttribute(value) {
+            const nameAttr = value.parentNode.getAttribute("data-name-attribute");
+            document.getElementById("attribute_name").value = nameAttr;
+            document.getElementById("box_over-file_").classList.remove("hide");
+            document.getElementById("box_over-file_").classList.add("box-placement");
+            document.getElementById("valid-attr").id = "edit-attr";
 
-        btnGenerate.addEventListener('click', function() {
-           let payload = {
-               name: apiName.textContent,
-               description: apiDescription.value
-           };
-           initiateAPi("{{path('app_default_index')}}api/apis/", payload);
-        });
+            const btnEdit = document.getElementById("edit-attr");
+            btnEdit.addEventListener("click", function () {
+                let inputAttribute = document.getElementById("attribute_name").value;
+                let entityValue = document.getElementById("entity1").value;
+                let selectValue = document.getElementById("select-type-attr").value;
+                let checkbxValue= document.getElementById("checkbx-attr").checked;
+                let attributeId = simplifiedApiName+"_"+entityValue+"_"+inputAttribute;
+
+                const attributeChip = document.getElementById("list-attribute_1");
+                const template = "<div class=\"makapi-chip\" id=\""+attributeId+"\" data-id-attribute=\""+simplifiedApiName+"_"+entityValue+"_"+inputAttribute+"\" data-name-attribute=\""+inputAttribute+"\" data-type-attribute=\""+selectValue+"\" data-nullable-attribute=\""+checkbxValue+"\">"+ inputAttribute + "<i class=\"material-icons right\" style=\"cursor:pointer;\" onclick=\"deleteAttribute(this)\">delete_forever</i> <i class=\"material-icons right\" style=\"cursor:pointer;\" onclick=\"editAttribute(this)\">create</i></div>";
+
+                if(inputAttribute != ""){
+                    attributeChip.insertAdjacentHTML("beforeend", template);
+                    document.getElementById("attribute_name").value = "";
+                    document.getElementById("box-attribute-name").innerHTML = "Default attribute";
+                }
+                value.parentNode.remove();
+                document.getElementById("edit-attr").id = "valid-attr";
+                document.getElementById("box_over-file_").classList.add("hide");
+            });
+        }
 
         function deleteAttribute(value) {
             value.parentNode.remove();
         }
+
+        btnGenerate.addEventListener('click', function() {
+            let inputAttribute = document.getElementById("attribute_name").value;
+            let attributeId = simplifiedApiName+"_"+entityName+"_"+inputAttribute;
+            console.log(attributeId);
+
+            let attributeName = document.getElementsById(attributeId).getAttribute("data-name-attribute");
+            let attributeType = document.getElementsById(attributeId).getAttribute("data-type-attribute");
+            let attributeNullable = document.getElementsById("makapi-chip").getAttribute("data-nullable-attribute");
+
+           let apiPayload = {
+               name: apiName.textContent,
+               description: apiDescription.value
+           };
+           let entityPayload = {
+               id: entityId,
+               name: entityName
+           };
+           let attributePayload = {
+               id: entityId,
+               /*name: attributeName,
+               type: attributeType,
+               nullable: attributeNullable,*/
+               attributes:""
+           };
+           initiateAPi("{{path('app_default_index')}}api/apis/", apiPayload);
+           initiateAPi("{{path('app_default_index')}}api/entities/", entityPayload);
+        });
 
         function initiateAPi(route, payload) {
             $.ajax({
@@ -229,35 +282,7 @@
             });
         }
 
-        /**
-         *
-         * @param value
-         */
-        function editAttribute(value) {
-            let nameAttr = value.parentNode.getAttribute("data-name-attribute");
-            document.getElementById("attribute_name").value = nameAttr;
-            document.getElementById("box_over-file_").classList.remove("hide");
-            document.getElementById("box_over-file_").classList.add("box-placement");
-            document.getElementById("valid-attr").id = "edit-attr";
 
-            const btnEdit = document.getElementById("edit-attr");
-            btnEdit.addEventListener("click", function () {
-                let inputAttribute = document.getElementById("attribute_name").value;
-                let selectValue = document.getElementById("select-type-attr").value;
-                let checkbxValue= document.getElementById("checkbx-attr").checked;
-
-                const attributeChip = document.getElementById("list-attribute_1");
-                const template = "<div class=\"makapi-chip\" data-name-attribute=\""+inputAttribute+"\" data-type-attribute=\""+selectValue+"\" data-nullable-attribute=\""+checkbxValue+"\">"+ inputAttribute + "<i class=\"material-icons right\" style=\"cursor: pointer;\" onclick=\"deleteAttribute(this)\">delete_forever</i> <i class=\"material-icons right\" style=\"cursor: pointer;\" onclick=\"editAttribute(this)\">create</i></div>";
-                if(inputAttribute != ""){
-                    attributeChip.insertAdjacentHTML("beforeend", template);
-                    document.getElementById("attribute_name").value = "";
-                    document.getElementById("box-attribute-name").innerHTML = "Default attribute";
-                }
-                value.parentNode.remove();
-                document.getElementById("edit-attr").id = "valid-attr";
-                document.getElementById("box_over-file_").classList.add("hide");
-            });
-        }
 
     </script>
 {% endblock %}
