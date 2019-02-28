@@ -4,6 +4,7 @@ namespace App\Service\Generator;
 
 
 use App\Entity\Api;
+use App\Service\ApiService;
 use App\Utils\StringTools;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -35,6 +36,16 @@ abstract class AbstractFrameworkGenerator
     protected $apiPath;
 
     /**
+     * @var string
+     */
+    protected $zipArchiveName;
+
+    /**
+     * @var string
+     */
+    protected $zipStoragePath;
+
+    /**
      * @var LoggerInterface
      */
     protected $logger;
@@ -44,11 +55,18 @@ abstract class AbstractFrameworkGenerator
      */
     protected $twigEnvironment;
 
-    public function __construct(KernelInterface $kernel, LoggerInterface $logger, \Twig_Environment $twigEnvironment)
+    /**
+     * @var ApiService
+     */
+    protected $apiService;
+
+    public function __construct(KernelInterface $kernel, LoggerInterface $logger, \Twig_Environment $twigEnvironment, ApiService $apiService)
     {
         $this->rootPath = realpath(sprintf('%s/../generatedApis', $kernel->getProjectDir()));
         $this->logger = $logger;
         $this->twigEnvironment = $twigEnvironment;
+        $this->apiService = $apiService;
+        $this->zipStoragePath = sprintf('%s/public/generated-apis', $kernel->getProjectDir());
     }
 
     /**
@@ -73,6 +91,7 @@ abstract class AbstractFrameworkGenerator
         $projectPath = sprintf('%s/%s-%s', $this->rootPath, $this->api->getName(), StringTools::generateUUID4());
         $this->projectPath = $projectPath;
         $this->bash(sprintf('mkdir %s', $projectPath), $this->rootPath);
+        $this->apiService->setPath($this->api, sprintf('%s/%s', $this->projectPath, $this->api->getName()));
         return $this;
     }
 
@@ -104,7 +123,6 @@ abstract class AbstractFrameworkGenerator
         $templatePath = sprintf('services/generator/%s.html.twig', $template);
         try {
             $render = $this->twigEnvironment->render($templatePath, $context);
-            $this->logger->info($render);
         } catch (\Twig_Error $e) {
             $this->logger->error("Could not render template, error: '{$e->getMessage()}'.", $context);
             $render = ''; // TODO Throw a custom exception to be caught and handled properly.
@@ -123,8 +141,39 @@ abstract class AbstractFrameworkGenerator
      */
     protected function createFile(string $path, string $fileName, string $content = ''): bool
     {
-        $fileHandle = fopen(sprintf('%s/%s/%s', $this->getApiPath(), $path, $fileName), 'a+');
+        $this->logger->info("Creating file '$path/$fileName'.");
+        $fileHandle = fopen(sprintf('%s/%s/%s', $this->apiPath, $path, $fileName), 'a+');
         return (bool) fwrite($fileHandle, $content);
+    }
+
+    /**
+     * Generates the ZIP archive and returns its path.
+     *
+     * @return string
+     */
+    public function generateZipArchive(): string
+    {
+        $this->bash('rm -rf vendor', $this->apiPath);
+        $filename = sprintf('%s-%s.zip', $this->api->getName(), StringTools::generateUUID4());
+        $this->bash(sprintf('zip -r %s %s', $filename, $this->api->getName()), $this->projectPath);
+        $this->logger->info("Created Zip archive for api {$this->api->getName()}: $filename.");
+        $this->zipArchiveName = $filename;
+        return $this->zipArchiveName;
+    }
+
+    /**
+     * Uploads the ZIP archive.
+     *
+     * @return bool
+     */
+    public function uploadArchive(): bool
+    {
+        $zipArchivePath = sprintf('%s/%s', $this->projectPath, $this->zipArchiveName);
+        $this->bash(sprintf("mv %s %s/", $zipArchivePath, $this->zipStoragePath), $this->projectPath);
+        $downloadLink = sprintf('%s/generated-apis/%s', getenv('WEBSITE_URL'), $this->zipArchiveName);
+        $this->apiService->setDownloadLink($this->api, $downloadLink);
+        $this->logger->info($downloadLink);
+        return true;
     }
 
     /**

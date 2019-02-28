@@ -15,9 +15,11 @@ class SymfonyGenerator extends AbstractFrameworkGenerator
      */
     protected function generateProject(): AbstractFrameworkGenerator
     {
+        $this->logger->info('Creating symfony project');
         $this->bash(sprintf('composer create-project symfony/skeleton %s', $this->api->getName()), $this->projectPath);
         $this->apiPath = sprintf('%s/%s', $this->projectPath, $this->api->getName());
 
+        $this->logger->info('Requiring ApiPlatform.');
         $this->bash('composer require api', $this->apiPath);
 
         return $this;
@@ -46,6 +48,7 @@ class SymfonyGenerator extends AbstractFrameworkGenerator
      */
     private function generateEntity(ApiEntity $entity): SymfonyGenerator
     {
+        $this->logger->info("Generating entity '{$entity->getName()}'.");
         $context = [
             'name' => ucfirst($entity->getName()),
             'attributes' => [],
@@ -71,18 +74,24 @@ class SymfonyGenerator extends AbstractFrameworkGenerator
 
     /**
      * Generates a repository.
+     *
+     * @param ApiEntity $entity
+     * @return SymfonyGenerator
      */
-    public function generateRepository(ApiEntity $entity)
+    public function generateRepository(ApiEntity $entity): SymfonyGenerator
     {
-        $classname = sprintf('%sRepository', ucfirst($entity->getName()));
+        $className = sprintf('%sRepository', ucfirst($entity->getName()));
+        $this->logger("Generating '$className'.");
         $context = [
-            'name' => $classname,
+            'name' => $className,
             'entityName' => ucfirst($entity->getName())
         ];
 
         $render = $this->renderFile('symfony/repository', $context);
 
-        $this->createFile('src/Repository', sprintf('%s.php', $classname), $render);
+        $this->createFile('src/Repository', sprintf('%s.php', $className), $render);
+
+        return $this;
     }
 
     /**
