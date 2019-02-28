@@ -31,4 +31,8 @@ $background-makapiLinearTwo: linear-gradient(359.79deg, $color-blueDial 15.77%, 
 /**
   Dashobard
  */
+  // size
   $size-minWidthDashboard: 900px;
+
+  //box-shadow
+  $boxShadow-blocDashboard: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);

@@ -20,19 +20,11 @@
 
 {% block javascripts %}
     <script>
-        const apiTabs = document.getElementById('tabs-swipe-demo');
-        const reportTabs = document.getElementById('tabs-swipe-report');
-        const usersTabs = document.getElementById('tabs-swipe-users');
+        const tabs = document.getElementsByClassName('tabs');
 
-        const instance = M.Tabs.init(apiTabs,
-            swipeable = true,
-        );
-        const instance2 = M.Tabs.init(reportTabs,
-            swipeable = true,
-        );
-        const instance3 = M.Tabs.init(usersTabs,
-            swipeable = true,
-        );
+        for(tab in tabs){
+            M.Tabs.init(tabs[tab]);
+        }
 
         var ctx = document.getElementById("myChart").getContext('2d');
 
