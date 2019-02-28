@@ -1,0 +1,44 @@
+.adjust-submain {
+  min-height: 40vh;
+}
+
+.center-delete {
+  margin-top: 12vh;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+  background: #FFFFFF;
+  padding: 15px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+
+  .delete-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 40%;
+
+    form {
+      margin-left: 20px;
+    }
+  }
+}
+
+.notsure-btn {
+  background-color: $color-blueDial;
+}
+
+.border-button {
+  border-radius: 50px !important;
+}
