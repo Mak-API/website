@@ -273,7 +273,7 @@
                description: apiDescription.value
            };
            let entityPayload = {
-               id: entityId,
+               id: simplifiedApiName,
                name: entityName
            };
            let attributePayload = {
@@ -283,8 +283,6 @@
                nullable: attributeNullable,
                attributes:""
            };
-
-           console.log(attributePayload);
 
            initiateAPi("{{path('app_default_index')}}api/apis/", apiPayload);
            initiateAPi("{{path('app_default_index')}}api/entities/", entityPayload);
@@ -300,8 +298,6 @@
                 return res;
             });
         }
-
-
 
     </script>
 {% endblock %}
