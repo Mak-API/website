@@ -3,11 +3,13 @@
 namespace App\Controller\Rest;
 
 use App\Entity\Api;
-use App\Repository\UserRepository;
 use App\Service\ApiService;
+use App\Service\Generator\Framework\SymfonyGenerator;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -78,9 +80,25 @@ class ApiController extends RestController
      * @return Response
      * @Route("/{id}", methods={"PUT"})
      */
-    public function updateApi(Request $request, Api $api)
+    public function updateApi(Request $request, Api $api): Response
     {
         $api = $this->apiService->updateApi($api, $request->get('name'), $request->get('description'), $this->getUser());
         return new Response($this->serialize($api), Response::HTTP_OK);
+    }
+
+    /**
+     * @param Api $api
+     * @param SymfonyGenerator $symfonyGenerator
+     * @return Response
+     * @Route("/{id}/generate", methods={"POST", "GET"})
+     */
+    public function generateApi(Api $api, SymfonyGenerator $symfonyGenerator): Response
+    {
+        $symfonyGenerator->setApi($api);
+        $symfonyGenerator->generate();
+        $symfonyGenerator->generateZipArchive();
+        $symfonyGenerator->uploadArchive();
+
+        return $this->getApi($api);
     }
 }
