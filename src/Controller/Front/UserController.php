@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\UserService;
 use App\Service\EmailService;
+use App\Utils\StringTools;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,7 +69,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             //generate and set email_token (for the email checking)
-            $token = $this->emailService->gen_uuid();
+            $token = StringTools::generateUUID4();
             $user->setEmailToken($token);
 
             //sending the confirmation email
