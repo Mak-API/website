@@ -147,8 +147,8 @@ class UserController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('app_user_index', [
-                'id' => $user->getId(),
+            return $this->redirectToRoute('app_user_show', [
+                'login' => $user->getLogin(),
             ]);
         }
 
