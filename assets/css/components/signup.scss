@@ -7,10 +7,21 @@ body{
         min-width: 500px;
         background: #FFFFFF;
         padding: 15px 35px;
-        -webkit-box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
-        -moz-box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
-        box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
+        @extend .makapi-form-box-shadow;
       }
+    }
+    .part-edit-profile {
+      @extend .part-profile;
+      .edit-form {
+        margin-top: 15vh;
+        padding: 10px 15px;
+        background-color: $color-lightGrey;
+        margin-bottom: 5px;
+        @extend .makapi-form-box-shadow;
+      }
+    }
+    .part-edit-profile-second {
+      height: 600px;
     }
   }
 }
