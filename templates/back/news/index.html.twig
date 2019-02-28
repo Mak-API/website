@@ -40,7 +40,7 @@
                     <td>{{ news.updatedAt ? news.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('app_admin_news_show', {'id': news.id}) }}">show</a>
+                            <a href="{{ path('app_news_show', {'id': news.id}) }}">show</a>
                         {% else %}
                             <a href="{{ path('app_news_show', {'id': news.id}) }}">show</a>
                         {% endif %}
