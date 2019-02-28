@@ -1,20 +1,8 @@
+{% extends 'pagelayout.html.twig' %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css?family=Kodchasan|Major+Mono+Display" rel="stylesheet">
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-    <link rel="stylesheet" href="{{ asset('build/vendor.css') }}">
-    <script type="text/javascript" src="{{ asset('build/vendor.js') }}"></script>
-
-    {% block head_javascripts %}{% endblock %}
-</head>
-<body>
-{{ encore_entry_script_tags('app') }}
+{% block title %}Delete profil{% endblock %}
 {% block body %}
+    {{ encore_entry_script_tags('app') }}
     <header class="linear-header">
         {% include 'components/header/delete_header.html.twig' %}
     </header>
@@ -37,6 +25,4 @@
         {% include 'components/footer/homepage_footer.html.twig' %}
     </footer>
 {% endblock %}
-</body>
-</html>
 
