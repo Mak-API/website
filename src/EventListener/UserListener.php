@@ -17,7 +17,8 @@ class UserListener
     {
         $entity = $args->getEntity();
         if($entity instanceof User){
-            $entity->setStatus('1');
+            $entity->setStatus('0');
+            $entity->setRoles(array('ROLE_UNVERIFIED'));
         }
     }
 }

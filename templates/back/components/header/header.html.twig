@@ -1,0 +1,28 @@
+<nav class="homepage-navbar">
+    <div class="nav-wrapper">
+        <a href="{{ path('app_default_index') }}" class="brand-logo">
+            <div class="navbar-logo_makapi">
+                <div class="font-mak">
+                    Mak
+                </div>
+                <img src="{{ asset('images/favicons/favicon.png') }}">
+                <div class="font-api">
+                    API
+                </div>
+            </div>
+        </a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down navbar-list">
+            <li><a href="{{ path('app_default_index') }}">Home</a></li>
+            <li class="navbar-list_signin"><a href="{{ path('app_user_show', {'login': app.user.login}) }}">{{ app.user.login }}</a></li>
+            <li class="active"><a href="{{ path('app_admin_index') }}">Dashboard</a></li>
+            <li class="navbar-list_signup"><a class="waves-effect waves-light btn makapi-button corail small" href="{{ path('app_security_logout') }}">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="{{ path('app_default_index') }}">Home</a></li>
+    <li><a href="{{ path('app_user_show', {'login': app.user.login}) }}">{{ app.user.login }}</a></li>
+    <li><a href="{{ path('app_admin_index') }}">Dashboard</a></li>
+    <li><a href="{{ path('app_security_logout') }}">Logout</a></li>
+</ul>

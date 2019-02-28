@@ -1,81 +1,81 @@
-{% trans_default_domain 'app' %}
-{% extends 'pagelayout.html.twig' %}
+{% extends 'back/admin_base.html.twig' %}
 {% block title %}
     Admin - Index CronTasks
 {% endblock %}
 
-{% block body %}
-    <main class="linear-submain container">
-        <div class="row">
-            <div class="col s12">
-                <ul class="tabs">
-                    <li class="tab col s3"><a href="#activated-tasks">Activated tasks</a></li>
-                    <li class="tab col s3 disabled"><a href="#tasks-lists">Tasks list</a></li>
-                    <li class="tab col s3"><a href="#add-task">Add task</a></li>
-                    <li class="tab col s3 disabled"><a href="#logs">Logs</a></li>
-                </ul>
-            </div>
-            <div id="activated-tasks" class="col s12">
+{% block content_main %}
+    <div class="panel-container-bloc">
+        <div class="header">
+            <h4>Tasks manager</h4>
+        </div>
+        <div class="main">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#activated-tasks">Activated tasks</a></li>
+                <li class="tab col s3 disabled"><a href="#tasks-lists">Tasks list</a></li>
+                <li class="tab col s3"><a href="#add-task">Add task</a></li>
+                <li class="tab col s3 disabled"><a href="#logs">Logs</a></li>
+            </ul>
+            <div id="activated-tasks">
                 <div class="white">
                     <table class="table">
                         <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Command</th>
-                                <th>Last activate</th>
-                                <th>Command result</th>
-                                <th>Action</th>
-                            </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Command</th>
+                            <th>Last activate</th>
+                            <th>Command result</th>
+                            <th>Action</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {% for task in activatedTasks %}
-                                <tr>
-                                    <td>{{ task.name }}</td>
-                                    <td>{{ task.command }}</td>
-                                    <td>{{ task.lastExecution ? task.lastExecution|date('Y-m-d H:i:s T') : '' }}</td>
-                                    {% if task.lastReturnCode == 0 %}
-                                        <td>Success</td>
-                                    {% elseif task.lastReturnCode == true %}
-                                        <td>Failed</td>
-                                    {% else %}
-                                        <td>No result</td>
-                                    {% endif %}
-                                    <td>
-                                        <a href="{{ path('app_crontasks_delete', {'id':task.id}) }}" class="btn makapi-button small red">
-                                            <i class="material-icons">delete</i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <td colspan="5">
-                                    <h2>No tasks founded</h2>
-                                    <p>
-                                        Go to add your first task or activate one task.
-                                    </p>
+                        {% for task in activatedTasks %}
+                            <tr>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.command }}</td>
+                                <td>{{ task.lastExecution ? task.lastExecution|date('Y-m-d H:i:s T') : '' }}</td>
+                                {% if task.lastReturnCode == 0 %}
+                                    <td>Success</td>
+                                {% elseif task.lastReturnCode == true %}
+                                    <td>Failed</td>
+                                {% else %}
+                                    <td>No result</td>
+                                {% endif %}
+                                <td>
+                                    <a href="{{ path('app_crontasks_delete', {'id':task.id}) }}" class="btn makapi-button small red">
+                                        <i class="material-icons">delete</i>
+                                    </a>
                                 </td>
-                            {% endfor %}
+                            </tr>
+                        {% else %}
+                            <td colspan="5">
+                                <h2>No tasks founded</h2>
+                                <p>
+                                    Go to add your first task or activate one task.
+                                </p>
+                            </td>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div id="tasks-lists" class="col s12">tasks-lists</div>
-            <div id="add-task" class="col s12">
+            <div id="tasks-lists">tasks-lists</div>
+            <div id="add-task">
                 <div id="makapi-task-form" class="white" style="
-                    padding: 15px;
-                ">
+                padding: 15px;
+            ">
                     <div style="
-                        width: 70%;
-                        margin: auto;
-                    ">
+                    width: 70%;
+                    margin: auto;
+                ">
                         {{ render(controller(
                             'App\\Controller\\Back\\CronTasksController::add'
                         )) }}
                     </div>
                 </div>
             </div>
-            <div id="logs" class="col s12">Log</div>
+            <div id="logs">Log</div>
         </div>
-    </main>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
