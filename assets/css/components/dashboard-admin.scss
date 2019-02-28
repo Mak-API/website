@@ -5,10 +5,41 @@ a:link, a:visited {
 a:hover, a:active {
   text-decoration: none;
 }
+header.dashboard-header {
+  min-width: $size-minWidthDashboard;
+}
 
-.container-dashboard {
-  margin: 20px 15px 0 15px;
+main.container-dashboard {
+  min-width: $size-minWidthDashboard;
 
+  aside {
+    ul.panel-dashboard {
+      li.collection-header{
+        > h4 {
+          margin: 0;
+        }
+      }
+      li.collection-item {
+        padding: 0;
+        > a {
+          padding: 10px 15px;
+          color: $color-blueDial;
+          transition: .1s;
+          > i {
+            margin-right: 10px;
+          }
+          &:hover {
+            color: $color-livingCoral;
+          }
+          &.active {
+            padding-left: 35px;
+            color: $color-livingCoral;
+          }
+        }
+      }
+    }
+
+  }
   .container-bloc {
     margin: 10px;
     background-color: #fff;

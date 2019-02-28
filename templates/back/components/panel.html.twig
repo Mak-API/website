@@ -1,0 +1,27 @@
+<ul class="collection with-header panel-dashboard">
+    <li class="collection-header"><h4>Menu</h4></li>
+    <li class="collection-item">
+        <a href="#" class="valign-wrapper">
+            <i class="small material-icons">dashboard</i>
+            Dashboard
+        </a>
+    </li>
+    <li class="collection-item">
+        <a href="#" class="valign-wrapper">
+            <i class="small material-icons">group</i>
+            Users
+        </a>
+    </li>
+    <li class="collection-item">
+        <a href="{{ path('app_crontasks_index') }}" class="valign-wrapper {% if app.request.get('_route') == 'app_crontasks_index' %} active{% endif %}">
+            <i class="small material-icons">play_circle_outline</i>
+            Tasks
+        </a>
+    </li>
+    <li class="collection-item">
+        <a href="#" class="valign-wrapper">
+            <i class="small material-icons">note</i>
+            News
+        </a>
+    </li>
+</ul>
