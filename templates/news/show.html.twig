@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<title>News</title>
+
+{% block body %}
+    <h1>News</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ news.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ news.title }}</td>
+            </tr>
+            <tr>
+                <th>Body</th>
+                <td>{{ news.body }}</td>
+            </tr>
+            <tr>
+                <th>IsPublished</th>
+                <td>{{ news.isPublished ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ news.createdAt ? news.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ news.updatedAt ? news.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('news_index') }}">back to list</a>
+
+    <a href="{{ path('news_edit', {'id': news.id}) }}">edit</a>
+
+    {{ include('news/_delete_form.html.twig') }}
+{% endblock %}
