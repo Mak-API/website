@@ -4,16 +4,21 @@
 {% endblock %}
 
 {% block content_main %}
-        <ul class="tabs">
-            <li class="tab col s3"><a href="#activated-tasks">Activated tasks</a></li>
-            <li class="tab col s3 disabled"><a href="#tasks-lists">Tasks list</a></li>
-            <li class="tab col s3"><a href="#add-task">Add task</a></li>
-            <li class="tab col s3 disabled"><a href="#logs">Logs</a></li>
-        </ul>
-        <div id="activated-tasks">
-            <div class="white">
-                <table class="table">
-                    <thead>
+    <div class="panel-container-bloc">
+        <div class="header">
+            <h4>Task manager</h4>
+        </div>
+        <div class="main">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#activated-tasks">Activated tasks</a></li>
+                <li class="tab col s3 disabled"><a href="#tasks-lists">Tasks list</a></li>
+                <li class="tab col s3"><a href="#add-task">Add task</a></li>
+                <li class="tab col s3 disabled"><a href="#logs">Logs</a></li>
+            </ul>
+            <div id="activated-tasks">
+                <div class="white">
+                    <table class="table">
+                        <thead>
                         <tr>
                             <th>Name</th>
                             <th>Command</th>
@@ -21,8 +26,8 @@
                             <th>Command result</th>
                             <th>Action</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         {% for task in activatedTasks %}
                             <tr>
                                 <td>{{ task.name }}</td>
@@ -49,26 +54,27 @@
                                 </p>
                             </td>
                         {% endfor %}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div id="tasks-lists">tasks-lists</div>
-        <div id="add-task">
-            <div id="makapi-task-form" class="white" style="
+            <div id="tasks-lists">tasks-lists</div>
+            <div id="add-task">
+                <div id="makapi-task-form" class="white" style="
                 padding: 15px;
             ">
-                <div style="
+                    <div style="
                     width: 70%;
                     margin: auto;
                 ">
-                    {{ render(controller(
-                        'App\\Controller\\Back\\CronTasksController::add'
-                    )) }}
+                        {{ render(controller(
+                            'App\\Controller\\Back\\CronTasksController::add'
+                        )) }}
+                    </div>
                 </div>
             </div>
+            <div id="logs">Log</div>
         </div>
-        <div id="logs">Log</div>
     </div>
 {% endblock %}
 
