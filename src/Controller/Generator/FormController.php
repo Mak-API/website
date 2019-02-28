@@ -2,6 +2,7 @@
 
 namespace App\Controller\Generator;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,6 +15,7 @@ class FormController extends AbstractController
 {
     /**
      * @Route("/form", name="index")
+     * @IsGranted("ROLE_USER")
      */
     public function index()
     {
