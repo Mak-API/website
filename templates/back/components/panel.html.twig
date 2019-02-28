@@ -4,24 +4,28 @@
         <a href="{{ path('app_admin_index') }}" class="valign-wrapper {% if app.request.get('_route') == 'app_admin_index' %} active{% endif %}">
             <i class="small material-icons">dashboard</i>
             Dashboard
+            <i class="small material-icons icons-arrow-panel">keyboard_arrow_right</i>
         </a>
     </li>
     <li class="collection-item">
         <a href="{{ path('app_admin_users_index') }}" class="valign-wrapper {% if app.request.get('_route') == 'app_admin_users_index' %} active{% endif %}">
             <i class="small material-icons">group</i>
             Users
+            <i class="small material-icons icons-arrow-panel">keyboard_arrow_right</i>
         </a>
     </li>
     <li class="collection-item">
         <a href="{{ path('app_crontasks_index') }}" class="valign-wrapper {% if app.request.get('_route') == 'app_crontasks_index' %} active{% endif %}">
             <i class="small material-icons">play_circle_outline</i>
             Tasks
+            <i class="small material-icons icons-arrow-panel">keyboard_arrow_right</i>
         </a>
     </li>
     <li class="collection-item">
         <a href="#" class="valign-wrapper">
             <i class="small material-icons">note</i>
             News
+            <i class="small material-icons icons-arrow-panel">keyboard_arrow_right</i>
         </a>
     </li>
 </ul>

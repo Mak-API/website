@@ -31,11 +31,15 @@ main.container-dashboard {
           > i {
             margin-right: 10px;
           }
+          > i.icons-arrow-panel {
+            position: absolute;
+            right: 0;
+          }
           &:hover {
             color: $color-livingCoral;
           }
           &.active {
-            padding-left: 35px;
+            padding-left: 25px;
             color: $color-livingCoral;
           }
         }
