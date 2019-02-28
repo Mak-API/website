@@ -66,3 +66,5 @@ docker/*
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+storage/*
