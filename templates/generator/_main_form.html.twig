@@ -166,8 +166,6 @@
          * Replace title of entity by value on input entity1
          * @type {HTMLElement}
          */
-        const api = document.getElementById("form-api-name").textContent;
-        const simplifiedApiName = api.replace(/ /g, "");
         const inputEntity = document.getElementById("entity1");
         const inputAttribute = document.getElementById("attribute_name");
         const btnAdd = document.getElementById("valid-attr");
@@ -179,6 +177,8 @@
         /**/
 
         inputEntity.addEventListener("keyup", function() {
+            const api = document.getElementById("form-api-name").textContent;
+            const simplifiedApiName = api.replace(/ /g, "");
             const entity = document.getElementById("entity-name");
             let entityValue = document.getElementById("entity1").value;
             let template = entityValue+"<i class=\"material-icons medium\">arrow_drop_down</i>";
@@ -193,6 +193,8 @@
         });
 
         btnAdd.addEventListener("click", function () {
+            const api = document.getElementById("form-api-name").textContent;
+            const simplifiedApiName = api.replace(/ /g, "");
             let inputAttribute = document.getElementById("attribute_name").value;
             let entityValue = document.getElementById("entity1").value;
             let selectValue = document.getElementById("select-type-attr").value;
@@ -212,6 +214,7 @@
         });
 
         function editAttribute(value) {
+
             const nameAttr = value.parentNode.getAttribute("data-name-attribute");
             document.getElementById("attribute_name").value = nameAttr;
             document.getElementById("box_over-file_").classList.remove("hide");
@@ -220,6 +223,8 @@
 
             const btnEdit = document.getElementById("edit-attr");
             btnEdit.addEventListener("click", function () {
+                const api = document.getElementById("form-api-name").textContent;
+                const simplifiedApiName = api.replace(/ /g, "");
                 let inputAttribute = document.getElementById("attribute_name").value;
                 let entityValue = document.getElementById("entity1").value;
                 let selectValue = document.getElementById("select-type-attr").value;
@@ -245,15 +250,27 @@
         }
 
         btnGenerate.addEventListener('click', function() {
-            let inputAttribute = document.getElementById("attribute_name").value;
-            let attributeId = simplifiedApiName+"_"+entityName+"_"+inputAttribute;
-            console.log(attributeId);
 
-            let attributeName = document.getElementsById(attributeId).getAttribute("data-name-attribute");
-            let attributeType = document.getElementsById(attributeId).getAttribute("data-type-attribute");
-            let attributeNullable = document.getElementsById("makapi-chip").getAttribute("data-nullable-attribute");
+            let attributeName = [];
+            let attributeType = [];
+            let attributeNullable = [];
 
-           let apiPayload = {
+            var attr = document.querySelectorAll("div[data-name-attribute]");
+            for( var i = 0; i < attr.length; i++ ) {
+                attributeName.push(attr[i].getAttribute("data-name-attribute"));
+                attributeType.push(attr[i].getAttribute("data-type-attribute"));
+                attributeNullable.push(attr[i].getAttribute("data-nullable-attribute"));
+            }
+            const api = document.getElementById("form-api-name").textContent;
+            const simplifiedApiName = api.replace(/ /g, "");
+            const entity = document.getElementById("entity-name");
+            let entityValue = document.getElementById("entity1").value;
+            entity.setAttribute("data-entity-id", simplifiedApiName+"_"+entityValue);
+
+            const entityId = document.getElementById("entity-name").getAttribute("data-entity-id");
+            const entityName = document.getElementById("entity-name").getAttribute("data-entity-name");
+
+            let apiPayload = {
                name: apiName.textContent,
                description: apiDescription.value
            };
@@ -263,13 +280,15 @@
            };
            let attributePayload = {
                id: entityId,
-               /*name: attributeName,
+               name: attributeName,
                type: attributeType,
-               nullable: attributeNullable,*/
+               nullable: attributeNullable,
                attributes:""
            };
+
            initiateAPi("{{path('app_default_index')}}api/apis/", apiPayload);
            initiateAPi("{{path('app_default_index')}}api/entities/", entityPayload);
+           initiateAPi("{{path('app_default_index')}}api/fields/", attributePayload);
         });
 
         function initiateAPi(route, payload) {
