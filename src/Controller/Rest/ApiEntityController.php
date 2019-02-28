@@ -28,8 +28,8 @@ class ApiEntityController extends RestController
     }
 
     /**
- * @Route("/", methods={"GET"})
- */
+     * @Route("/", methods={"GET"})
+     */
     public function getEntities(): Response
     {
         return new Response($this->serialize($this->apiEntityService->getEntities()), Response::HTTP_OK);
@@ -65,7 +65,7 @@ class ApiEntityController extends RestController
      */
     public function updateEntity(Request $request, ApiEntity $entity)
     {
-        $entity = $this->apiEntityService->updateEntity($entity, $request->get('name'));
+        $entity = $this->apiEntityService->updateEntity($entity, $request->get('name'), $this->getUser());
         return new Response($this->serialize($entity), Response::HTTP_OK);
     }
 

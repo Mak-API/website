@@ -5,7 +5,6 @@ namespace App\Service\Generator;
 
 use App\Entity\Api;
 use App\Utils\StringTools;
-use http\Exception\RuntimeException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -42,7 +41,7 @@ abstract class AbstractFrameworkGenerator
 
     public function __construct(KernelInterface $kernel, LoggerInterface $logger)
     {
-        $this->rootPath = sprintf('%s/storage', $kernel->getProjectDir());
+        $this->rootPath = realpath(sprintf('%s/../generatedApis', $kernel->getProjectDir()));
         $this->logger = $logger;
     }
 
@@ -65,24 +64,22 @@ abstract class AbstractFrameworkGenerator
      */
     public function createFolder(): AbstractFrameworkGenerator
     {
-        $apiPath = sprintf('%s/%s-%s', $this->rootPath, $this->api->getName(), StringTools::generateUUID4());
-        if (mkdir($apiPath, 0777, true)) {
-            $this->projectPath = $apiPath;
-            return $this;
-        } else {
-            throw new RuntimeException("Folder '${apiPath}' could not be created.");
-        }
+        $projectPath = sprintf('%s/%s-%s', $this->rootPath, $this->api->getName(), StringTools::generateUUID4());
+        $this->projectPath = $projectPath;
+        $this->bash(sprintf('mkdir %s', $projectPath), $this->rootPath);
+        return $this;
     }
 
     /**
      * Runs a bash command and returns it.
      *
      * @param string $command
+     * @param string|null $directory
      * @return string
      */
-    protected function bash(string $command): string
+    protected function bash(string $command, string $directory): string
     {
-        $command = sprintf('cd %s && %s', isset($this->apiPath) ? $this->apiPath : $this->projectPath, $command);
+        $command = sprintf('cd %s && %s', $directory, $command);
         $this->logger->info("Launching command: '$command'.");
         $output = exec($command);
         $this->logger->info("Output: $output.");
@@ -95,6 +92,11 @@ abstract class AbstractFrameworkGenerator
         return $this->createFolder()
             ->generateProject()
             ->generateEntities();
+    }
+
+    public function getApiPath(): string
+    {
+        return $this->apiPath;
     }
 
     /**

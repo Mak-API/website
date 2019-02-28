@@ -14,12 +14,10 @@ class SymfonyGenerator extends AbstractFrameworkGenerator
      */
     protected function generateProject(): AbstractFrameworkGenerator
     {
-        $this->bash(sprintf('composer create-project symfony/skeleton %s', $this->api->getName()));
-        $this->apiPath = sprintf('%s/%s', $this->projectPath, $this->apiPath);
+        $this->bash(sprintf('composer create-project symfony/skeleton %s', $this->api->getName()), $this->projectPath);
+        $this->apiPath = sprintf('%s/%s', $this->projectPath, $this->api->getName());
 
-        $this->bash('touch composer.json');
-        $this->bash("echo '{}' > composer.json");
-        $this->bash('composer require api | yes');
+        $this->bash('composer require api', $this->apiPath);
 
         return $this;
     }
@@ -31,6 +29,16 @@ class SymfonyGenerator extends AbstractFrameworkGenerator
      */
     protected function generateEntities(): string
     {
-        return $this->bash('pwd');
+    }
+
+    /**
+     * Runs a Symfony command <php bin/console $command>
+     *
+     * @param string $command
+     * @return string
+     */
+    private function symfonyCommand(string $command): string
+    {
+        return $this->bash(sprintf('php bin/console %s', $command), $this->apiPath);
     }
 }
