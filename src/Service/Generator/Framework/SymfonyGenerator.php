@@ -81,7 +81,7 @@ class SymfonyGenerator extends AbstractFrameworkGenerator
     public function generateRepository(ApiEntity $entity): SymfonyGenerator
     {
         $className = sprintf('%sRepository', ucfirst($entity->getName()));
-        $this->logger("Generating '$className'.");
+        $this->logger->info("Generating '$className'.");
         $context = [
             'name' => $className,
             'entityName' => ucfirst($entity->getName())
