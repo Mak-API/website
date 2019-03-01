@@ -271,31 +271,44 @@
             let apiPayload = {
                name: apiName.textContent,
                description: apiDescription.value
-           };
-           let entityPayload = {
+            };
+            let entityPayload = {
                id: simplifiedApiName,
                name: entityName
-           };
-           let attributePayload = {
+            };
+            let attributePayload = {
                id: entityId,
                name: attributeName,
                type: attributeType,
                nullable: attributeNullable,
                attributes:""
-           };
+            };
 
-           initiateAPi("{{path('app_default_index')}}api/apis/", apiPayload);
-           initiateAPi("{{path('app_default_index')}}api/entities/", entityPayload);
-           initiateAPi("{{path('app_default_index')}}api/fields/", attributePayload);
+           initiateAPi("{{path('app_default_index')}}api/apis/", apiPayload, entityPayload, attributePayload);
         });
 
-        function initiateAPi(route, payload) {
+        function initiateAPi(route, payload, entityPayload, attributePayload) {
             $.ajax({
                 url: route,
                 type: 'POST',
-                data: payload
-            }).done(function(res) {
-                return res;
+                data: payload,
+                success: function (res) {
+                    $.ajax({
+                        url: "{{ path('app_default_index') }}api/entities/",
+                        type: 'POST',
+                        data: entityPayload,
+                        success: function (res) {
+                            $.ajax({
+                                url: "{{path('app_default_index')}}api/fields/",
+                                type: 'POST',
+                                data: attributePayload,
+                                success: function (res) {
+                                    return res;
+                                }
+                            })
+                        }
+                    })
+                }
             });
         }
 
