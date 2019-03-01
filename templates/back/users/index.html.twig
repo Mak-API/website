@@ -1,0 +1,63 @@
+{% extends 'back/admin_base.html.twig' %}
+{% block title %}
+    Admin - Index CronTasks
+{% endblock %}
+
+{% block content_main %}
+    <div class="panel-container-bloc">
+        <div class="header">
+            <h4>Users manager</h4>
+        </div>
+        <div class="main">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#activated-users">Activated users</a></li>
+                <li class="tab col s3 disabled"><a href="#premium-users">Premium users</a></li>
+            </ul>
+            <div id="activated-users">
+                <div class="white">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Registered at</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.login }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d') : '' }}</td>
+                                <td>
+                                    <a onClick="return confirm('Delete {{ user.login }} ?')" href="{{ path('app_admin_users_delete', {'id':user.id}) }}" class="btn makapi-button small red">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <td colspan="5">
+                                <h2>No tasks founded</h2>
+                                <p>
+                                    Go to add your first task or activate one task.
+                                </p>
+                            </td>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="premium-users">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let el = document.querySelectorAll('.tabs');
+        let instance = M.Tabs.init(el);
+    </script>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'back/admin_base.html.twig' %}
+{% block title %}
+    Admin - Administration Panel
+{% endblock %}
+
+{% block content_main %}
+    <div class="panel-container-bloc">
+        <div class="header">
+            <h4>Users analytics</h4>
+        </div>
+        <div class="main panel-container-dashboard-users">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a class="active" href="#users-day">Day</a></li>
+                        <li class="tab col s3"><a href="#users-week">Week</a></li>
+                        <li class="tab col s3 disabled"><a href="#users-month">Month</a></li>
+                        <li class="tab col s3 disabled"><a href="#users-year">Year</a></li>
+                    </ul>
+                </div>
+                <div id="users-day" class="col s12 center">
+                    <div class="col s4 container-stats-users">
+                        <h5>Users visited</h5>
+                        <span class="makapi-text">15</span>
+                    </div>
+                    <div class="col s4 container-stats-users">
+                        <h5>Users registered</h5>
+                        <span class="makapi-text">1</span>
+                    </div>
+                    <div class="col s4 container-stats-users">
+                        <h5>Users premium</h5>
+                        <span class="makapi-text">0</span>
+                    </div>
+                </div>
+                <div id="users-week" class="col s12 center">
+                    <div class="col s4 container-stats-users">
+                        <h5>Users visited</h5>
+                        <span class="makapi-text">100</span>
+                    </div>
+                    <div class="col s4 container-stats-users">
+                        <h5>Users registered</h5>
+                        <span class="makapi-text">20</span>
+                    </div>
+                    <div class="col s4 container-stats-users">
+                        <h5>Users premium</h5>
+                        <span class="makapi-text">2</span>
+                    </div>
+                </div>
+                <div id="users-month" class="col s12 center">
+
+                </div>
+                <div id="users-year" class="col s12 center">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-container-bloc">
+        <div class="header">
+            <h4>APIs analytics</h4>
+        </div>
+        <div class="main panel-container-dashboard-apis">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a class="active" href="#apis-day">Day</a></li>
+                        <li class="tab col s3 disabled"><a href="#apis-week">Week</a></li>
+                        <li class="tab col s3 disabled"><a href="#apis-month">Month</a></li>
+                        <li class="tab col s3 disabled"><a href="#apis-year">Year</a></li>
+                    </ul>
+                </div>
+                <div id="apis-day" class="col s12 center">
+                    <div class="container-canvas">
+                        <canvas id="myChart" class="chart-api fixed-chart-js-height"></canvas>
+                    </div>
+                </div>
+                <div id="apis-week" class="col s12 center">
+
+                </div>
+                <div id="apis-month" class="col s12 center">
+
+                </div>
+                <div id="apis-year" class="col s12 center">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-container-bloc">
+        <div class="header">
+            <h4>Financial analytics</h4>
+        </div>
+        <div class="main panel-container-dashboard-financial">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a class="active" href="#financial-day">Day</a></li>
+                        <li class="tab col s3 disabled"><a href="#financial-week">Week</a></li>
+                        <li class="tab col s3 disabled"><a href="#financial-month">Month</a></li>
+                        <li class="tab col s3 disabled"><a href="#financial-year">Year</a></li>
+                    </ul>
+                </div>
+                <div id="financial-day" class="col s12 center">
+                    <div class="container-canvas">
+                        <canvas id="myChartReport" class="chart-financial fixed-chart-js-height"></canvas>
+                    </div>
+                </div>
+                <div id="financial-week" class="col s12 center">
+
+                </div>
+                <div id="financial-month" class="col s12 center">
+
+                </div>
+                <div id="financial-year" class="col s12 center">
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
