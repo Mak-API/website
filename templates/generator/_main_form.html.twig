@@ -290,13 +290,13 @@
 
         function initiateAPi() {
             $.ajax({
-                url: 'http://127.0.0.1:8000/api/apis/',
+                url: 'http://mak-api.com/api/apis/',
                 type: 'POST',
                 data: apiPayload,
                 success: function (response) {
                     entityPayload['apiId'] = JSON.parse(response)['id'];
                     $.ajax({
-                        url: 'http://127.0.0.1:8000/api/entities/',
+                        url: 'http://mak-api.com/api/entities/',
                         type: 'POST',
                         data: entityPayload,
                         success: function (response) {
@@ -318,7 +318,7 @@
                     'nullable': attr[i].getAttribute('data-nullable-attribute')
                 };
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/api/fields/',
+                    url: 'http://mak-api.com/api/fields/',
                     type: 'POST',
                     data: payload,
                     success: function (res) {
