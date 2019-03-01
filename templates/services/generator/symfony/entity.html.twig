@@ -1,10 +1,14 @@
 {% extends 'services/generator/symfony/class.html.twig' %}
 
 {% block namespace 'App\\Entity' %}
-{% block uses 'Doctrine\\ORM\\Mapping as ORM;' %}
+{% block uses %}
+use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+{% endblock %}
 
 {% block classPhpDoc %}
 /**
+* @
 * @ORM\Entity(repositoryClass="App\Repository\{{ name|capitalize }}Repository")
 */
 {% endblock %}

@@ -113,18 +113,6 @@
     "mtdowling/cron-expression": {
         "version": "v1.2.1"
     },
-    "nelmio/cors-bundle": {
-        "version": "1.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.5",
-            "ref": "f0436fc35fca88eada758311f8de43bfb61f1980"
-        },
-        "files": [
-            "config/packages/nelmio_cors.yaml"
-        ]
-    },
     "nikic/php-parser": {
         "version": "v4.1.0"
     },
@@ -175,6 +163,18 @@
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
+    },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "c82bead70f9a4f656354a193df7bf0ca2114efa0"
+        },
+        "files": [
+            "public/.htaccess"
+        ]
     },
     "symfony/asset": {
         "version": "v4.2.1"

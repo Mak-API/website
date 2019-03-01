@@ -3,12 +3,15 @@
 namespace App\Controller\Rest;
 
 use App\Entity\Api;
+use App\Entity\User;
 use App\Service\ApiService;
 use App\Service\Generator\Framework\SymfonyGenerator;
+use App\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * Class ApiController
@@ -23,9 +26,16 @@ class ApiController extends RestController
      */
     private $apiService;
 
-    public function __construct(ApiService $apiService)
+    /**
+     * @var UserService
+     */
+    private $userService;
+
+
+    public function __construct(ApiService $apiService, UserService $userService)
     {
         $this->apiService = $apiService;
+        $this->userService = $userService;
     }
 
     /**
@@ -51,14 +61,16 @@ class ApiController extends RestController
 
     /**
      * @param Request $request
+     * @param TokenInterface $token
      * @return Response
      *
-     * @Route("/", methods={"POST"})
+     * @Route("/", methods={"POST", "GET"})
      */
     public function createApi(Request $request): Response
     {
-        $api = $this->apiService->createApi($request->get('name'), $request->get('description'), $this->getUser());
-        return new Response($this->serialize($api), Response::HTTP_CREATED);
+        header("Access-Control-Allow-Origin: *");
+        $api = $this->apiService->createApi($request->get('name'), $request->get('description'), $this->getUser($request));
+        return new Response($this->serialize($api), Response::HTTP_CREATED, ['Access-Control-Allow-Origin' => '*']);
     }
 
     /**
@@ -80,7 +92,7 @@ class ApiController extends RestController
      */
     public function updateApi(Request $request, Api $api): Response
     {
-        $api = $this->apiService->updateApi($api, $request->get('name'), $request->get('description'), $this->getUser());
+        $api = $this->apiService->updateApi($api, $request->get('name'), $request->get('description'), $this->getUserFromRequest());
         return new Response($this->serialize($api), Response::HTTP_OK);
     }
 
@@ -98,5 +110,14 @@ class ApiController extends RestController
         $symfonyGenerator->uploadArchive();
 
         return $this->getApi($api);
+    }
+
+    /**
+     * @param Request $request
+     * @return \App\Entity\User|mixed|null
+     */
+    private function getUserFromRequest(Request $request)
+    {
+        return $this->userService->getUser($request->get('userId'));
     }
 }

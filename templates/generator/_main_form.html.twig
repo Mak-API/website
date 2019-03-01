@@ -174,9 +174,9 @@
         let entityName = document.getElementById("entity-name").getAttribute("data-entity-name");
         /**/
 
-        var apiPayload;
-        var entityPayload;
-        var attributesPayload;
+        apiPayload = {};
+        entityPayload = {};
+        attributesPayload = {};
 
         inputEntity.addEventListener("keyup", function() {
             const api = document.getElementById("form-api-name").textContent;
@@ -257,12 +257,6 @@
             let attributeType = [];
             let attributeNullable = [];
 
-            var attr = document.querySelectorAll("div[data-name-attribute]");
-            for( var i = 0; i < attr.length; i++ ) {
-                attributeName.push(attr[i].getAttribute("data-name-attribute"));
-                attributeType.push(attr[i].getAttribute("data-type-attribute"));
-                attributeNullable.push(attr[i].getAttribute("data-nullable-attribute"));
-            }
             const api = document.getElementById("form-api-name").textContent;
             const simplifiedApiName = api.replace(/ /g, "");
             const entity = document.getElementById("entity-name");
@@ -274,18 +268,21 @@
 
             apiPayload = {
                name: apiName.textContent,
-               description: apiDescription.value
+               description: apiDescription.value,
+                userId: {{ userId }}
             };
             entityPayload = {
                id: simplifiedApiName,
-               name: entityName
+               name: entityName,
+                userId: {{ userId }}
             };
             attributePayload = {
                id: entityId,
                name: attributeName,
                type: attributeType,
                nullable: attributeNullable,
-               attributes:""
+               attributes:"",
+                userId: {{ userId }}
             };
 
            initiateAPi();
@@ -293,29 +290,42 @@
 
         function initiateAPi() {
             $.ajax({
-                url: 'http://localhost:8000/api/apis',
+                url: 'http://127.0.0.1:8000/api/apis/',
                 type: 'POST',
                 data: apiPayload,
                 success: function (response) {
-                    entityPayload['apiId'] = response['id'];
+                    entityPayload['apiId'] = JSON.parse(response)['id'];
                     $.ajax({
-                        url: 'http://localhost:8000/api/entities',
+                        url: 'http://127.0.0.1:8000/api/entities/',
                         type: 'POST',
                         data: entityPayload,
                         success: function (response) {
-                            attributesPayload['entityId'] = response['id'];
-                            $.ajax({
-                                url: 'http://localhost:8000/api/fields',
-                                type: 'POST',
-                                data: attributePayload,
-                                success: function (res) {
-                                    return res;
-                                }
-                            })
+                            generateFields(JSON.parse(response)['id']);
                         }
                     })
                 }
             });
+        }
+
+        function generateFields(entityId) {
+            var attr = document.querySelectorAll("div[data-name-attribute]");
+            for(var i = 0; i < attr.length; i++) {
+                let payload = {
+                    'userId': {{ userId }},
+                    'entityId': entityId,
+                    'name': attr[i].getAttribute('data-name-attribute'),
+                    'type': attr[i].getAttribute('data-type-attribute'),
+                    'nullable': attr[i].getAttribute('data-nullable-attribute')
+                };
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/api/fields/',
+                    type: 'POST',
+                    data: payload,
+                    success: function (res) {
+                        console.log(JSON.parse(res)['id']);
+                    }
+                })
+            }
         }
 
     </script>

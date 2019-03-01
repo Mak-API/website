@@ -5,6 +5,7 @@ namespace App\Controller\Rest;
 use App\Entity\ApiEntity;
 use App\Repository\UserRepository;
 use App\Service\ApiEntityService;
+use App\Service\UserService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,9 +23,15 @@ class ApiEntityController extends RestController
      */
     private $apiEntityService;
 
-    public function __construct(ApiEntityService $apiEntityService)
+    /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(ApiEntityService $apiEntityService, UserService $userService)
     {
         $this->apiEntityService = $apiEntityService;
+        $this->userService = $userService;
     }
 
     /**
@@ -53,7 +60,7 @@ class ApiEntityController extends RestController
      */
     public function createEntity(Request $request): Response
     {
-        $api = $this->apiEntityService->createEntity($request->get('apiId'), $request->get('name'), $this->getUser());
+        $api = $this->apiEntityService->createEntity($request->get('apiId'), $request->get('name'), $this->getUserFromRequest($request));
         return new Response($this->serialize($api));
     }
 
@@ -78,5 +85,14 @@ class ApiEntityController extends RestController
     {
         $this->apiEntityService->deleteEntity($entity);
         return new Response(null, Response::HTTP_OK);
+    }
+
+    /**
+     * @param Request $request
+     * @return \App\Entity\User|mixed|null
+     */
+    private function getUserFromRequest(Request $request)
+    {
+        return $this->userService->getUser($request->get('userId'));
     }
 }

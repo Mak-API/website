@@ -5,6 +5,7 @@ namespace App\Controller\Generator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * Class FormController
@@ -21,6 +22,7 @@ class FormController extends AbstractController
     {
         return $this->render('generator/index_form.html.twig', [
             'controller_name' => 'FormController',
+            'userId' => $this->getUser()->getId()
         ]);
     }
 }

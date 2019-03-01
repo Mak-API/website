@@ -8,6 +8,7 @@
 
 namespace App\Service;
 
+use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use App\Entity\User;
@@ -15,8 +16,20 @@ use http\Exception\RuntimeException;
 
 class UserService
 {
+    /**
+     * @var ObjectManager
+     */
     private $manager;
+
+    /**
+     * @var \Twig_Environment
+     */
     private $templating;
+
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
 
     /**
@@ -24,10 +37,11 @@ class UserService
      * @param ObjectManager $manager
      * @param \Twig_Environment $templating
      */
-    public function __construct(ObjectManager $manager, \Twig_Environment $templating)
+    public function __construct(ObjectManager $manager, \Twig_Environment $templating, UserRepository $userRepository)
     {
         $this->manager = $manager;
         $this->templating = $templating;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -124,5 +138,14 @@ class UserService
         } catch (\RuntimeException $e) {
             throw new \RuntimeException('Something went wrong' . + $e);
         }
+    }
+
+    /**
+     * @param int $id
+     * @return User|null
+     */
+    public function getUser(int $id)
+    {
+        return $this->userRepository->find($id);
     }
 }

@@ -1,6 +1,6 @@
 rest_controllers:
     resource: ../../src/Controller/Rest
-    type: annotation
+    type: 'annotation'
     prefix: '/api'
 
 front_controllers:

@@ -20,7 +20,7 @@ class SymfonyGenerator extends AbstractFrameworkGenerator
         $this->apiPath = sprintf('%s/%s', $this->projectPath, $this->api->getName());
 
         $this->logger->info('Requiring ApiPlatform.');
-        $this->bash('composer require api', $this->apiPath);
+        $this->bash('composer require api --ignore-platform-reqs', $this->apiPath);
 
         return $this;
     }
