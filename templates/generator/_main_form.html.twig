@@ -288,24 +288,24 @@
                attributes:""
             };
 
-           initiateAPi("{{ path('app_default_index') }}");
+           initiateAPi();
         });
 
-        function initiateAPi(route) {
+        function initiateAPi() {
             $.ajax({
-                url: route + '/api/entities',
+                url: 'http://localhost:8000/api/apis',
                 type: 'POST',
                 data: apiPayload,
                 success: function (response) {
                     entityPayload['apiId'] = response['id'];
                     $.ajax({
-                        url: "{{ path('app_default_index') }}api/entities/",
+                        url: 'http://localhost:8000/api/entities',
                         type: 'POST',
                         data: entityPayload,
                         success: function (response) {
                             attributesPayload['entityId'] = response['id'];
                             $.ajax({
-                                url: "{{path('app_default_index')}}api/fields/",
+                                url: 'http://localhost:8000/api/fields',
                                 type: 'POST',
                                 data: attributePayload,
                                 success: function (res) {
