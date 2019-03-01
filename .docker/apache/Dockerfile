@@ -13,7 +13,6 @@ RUN apt-get update \
 RUN a2enmod proxy_fcgi ssl rewrite proxy proxy_balancer proxy_http proxy_ajp
 RUN sed -i '/Global configuration/a \
 ServerName localhost \
-Header set Access-Control-Allow-Origin "*" \
 ' /etc/apache2/apache2.conf
 EXPOSE 80 443
 RUN rm -f /run/apache2/apache2.pid
