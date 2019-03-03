@@ -18,6 +18,6 @@ class EditorialController extends AbstractController
      */
     public function aboutUs()
     {
-        return $this->render('components/editorial_pages/about/about.html.twig', []);
+        return $this->render('Front/Editorial/About/about.html.twig', []);
     }
 }

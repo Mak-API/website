@@ -1,0 +1,114 @@
+{% extends 'Front/linear_front.html.twig' %}
+
+{% block title %}
+    Mak'API - About Us
+{% endblock %}
+
+{% block main %}
+    <div class="container makapi-container">
+        <div class="row">
+            <div class="col s12 m6">
+                <h1>About us</h1>
+                <p class="makapi-text tall">
+                    We are group of people who wants to simplify the use of APIs to all. Simple isn't it ?
+                </p>
+                <h2>Who are we ?</h2>
+                <p class="makapi-text tall">
+                    We are your API builders. Our website and generator give you an unique opportunity to create your
+                    API in few minutes. Go See you below for more information about Mak'API.
+                </p>
+            </div>
+            <div class="col m6 s12">
+                <div class="makapi-content-img">
+                    <img class="responsive-img" src="{{ asset('images/png/builder.png') }}" alt="Makapi builder">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs tabs-fixed-width z-depth-1">
+                    <li class="tab col s3"><a href="#tabs-makapi-project">Mak'API Project</a></li>
+                    <li class="tab col s3"><a href="#tabs-founder">Founder</a></li>
+                    <li class="tab col s3 disabled"><a href="#tabs-history">History</a></li>
+                    <li class="tab col s3 disabled"><a href="#tabs-futur">Futur</a></li>
+                </ul>
+            </div>
+            <div id="tabs-makapi-project" class="col s12">
+                <div class="makapi-tabs-content">
+                    <h2>Student Project</h2>
+                    <p class="makapi-text">
+                        At the beginning, Mak'API was a student project. This project almost never seen the day.
+                    </p>
+                </div>
+            </div>
+            <div id="tabs-founder" class="col s12">
+                <div class="makapi-tabs-content">
+                    <h2>Mak'API's Founders</h2>
+                    <ul class="collection with-header">
+                        <li class="collection-header">
+                            <h4>We were five :</h4>
+                        </li>
+                        <li class="collection-item">
+                            <div>
+                                ABKHOUKH Mehdi
+                                <a href="https://github.com/mehdou92" class="secondary-content">
+                                    <i class="material-icons livingCoral-text">link</i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div>
+                                DOMANGE Julien
+                                <a href="https://github.com/Backins" class="secondary-content">
+                                    <i class="material-icons livingCoral-text">link</i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div>
+                                NOEL Jérémie
+                                <a href="https://github.com/jeremNoel" class="secondary-content">
+                                    <i class="material-icons livingCoral-text">link</i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div>
+                                KAZMIERCZAK Benjamin
+                                <a href="https://github.com/benKazmierczak" class="secondary-content">
+                                    <i class="material-icons livingCoral-text">link</i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div>
+                                PRUNIER Ivan
+                                <a href="https://github.com/ivanPrunier" class="secondary-content">
+                                    <i class="material-icons livingCoral-text">link</i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="tabs-history" class="col s12">
+                <div class="makapi-tabs-content">
+                    <h2>History</h2>
+                    <p class="makapi-text">
+                        Nothing now
+                    </p>
+                </div>
+            </div>
+            <div id="tabs-futur" class="col s12">
+                <div class="makapi-tabs-content">
+                    <h2>What are our future ?</h2>
+                    <p class="makapi-text">
+                        Describe
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer_scripts %}{% endblock %}
