@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>Edit News</title>
+
+{% block body %}
+    <h1>Edit News</h1>
+
+    {{ include('back/news/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_news_index') }}">back to list</a>
+{% endblock %}
