@@ -1,0 +1,147 @@
+{% extends 'Front/gradient_front.html.twig' %}
+
+{% block title %}Mak'API - Profile{% endblock %}
+
+{% block main %}
+    <section class="part-profile white-text">
+        <div class="profile-content container">
+            <div class="profile-content_center_div center-block">
+                <div class="row">
+                    <img class="profile-picture" src="{{ asset('images/png/Moi2_190118.png') }}" alt="Profile_picture">
+                </div>
+                <div class="row center">
+                    <h4>{{ user.login }}</h4>
+                    <p class="makapi-text center"> {{ user.email }}</p>
+                </div>
+                <div class="row info-API">
+                    <div class="col m5 s12">
+                        <p class="makapi-text center">
+                            API created :
+                            {% if numberAPI is defined %}
+                                {{ numberAPI }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col offset-m2 m5 s12">
+                        <p class="makapi-text center">
+                            Request traited :
+                            {% if apiRequest is defined %}
+                                {{ apiRequest }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                <div class="profile-setting center">
+                    <a class="btn-flat white-text" href="{{ path('app_user_edit', {'login': user.login}) }}">
+                        <i class="material-icons medium left">settings</i>
+                        Settings
+                    </a>
+                </div>
+                <div class="profile-panel makapi-text tall">
+                    <ul>
+                        <li>
+                            <a class="valign-wrapper" href="{{ path('app_generator_form_index') }}">
+                                <i class="material-icons">add</i>
+                                Create new API
+                            </a>
+                        </li>
+                        <li>
+                            <a class="valign-wrapper" href="#">
+                                <i class="material-icons">bar_chart</i>
+                                See statistics
+                            </a>
+                        </li>
+                        <li>
+                            <a class="valign-wrapper" href="{{ path('app_user_confirmdelete', {id: user.id}) }}">
+                                <i class="material-icons">delete</i>
+                                Delete my profile
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {#
+    <section class="profile-panel container">
+        <div class="row">
+            <div class="col s12">
+                <div class="profile-panel-button">
+                    <a class="waves-effect waves-light btn makapi-button corail small">
+                        <i class="material-icons large">add</i>
+                        Create new API
+                    </a>
+                    <a class="waves-effect waves-light btn makapi-button corail small">
+                        <i class="material-icons large">bar_chart</i>
+                        See statistics
+                    </a>
+                    <a class="waves-effect waves-light btn makapi-button corail small">
+                        <i class="material-icons large">delete</i>
+                        Delete my profile
+                    </a>
+                    <a class="waves-effect waves-light btn makapi-button corail small">
+                        <i class="material-icons large">dashboard</i>
+                        Admin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    #}
+    <section class="profile-content container">
+        <div class="row">
+            <div class="col s12">
+                <ul class="collapsible">
+                    <li class="active">
+                        <div class="collapsible-header">
+                            <h4>
+                                <i class="material-icons">
+                                    expand_more
+                                </i>
+                                My API
+                            </h4>
+                        </div>
+                        <div class="collapsible-body">
+                            <table class="centered responsive-table">
+                                <thead class="makapi-text tall">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Created at</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="makapi-text">
+                                <tr>
+                                    <td>Name of your API</td>
+                                    <td>This is an example</td>
+                                    <td>12-12-12</td>
+                                    <td class="table-btn-action">
+                                        <a href="#"><i class="material-icons small ">cloud_download</i></a>
+                                        <a href="#"><i class="material-icons small">bar_chart</i></a>
+                                        <a href="#"><i class="material-icons small">create</i></a>
+                                        <a href="#"><i class="material-icons small">delete_forever</i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block footer_scripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems);
+        });
+    </script>
+{% endblock %}
