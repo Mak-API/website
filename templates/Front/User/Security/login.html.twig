@@ -1,0 +1,42 @@
+{% extends 'Front/linear_front.html.twig' %}
+
+{% block title %}Mak'API - Login{% endblock %}
+
+{% block main %}
+    <section class="form-signin container row col l12 m12 s12">
+        <div class="form-content col offset-s3 s6">
+            <div class="center-block">
+                <h2>Sign in to MAK'API</h2>
+                <div class="form-makapi blueDial-text">
+                    <div class="row">
+                        <div class="col s12">
+                            <form method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
+                                <label for="inputEmail" class="sr-only">Email</label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                                       class="form-control" placeholder="Email" required autofocus>
+                                <label for="inputPassword" class="sr-only">Password</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control"
+                                       placeholder="Password" required>
+
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}"
+                                >
+                                <div class="center">
+                                    <h4>Not an account ?
+                                        <a href="{{ path('app_user_new') }}">Sign up.</a>
+                                    </h4>
+                                </div>
+                                <button class="btn makapi-button corail" type="submit">
+                                    Sign in
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
