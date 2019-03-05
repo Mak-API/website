@@ -91,7 +91,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->render('authentication/registration.html.twig', [
+            return $this->render('Front/User/Security/Authentication/registration.html.twig', [
                 'isDeleted' => false,
                 'isVerified' => false,
                 'isSend' => true,

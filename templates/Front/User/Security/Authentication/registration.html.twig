@@ -1,0 +1,67 @@
+{% extends 'Front/linear_front.html.twig' %}
+
+{% block main %}
+    {% if isDeleted == true %}
+        <script>
+            M.toast({html: 'You have deleted your account not long ago, you just need to check your email for recover your account.'})
+        </script>
+    {% endif %}
+    {% if isSend == true %}
+    <script>
+        M.toast({html: 'Email has  been sent ! Don\'t forget to check your spam !'});
+    </script>
+    {% endif %}
+    <section class="form-registration container row col l12 m12 s12">
+        <div class="content-registration col offset-s3 s6">
+            <div class="center-block">
+                {% if isVerified == true %}
+                    <div class="validate-registration">
+                        <div class="row">
+                            <div class="col s12">
+                                <h2 class="center-align">Congratulation !</h2>
+                                <p class="makapi-text center">
+                                    Your email is verified. You can now sign in to your profile.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <a class="send-email btn waves-effect waves-light makapi-button corail small" href="{{ path('app_security_login')}}">Go sign in</a>
+                            </div>
+                        </div>
+                    </div>
+                {% elseif isNotVerified is defined and isNotVerified == true %}
+                    <div class="validate-registration container">
+                        <div class="row">
+                            <div class="col s12">
+                                <h2 class="center-align">Oops ! </h2>
+                                <p class="makapi-text center bold">Your mail hasn't been verified.</p>
+                                <p class="makapi-text center">Check your email box to activate your account.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <a class="send-email btn waves-effect waves-light makapi-button corail small" href="{{ path('send_confirmation_email', {'email': login }) }}">No mail received ? Click here</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="validate-registration container">
+                        <div class="row">
+                            <div class="col s12">
+                                <h2 class="center-align">Success ! </h2>
+                                <p class="makapi-text center">Check your email box to activate your account.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <a class="send-email btn waves-effect waves-light makapi-button corail small" href="{{ path('send_confirmation_email', {'email': login }) }}">No mail received ? Click here</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
