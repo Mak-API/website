@@ -26,6 +26,6 @@ class AdminController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('back/admin/index.html.twig');
+        return $this->render('Back/admin/index.html.twig');
     }
 }

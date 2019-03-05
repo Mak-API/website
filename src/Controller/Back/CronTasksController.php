@@ -26,7 +26,7 @@ class CronTasksController extends AbstractController
      */
     public function index(CronTasksRepository $cronTasksRepository): Response
     {
-        return $this->render('back/crontasks/index.html.twig', [
+        return $this->render('Back/crontasks/index.html.twig', [
             'activatedTasks' => $cronTasksRepository->findBy(['disabled' => 0])
         ]);
     }
@@ -47,7 +47,7 @@ class CronTasksController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('app_crontasks_index');
         }
-        return $this->render('back/crontasks/add.html.twig', [
+        return $this->render('Back/crontasks/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }
