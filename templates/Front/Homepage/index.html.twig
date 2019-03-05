@@ -1,0 +1,31 @@
+{% extends 'Front/gradient_front.html.twig' %}
+
+{% block title %}Mak'API - Home{% endblock %}
+
+{% block main %}
+        <section class="part-home">
+            {% include 'Front/Homepage/part_home.html.twig' %}
+        </section>
+        <section class="part-makapi container valign-wrapper">
+            {% include 'Front/Homepage/part_makapi.html.twig' %}
+        </section>
+        <section class="part-create container valign-wrapper">
+            {% include 'Front/Homepage/part_create.html.twig' %}
+        </section>
+        <section class="part-build container valign-wrapper">
+            {% include 'Front/Homepage/part_build.html.twig' %}
+        </section>
+        <section class="part-test container valign-wrapper">
+            {% include 'Front/Homepage/part_test.html.twig' %}
+        </section>
+        <section class="part-host container valign-wrapper">
+            {% include 'Front/Homepage/part_host.html.twig' %}
+        </section>
+        <section class="part-ahead container valign-wrapper">
+            {% include 'Front/Homepage/part_ahead.html.twig' %}
+        </section>
+{% endblock %}
+
+{% block footer_scripts %}
+    <script type="text/javascript" src="{{ asset('build/vendor.js') }}"></script>
+{% endblock %}
