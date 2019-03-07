@@ -43,7 +43,7 @@ class RegistrationController extends AbstractController
         //Check if the the 'isVerified' Bool is ok or not
         $result = $this->userService->verifyToken($token);
 
-        return $this->render('Front/User/Security/Authentication/registration.html.twig', [
+        return $this->render('front/user/security/authentication/registration.html.twig', [
             'isDeleted' => false,
             'isSend' => false,
             'isVerified' => $result["isVerified"],
@@ -59,7 +59,7 @@ class RegistrationController extends AbstractController
     public function forgotPassword(string $token) : Response
     {
 
-        return $this->render('Front/User/Security/Authentication/resetPassword.html.twig', [
+        return $this->render('front/user/security/authentication/resetPassword.html.twig', [
             'token' => $token
         ]);
     }
@@ -75,7 +75,7 @@ class RegistrationController extends AbstractController
     public function sendConfirmationEmail(string $email) : Response
     {
         if($this->emailService->sendNewEmail($email)) {
-            return $this->render('Front/User/Security/Authentication/registration.html.twig', [
+            return $this->render('front/user/security/authentication/registration.html.twig', [
                 'isDeleted' => false,
                 'isSend' => true,
                 'isVerified' => false,
@@ -83,7 +83,7 @@ class RegistrationController extends AbstractController
             ]);
         }
 
-        return $this->render('Front/User/Security/Authentication/registration.html.twig', [
+        return $this->render('front/user/security/authentication/registration.html.twig', [
             'isDeleted' => false,
             'isVerified' => false,
             'isSend' => false,

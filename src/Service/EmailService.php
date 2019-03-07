@@ -52,7 +52,7 @@ class EmailService {
             ->setTo($email)
             ->setBody(
                 $this->templating->render(
-                    'Front/User/Emails/registration.html.twig',
+                    'front/user/emails/registration.html.twig',
                     ['login' => $login,
                         'token' => $token]
                 ),

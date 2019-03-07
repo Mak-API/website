@@ -1,4 +1,4 @@
-{% extends 'Front/linear_front.html.twig' %}
+{% extends 'front/linear_front.html.twig' %}
 
 {% block title %}Sign Up{% endblock %}
 
@@ -10,7 +10,7 @@
                     <div class="col s12">
                         <h2>Sign up to MAK'API</h2>
                         <div class="form-makapi blueDial-text">
-                            {{ include('Front/User/_form.html.twig') }}
+                            {{ include('front/user/_form.html.twig') }}
                             <div class="center">
                                 <h4>Already an account ?
                                     <a href="{{ path('app_security_login') }}">Sign in.</a>
