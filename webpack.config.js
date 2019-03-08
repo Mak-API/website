@@ -19,6 +19,7 @@ Encore
      */
     .addEntry("app", "./assets/js/app.js")
     .addEntry("generator-form", "./assets/js/generator-form.js")
+    .addEntry("website", "./assets/css/website.scss")
     //.addEntry('page2', './assets/js/page2.js')
 
     // will require an extra script tag for runtime.js
