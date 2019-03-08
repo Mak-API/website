@@ -47,7 +47,7 @@ class UserController extends AbstractController
     public function index(UserRepository $userRepository): Response
     {
 
-        return $this->render('user/index.html.twig', [
+        return $this->render('front/user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
     }
@@ -74,7 +74,7 @@ class UserController extends AbstractController
 
             //sending the confirmation email
             if(!$this->emailService->confirmRegistration($user->getLogin(), $user->getEmail(), $user->getEmailToken())) {
-                return $this->render('user/new.html.twig', [
+                return $this->render('front/User/new.html.twig', [
                     'user' => $user,
                     'form' => $form->createView()
                 ]);
@@ -91,7 +91,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->render('authentication/registration.html.twig', [
+            return $this->render('front/user/security/authentication/registration.html.twig', [
                 'isDeleted' => false,
                 'isVerified' => false,
                 'isSend' => true,
@@ -99,7 +99,7 @@ class UserController extends AbstractController
             ]);
         }
 
-        return $this->render('user/new.html.twig', [
+        return $this->render('front/user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -115,7 +115,7 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
-        return $this->render('user/show.html.twig', [
+        return $this->render('front/user/show.html.twig', [
             'user' => $user,
         ]);
     }
@@ -152,7 +152,7 @@ class UserController extends AbstractController
             ]);
         }
 
-        return $this->render('user/edit.html.twig', [
+        return $this->render('front/user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -165,7 +165,7 @@ class UserController extends AbstractController
      */
     public function confirmDeleteUser(User $user): Response
     {
-        return $this->render('user/_delete_form.html.twig', [
+        return $this->render('front/user/_delete_form.html.twig', [
             'user' => $user,
         ]);
     }

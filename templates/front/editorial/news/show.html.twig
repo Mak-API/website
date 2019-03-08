@@ -1,0 +1,27 @@
+{% extends 'front/linear_front.html.twig' %}
+
+{% block title %}
+    Mak'API - {{ new.title }}
+{% endblock %}
+
+{% block main %}
+    <div class="container makapi-container">
+        <div class="row">
+            <div class="col s12">
+                <p>
+                    <a href="{{ path('app_default_index') }}">Home</a> / <a href="{{ path('app_news_index') }}">News list</a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <h1>
+                    {{ new.title }}
+                </h1>
+                <p class="makapi-text">
+                    {{ new.body }}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

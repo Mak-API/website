@@ -93,14 +93,14 @@ class UserService
     public function redirectAfterEmailChecking(bool $verified, string $login)
     {
         if ($this->isDeleted($login)) {
-            return $this->templating->render('authentication/registration.html.twig', [
+            return $this->templating->render('front/user/security/authentication/registration.html.twig', [
                 'isDeleted' => true,
                 'isSend' => false,
                 'isVerified' => $verified,
                 'login' => $login
             ]);
         }
-        return $this->templating->render('authentication/registration.html.twig', [
+        return $this->templating->render('front/user/security/authentication/registration.html.twig', [
             'isDeleted' => false,
             'isSend' => false,
             'isVerified' => $verified,

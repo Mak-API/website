@@ -1,0 +1,24 @@
+{% extends 'front/gradient_front.html.twig' %}
+
+{% block title %}Mak'API - Edit your profile{% endblock %}
+
+{% block main %}
+    <section class="part-edit-profile">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-xl2 xl8 offset-l1 l10 m12 s12">
+                    <div class="edit-form">
+                        <h2>Edit your profile informations</h2>
+                        <p class="makapi-text tall semi-bold">To edit your profile, you need enter your password.</p>
+                        <div class="form-makapi blueDial-text">
+                            {{ include('front/user/_form.html.twig', {'button_label': 'Update profile'}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="part-edit-profile-second">
+
+    </section>
+{% endblock %}

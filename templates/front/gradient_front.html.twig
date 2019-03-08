@@ -1,0 +1,24 @@
+{% extends 'pagelayout.html.twig' %}
+
+{% block body %}
+    <header class="gradient-header">
+        {% include 'components/header/header.html.twig' %}
+    </header>
+    <main class="gradient-submain">
+        {% block main %}{% endblock %}
+    </main>
+    <footer class="page-footer">
+        {% include 'components/footer/footer.html.twig' %}
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    {% block footer_scripts %}{% endblock %}
+    <script>
+        /*
+        Activate tabs materialize
+         */
+        const el = document.querySelectorAll('.tabs');
+        const instance = M.Tabs.init(el);
+    </script>
+{% endblock %}
