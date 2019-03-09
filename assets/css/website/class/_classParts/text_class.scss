@@ -1,0 +1,46 @@
+.livingCoral-text{
+  color : $color-livingCoral;
+}
+.blueDial-text{
+  color : $color-blueDial;
+}
+.turkishSea-text{
+  color : $color-turkishSea;
+}
+.viridianGreen-text{
+  color : $color-viridianGreen;
+}
+.seaPink-text{
+  color : $color-seaPink;
+}
+.greyClaire-text{
+  color : $color-lightGrey;
+}
+.redFalse-text{
+  color : $color-redFalse;
+}
+.greenConfirm-text{
+  color : $color-greenConfirm;
+}
+.makapi-text {
+  text-align: justify;
+  font-size: 16px;
+  &.small {
+    font-size: 14px;
+  }
+  &.tall {
+    font-size: 18px;
+  }
+  &.bold {
+    font-weight: bold;
+  }
+  &.italic {
+    font-style: italic;
+  }
+  &.center {
+    text-align: center;
+  }
+  &.semi-bold {
+    font-weight: 600;
+  }
+}
