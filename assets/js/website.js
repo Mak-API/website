@@ -1,1 +1,1 @@
-require('../css/website.scss');
+require("../css/website.scss");
