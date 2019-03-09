@@ -1,5 +1,22 @@
 // Imports fonts, variable, Makapi Class and animations
   @import "fonts/fonts";
   @import "variable/global";
+  @import "website/animation/animation";
 
+
+/**
+  Global
+ */
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  body {
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+  }
+  @import "website/materialize/override";
   @import "website/class/makapi_class";
+  @import "website/components/header";
+  @import "website/components/footer";
+  @import "website/front/front";

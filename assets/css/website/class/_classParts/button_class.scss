@@ -1,33 +1,35 @@
-.makapi-button {
-  background-color: $color-livingCoral;
-  padding: 0 22px;
-  height: 50px ;
-  line-height: 50px;
-  border-radius: 20px;
-  text-transform: none;
-  font-weight: bold;
-  font-size: 16px;
-  &.large {
-    padding: 0 16px;
-    height: 60px;
-    line-height: 60px;
-    font-size: 18px;
-  }
-  &.small {
-    padding: 0 27px;
-    height: 40px;
-    line-height: 40px;
-  }
-  &.corail{
+body {
+  .makapi-button {
     background-color: $color-livingCoral;
-    &:hover {
-      background-color: $color-livingCoral;
+    padding: 0 22px;
+    height: 50px ;
+    line-height: 50px;
+    border-radius: 20px;
+    text-transform: none;
+    font-weight: bold;
+    font-size: 16px;
+    &.large {
+      padding: 0 16px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 18px;
     }
-  }
-  &.blue-dial{
-    background-color: $color-blueDial;
-    &:hover {
+    &.small {
+      padding: 0 27px;
+      height: 40px;
+      line-height: 40px;
+    }
+    &.corail{
+      background-color: $color-livingCoral;
+      &:hover {
+        background-color: $color-livingCoral;
+      }
+    }
+    &.blue-dial{
       background-color: $color-blueDial;
+      &:hover {
+        background-color: $color-blueDial;
+      }
     }
   }
 }
