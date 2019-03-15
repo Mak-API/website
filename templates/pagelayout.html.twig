@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/css?family=Kodchasan|Major+Mono+Display" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('website') }}
         {% endblock %}
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link rel="stylesheet" href="{{ asset('build/vendor.css') }}">
@@ -18,7 +18,7 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('website') }}
         {% block javascripts %}{% endblock %}
         <script>
             document.addEventListener('DOMContentLoaded', function() {

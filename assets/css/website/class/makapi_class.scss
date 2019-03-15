@@ -1,0 +1,19 @@
+@import "_classParts/extended_class";
+@import '_classParts/text_class';
+@import '_classParts/button_class';
+@import "_classParts/form_class";
+
+/**
+Global
+ */
+
+body {
+  main.linear-submain {
+    min-height: 100vh;
+    margin-top: 20px;
+  }
+  main.gradient-submain {
+    min-height: 100vh;
+    background-color: #F1F1F1;
+  }
+}

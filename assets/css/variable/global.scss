@@ -1,38 +1,13 @@
-/**
-  Global Mak'API var
- */
-/**
-  Color var
- */
-  $color-livingCoral: #FF6F61;
-  $color-blueDial: #263056;
-  $color-turkishSea: #195190;
-  $color-viridianGreen: #009499;
-  $color-seaPink: #DE98AB;
-  $color-lightGrey: #F7F7FE;
-  $color-redFalse: #EB5757;
-  $color-greenConfirm: #27CF17;
-  $color-white: #FFF;
+@import "_varParts/color";
+@import "_varParts/makapi";
 
 /**
-  Background var
- */
-$background-makapiLinearOne: linear-gradient(180deg, $color-blueDial 0%, #5E3D72 33.61%, #9C467E 50.87%, #D55377 64.95%, $color-livingCoral 82.2%, $color-livingCoral 82.21%);
-$background-makapiLinearTwo: linear-gradient(359.79deg, $color-blueDial 15.77%, #5E3D72 46.17%, #9C467E 61.78%, #D55377 79.03%, $color-livingCoral 90.12%, $color-livingCoral 90.12%);;
-
-
-/**
-  Size var
+  Front global var
  */
   $size-maxWithWebsite: 1280px;
 
-
-
 /**
-  Dashobard
+  Back global var
  */
-  // size
   $size-minWidthDashboard: 900px;
-
-  //box-shadow
   $boxShadow-blocDashboard: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
