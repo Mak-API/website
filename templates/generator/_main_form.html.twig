@@ -174,6 +174,10 @@
         let entityName = document.getElementById("entity-name").getAttribute("data-entity-name");
         /**/
 
+        apiPayload = {};
+        entityPayload = {};
+        attributesPayload = {};
+
         inputEntity.addEventListener("keyup", function() {
             const api = document.getElementById("form-api-name").textContent;
             const simplifiedApiName = api.replace(/ /g, "");
@@ -253,12 +257,6 @@
             let attributeType = [];
             let attributeNullable = [];
 
-            var attr = document.querySelectorAll("div[data-name-attribute]");
-            for( var i = 0; i < attr.length; i++ ) {
-                attributeName.push(attr[i].getAttribute("data-name-attribute"));
-                attributeType.push(attr[i].getAttribute("data-type-attribute"));
-                attributeNullable.push(attr[i].getAttribute("data-nullable-attribute"));
-            }
             const api = document.getElementById("form-api-name").textContent;
             const simplifiedApiName = api.replace(/ /g, "");
             const entity = document.getElementById("entity-name");
@@ -268,35 +266,66 @@
             const entityId = document.getElementById("entity-name").getAttribute("data-entity-id");
             const entityName = document.getElementById("entity-name").getAttribute("data-entity-name");
 
-            let apiPayload = {
+            apiPayload = {
                name: apiName.textContent,
-               description: apiDescription.value
-           };
-           let entityPayload = {
+               description: apiDescription.value,
+                userId: {{ userId }}
+            };
+            entityPayload = {
                id: simplifiedApiName,
-               name: entityName
-           };
-           let attributePayload = {
+               name: entityName,
+                userId: {{ userId }}
+            };
+            attributePayload = {
                id: entityId,
                name: attributeName,
                type: attributeType,
                nullable: attributeNullable,
-               attributes:""
-           };
+               attributes:"",
+                userId: {{ userId }}
+            };
 
-           initiateAPi("{{path('app_default_index')}}api/apis/", apiPayload);
-           initiateAPi("{{path('app_default_index')}}api/entities/", entityPayload);
-           initiateAPi("{{path('app_default_index')}}api/fields/", attributePayload);
+           initiateAPi();
         });
 
-        function initiateAPi(route, payload) {
+        function initiateAPi() {
             $.ajax({
-                url: route,
+                url: 'http://mak-api.com/api/apis/',
                 type: 'POST',
-                data: payload
-            }).done(function(res) {
-                return res;
+                data: apiPayload,
+                success: function (response) {
+                    entityPayload['apiId'] = JSON.parse(response)['id'];
+                    $.ajax({
+                        url: 'http://mak-api.com/api/entities/',
+                        type: 'POST',
+                        data: entityPayload,
+                        success: function (response) {
+                            generateFields(JSON.parse(response)['id']);
+                        }
+                    })
+                }
             });
+        }
+
+        function generateFields(entityId) {
+            var attr = document.querySelectorAll("div[data-name-attribute]");
+            for(var i = 0; i < attr.length; i++) {
+                let payload = {
+                    'userId': {{ userId }},
+                    'entityId': entityId,
+                    'name': attr[i].getAttribute('data-name-attribute'),
+                    'type': attr[i].getAttribute('data-type-attribute'),
+                    'nullable': attr[i].getAttribute('data-nullable-attribute')
+                };
+                $.ajax({
+                    url: 'http://mak-api.com/api/fields/',
+                    type: 'POST',
+                    data: payload,
+                    success: function (res) {
+                        console.log(JSON.parse(res)['id']);
+                    }
+                })
+            }
         }
 
     </script>

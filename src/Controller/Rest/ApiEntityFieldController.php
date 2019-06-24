@@ -5,6 +5,7 @@ namespace App\Controller\Rest;
 use App\Entity\ApiEntityField;
 use App\Repository\UserRepository;
 use App\Service\ApiEntityFieldService;
+use App\Service\UserService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,9 +23,15 @@ class ApiEntityFieldController extends RestController
      */
     private $entityFieldService;
 
-    public function __construct(ApiEntityFieldService $entityFieldService)
+    /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(ApiEntityFieldService $entityFieldService, UserService $userService)
     {
         $this->entityFieldService = $entityFieldService;
+        $this->userService = $userService;
     }
 
     /**
@@ -56,14 +63,15 @@ class ApiEntityFieldController extends RestController
      */
     public function createField(Request $request): Response
     {
-        return $this->json($this->entityFieldService->createField(
+        $field = $this->entityFieldService->createField(
             $request->get('entityId'),
             $request->get('name'),
             $request->get('type'),
             $request->get('nullable'),
-            $request->get('attributes'),
-            $this->getUser()
-        ));
+            '',
+            $this->getUserFromRequest($request)
+        );
+        return new Response($this->serialize($field), Response::HTTP_CREATED);
     }
 
     /**
@@ -97,5 +105,15 @@ class ApiEntityFieldController extends RestController
         $this->entityFieldService->deleteField($field);
 
         return new Response(null, Response::HTTP_OK);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \App\Entity\User|mixed|null
+     */
+    private function getUserFromRequest(Request $request)
+    {
+        return $this->userService->getUser($request->get('userId'));
     }
 }
